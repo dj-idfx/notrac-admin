@@ -39,7 +39,7 @@ composer install
 #### Laravel IDE Helper Generator
 
 Complete **PHPDocs**, directly from the source.  
-Settings can be found in the **ide-helper.php** file inside the **config** folder.  
-Docs are generated automatically after `composer update`.  
-[Barry Github](https://github.com/barryvdh/laravel-ide-helper)      
-`composer require --dev barryvdh/laravel-ide-helper`
+Package is registered in **AppServiceProvider**, settings can be found in the **ide-helper.php** file inside the **config** folder.    
+Docs are generated automatically after running `composer install`   
+[Barry Github](https://github.com/barryvdh/laravel-ide-helper)       
+`composer require --dev barryvdh/laravel-ide-helper` 
