@@ -1,5 +1,20 @@
+// Import Lodash
 import _ from 'lodash';
 window._ = _;
+
+/**
+ * Bootstrap JS
+ */
+// Import Popper JS
+import * as Popper from '@popperjs/core';
+window.Popper = Popper;
+
+// BS Option 1: Import separate Bootstrap 5 plugins
+// import { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip } from 'bootstrap';
+// BS Option 2: Import full Bootstrap JS
+import * as Bootstrap from 'bootstrap';
+window.Bootstrap = Bootstrap;
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

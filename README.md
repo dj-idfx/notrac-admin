@@ -43,3 +43,11 @@ Package is registered in **AppServiceProvider**, settings can be found in the **
 Docs are generated automatically after running `composer install`   
 [Barry Github](https://github.com/barryvdh/laravel-ide-helper)       
 `composer require --dev barryvdh/laravel-ide-helper` 
+
+
+## NPM packages
+
+### Bootstrap 5 + Icons
+`npm i --save bootstrap @popperjs/core`   
+`npm i --save-dev sass`
+`npm i bootstrap-icons`
