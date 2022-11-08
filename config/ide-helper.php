@@ -114,7 +114,7 @@ return [
     | Helper files to include
     |--------------------------------------------------------------------------
     |
-    | Include helper files. By default not included, but can be toggled with the
+    | Include helper files. By default, not included, but can be toggled with the
     | -- helpers (-H) option. Extra helper files can be included.
     |
     */
@@ -207,7 +207,7 @@ return [
     |
     | This setting allow you to map any custom database type (that you may have
     | created using CREATE TYPE statement or imported using database plugin
-    | / extension to a Doctrine type.
+    | / extension to a Doctrine type.)
     |
     | Each key in this array is a name of the Doctrine2 DBAL Platform. Currently valid names are:
     | 'postgresql', 'db2', 'drizzle', 'mysql', 'oracle', 'sqlanywhere', 'sqlite', 'mssql'
@@ -217,7 +217,7 @@ return [
     | The value of the array is an array of type mappings. Key is the name of the custom type,
     | (for example, "jsonb" from Postgres 9.4) and the value is the name of the corresponding Doctrine2 type (in
     | our case it is 'json_array'. Doctrine types are listed here:
-    | https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#types
+    | https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#types)
     |
     | So to support jsonb in your models when working with Postgres, just add the following entry to the array below:
     |
