@@ -1,5 +1,24 @@
+// Todo: import fonts? => move to app.js (top?)
+
+//Todo: set variables?
+
+// Import all of Bootstrap's CSS (todo: create scss file & import bootstraps components)
+@import "~bootstrap/scss/bootstrap";
+
+// Extra Custom CSS
+
+/* TEST */
 .app-test {
+    /* Test for autoprefixer => check option / support browser versions? */
     color: hotpink;
+    display: grid;
+    transition: all .5s;
+    user-select: none;
+    background: linear-gradient(to bottom, white, black);
 }
 
-/* Todo: import bootstrap (put file / variables in the app subfolder */
+/* Todo: check this out, handig of niet? */
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

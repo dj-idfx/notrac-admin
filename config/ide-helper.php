@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'include_helpers' => false,
+    'include_helpers' => true,
 
     'helper_files' => [
         base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
@@ -151,9 +151,7 @@ return [
     |
     */
 
-    'ignored_models' => [
-
-    ],
+    'ignored_models' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -196,9 +194,7 @@ return [
     |
     */
 
-    'interfaces' => [
-
-    ],
+    'interfaces' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -226,9 +222,7 @@ return [
     |  ),
     |
     */
-    'custom_db_types' => [
-
-    ],
+    'custom_db_types' => [],
 
     /*
      |--------------------------------------------------------------------------
@@ -278,7 +272,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => false,
+    'include_class_docblocks' => true,
 
     /*
     |--------------------------------------------------------------------------

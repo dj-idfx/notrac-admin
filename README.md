@@ -29,20 +29,19 @@ All files will be installed in the **vendor** directory:
 composer install
 ```
 
-### Required Packages:
-
-#### xxx
-
-
-### Dev Packages used for this project:      
-
-#### Laravel IDE Helper Generator
+### IDE Helper Generator
 
 Complete **PHPDocs**, directly from the source.  
 Package is registered in **AppServiceProvider**, settings can be found in the **ide-helper.php** file inside the **config** folder.    
 Docs are generated automatically after running `composer install`   
 [Barry Github](https://github.com/barryvdh/laravel-ide-helper)       
 `composer require --dev barryvdh/laravel-ide-helper` 
+
+### Laravel Breeze
+
+**Authentication** scaffolding (Breeze & Blade).   
+[Official documentation](https://laravel.com/docs/9.x/starter-kits#breeze-and-blade)    
+`composer require --dev laravel/breeze`
 
 
 ## NPM packages

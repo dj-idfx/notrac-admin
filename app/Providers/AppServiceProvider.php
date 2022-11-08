@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        /* Only Register the IDE Helper when not in production */
+        /* Register the IDE Helper, only when developing on a local environment */
         if ($this->app->isLocal()) {
             $this->app->register(IdeHelperServiceProvider::class);
         }
