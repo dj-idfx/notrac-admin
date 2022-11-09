@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
- * Main pages routes
+ * Main web routes
  */
 Route::get('/', function () {
     return view('welcome');
 });
 
 /**
- * User profile routes
+ * User account routes
  */
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,3 +31,7 @@ Route::get('/dashboard', function () {
  * Authentication routes
  */
 require __DIR__.'/auth.php';
+
+/**
+ * CMS admin routes
+ */
