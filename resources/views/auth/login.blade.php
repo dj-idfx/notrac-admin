@@ -1,57 +1,49 @@
 <x-app-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="{{ route('home') }}">
-                <x-svg.brand-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+    <x-slot name="header">
+        <div class="container py-4">
+            <h1 class="text-center mb-0">
+                {{ __('Log In') }}
+            </h1>
+        </div>
+    </x-slot>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth.auth-card>
+        {{-- Session Status --}}
+        <x-auth.auth-session-status class="mb-3" :status="session('status')" />
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            {{-- Email --}}
+            <div class="mb-3">
+                <x-form.input-label for="email" :value="__('Email')" />
+                <x-form.text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-form.input-error :errors="$errors->get('email')" />
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            {{-- Password --}}
+            <div class="mb-3">
+                <x-form.input-label for="password" :value="__('Password')" />
+                <x-form.text-input id="password" type="password" name="password" required autocomplete="current-password" />
+                <x-form.input-error :errors="$errors->get('password')" />
             </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+            {{-- Remember --}}
+            <div class="mb-3 form-check">
+                <input id="remember_me" type="checkbox" name="remember" class="form-check-input">
+                <label for="remember_me" class="form-check-label">{{ __('Remember me') }}</label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            {{-- Submit --}}
+            <div class="d-flex flex-wrap align-items-end justify-content-between">
+                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Log in') }}" />
+
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a href="{{ route('password.request') }}" class="link-dark small pt-2">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-auth.auth-card>
 </x-app-layout>

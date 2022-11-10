@@ -1,35 +1,27 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-svg.brand-logo class="" />
-            </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+<x-app-layout>
+    <x-slot name="header">
+        <div class="container py-4">
+            <h1 class="fs-5 text-center w-75 mb-0 mx-auto">
+                {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+            </h1>
         </div>
+    </x-slot>
 
+    <x-auth.auth-card>
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
-            <!-- Password -->
-            <div>
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            {{-- Password --}}
+            <div class="mb-3">
+                <x-form.input-label for="password" :value="__('Password')" />
+                <x-form.text-input id="password" type="password" name="password" required autofocus autocomplete="current-password" />
+                <x-form.input-error :errors="$errors->get('password')" />
             </div>
 
-            <div class="flex justify-end mt-4">
-                <x-primary-button>
-                    {{ __('Confirm') }}
-                </x-primary-button>
+            {{-- Submit --}}
+            <div class="d-flex flex-wrap align-items-end justify-content-between">
+                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Confirm') }}" />
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </x-auth.auth-card>
+</x-app-layout>

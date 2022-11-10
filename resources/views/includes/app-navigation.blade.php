@@ -37,7 +37,7 @@
             <div class="navbar-nav ms-auto">
                 @auth
                     <div class="dropdown">
-                        <x-nav.nav-link title="{{ Auth::user()->name }}" route="dashboard" class="dropdown-toggle"
+                        <x-nav.nav-link title="{{ Auth::user()->firstname }}" route="dashboard" class="dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" />
                         <div class="dropdown-menu dropdown-menu-end">
                             <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="dashboard" />

@@ -11,29 +11,20 @@
 <body class="l-body">
 <div class="l-app min-vh-100 d-flex flex-column">
     {{-- Navigation --}}
-    {{-- todo: verder uitwerken components --}}
     @include('includes.app-navigation')
 
     {{-- todo: breadcrumbs? (like page heading-> isset) --}}
 
-    {{-- Page Heading --}}
-    @if (isset($header))
-        <header class="l-header">
-            {{ $header }}
-        </header>
-    @endif
+    {{-- View slot header --}}
+    @if (isset($header))@include('includes.app-header')@endif
 
-    {{-- Page Content --}}
+    {{-- View content --}}
     <main class="l-main">
         {{ $slot }}
     </main>
 
-    {{-- Page Footer --}}
-    <footer class="l-footer bg-dark mt-auto">
-        <div class="container text-white text-center py-2">
-            FOOTER
-        </div>
-    </footer>
+    {{-- Footer --}}
+    @include('includes.app-footer')
 </div>
 </body>
 </html>

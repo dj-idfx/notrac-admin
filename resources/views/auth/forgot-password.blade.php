@@ -1,35 +1,36 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-svg.brand-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<x-app-layout>
+    <x-slot name="header">
+        <div class="container py-4">
+            <h1 class="fs-5 text-center w-75 mb-0 mx-auto">
+                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+            </h1>
         </div>
+    </x-slot>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth.auth-card>
+        {{-- Session Status --}}
+        <x-auth.auth-session-status class="mb-3" :status="session('status')" />
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            {{-- Email --}}
+            <div class="mb-3">
+                <x-form.input-label for="email" :value="__('Email')" />
+                <x-form.text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-form.input-error :errors="$errors->get('email')" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-primary-button>
+            {{-- Submit --}}
+            <div class="d-flex flex-wrap align-items-end justify-content-between">
+                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Email Password Reset Link') }}" />
+
+                @if (Route::has('login'))
+                    <a href="{{ route('login') }}" class="link-dark small pt-2">
+                        {{ __('Log in') }}
+                    </a>
+                @endif
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </x-auth.auth-card>
+</x-app-layout>
