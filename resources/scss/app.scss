@@ -1,9 +1,10 @@
 // Todo: import fonts? => move to app.js (top?)
 
-//Todo: set variables?
+// Import app variables
+@import "app/variables";
 
-// Import all of Bootstrap's CSS (todo: create scss file & import bootstraps components)
-@import "~bootstrap/scss/bootstrap";
+// Import bootstrap 5
+@import "app/bootstrap";
 
 // Extra Custom CSS
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="container py-4">
-            <h1 class="fs-5 text-center w-75 mb-0 mx-auto">
+        <div class="container py-3">
+            <h1 class="fs-6 text-center w-75 mb-0 mx-auto">
                 {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
             </h1>
         </div>

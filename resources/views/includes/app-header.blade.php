@@ -1,3 +1,3 @@
-<header class="l-header">
+<header class="l-header border-bottom">
     {{ $header }}
 </header>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="container py-4">
-            <h1 class="fs-5 text-center w-75 mb-0 mx-auto">
+        <div class="container py-3">
+            <h1 class="fs-6 text-center w-75 mb-0 mx-auto">
                 {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
             </h1>
         </div>

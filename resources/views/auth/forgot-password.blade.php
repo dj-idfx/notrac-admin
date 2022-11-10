@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="container py-4">
-            <h1 class="fs-5 text-center w-75 mb-0 mx-auto">
+        <div class="container py-3">
+            <h1 class="fs-6 text-center w-75 mb-0 mx-auto">
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
             </h1>
         </div>
