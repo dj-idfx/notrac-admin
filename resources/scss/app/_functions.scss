@@ -1,0 +1,11 @@
+// Bootstrap 5 function overrides
+
+// Return opaque color
+// ISSUE: Deprecation Warning: $weight: Passing a number without unit % (100) is deprecated.
+@function opaque($background, $foreground) {
+    // ORIGINAL:
+    // @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+
+    // SOLUTION:
+    @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100%);
+}
