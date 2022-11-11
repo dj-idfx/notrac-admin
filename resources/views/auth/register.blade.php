@@ -13,16 +13,16 @@
 
             {{-- Firstname --}}
             <div class="mb-2">
-                <x-form.input-label for="firstname" :value="__('Firstname')" />
-                <x-form.text-input id="firstname" type="text" name="firstname" :value="old('firstname')" required autofocus />
-                <x-form.input-error :errors="$errors->get('firstname')" />
+                <x-form.input-label for="first_name" :value="__('First Name')" />
+                <x-form.text-input id="first_name" type="text" name="first_name" :value="old('first_name')" required autofocus />
+                <x-form.input-error :errors="$errors->get('first_name')" />
             </div>
 
             {{-- Name --}}
             <div class="mb-2">
-                <x-form.input-label for="name" :value="__('Name')" />
-                <x-form.text-input id="name" type="text" name="name" :value="old('name')" required />
-                <x-form.input-error :errors="$errors->get('name')" />
+                <x-form.input-label for="last_name" :value="__('Last Name')" />
+                <x-form.text-input id="last_name" type="text" name="last_name" :value="old('last_name')" required />
+                <x-form.input-error :errors="$errors->get('last_name')" />
             </div>
 
             {{-- Email --}}

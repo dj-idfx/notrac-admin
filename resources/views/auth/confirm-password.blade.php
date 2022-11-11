@@ -14,7 +14,7 @@
             {{-- Password --}}
             <div class="mb-3">
                 <x-form.input-label for="password" :value="__('Password')" />
-                <x-form.text-input id="password" type="password" name="password" required autofocus autocomplete="current-password" />
+                <x-form.text-input id="password" type="password" name="password" required autofocus />
                 <x-form.input-error :errors="$errors->get('password')" />
             </div>
 

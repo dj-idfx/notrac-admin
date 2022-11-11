@@ -27,6 +27,7 @@
                         <x-nav.dropdown-link title="{{ __('Home') }}" route="home" />
                         <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
                         <hr class="dropdown-divider">
+                        <x-nav.dropdown-link title="{{ __('Github') }}" href="https://github.com/dj-idfx/notrac-admin" target="_blank" />
                         <x-nav.dropdown-link title="{{ __('Google it!') }}" href="https://www.google.com/" target="_blank" />
                     </div>
                 </div>
@@ -36,7 +37,7 @@
             <div class="navbar-nav ms-auto">
                 @auth
                     <div class="dropdown">
-                        <x-nav.nav-link title="{{ Auth::user()->firstname }}" route="account.dashboard" class="dropdown-toggle"
+                        <x-nav.nav-link title="{{ Auth::user()->full_name }}" route="account.dashboard" class="dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" />
                         <div class="dropdown-menu dropdown-menu-end">
                             <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
