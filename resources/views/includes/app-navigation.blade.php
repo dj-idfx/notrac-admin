@@ -1,4 +1,4 @@
-<nav class="l-navbar navbar navbar-expand-lg bg-light shadow">
+<nav class="l-navbar navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container-md">
         {{-- App Logo + Name--}}
         <a class="navbar-brand d-flex align-items-center p-0" href="{{ route('home') }}">
@@ -17,7 +17,7 @@
             {{-- Main navigation --}}
             <div class="navbar-nav">
                 <x-nav.nav-link title="{{ __('Home') }}" route="home" />
-                <x-nav.nav-link title="{{ __('Dashboard') }}" route="dashboard" />
+                <x-nav.nav-link title="{{ __('Dashboard') }}" route="account.dashboard" />
 
                 {{-- Dropdown example--}}
                 <div class="dropdown">
@@ -25,10 +25,9 @@
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                     <div class="dropdown-menu">
                         <x-nav.dropdown-link title="{{ __('Home') }}" route="home" />
-                        <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="dashboard" />
-                        <x-nav.dropdown-link title="{{ __('Another action') }}" />
+                        <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
                         <hr class="dropdown-divider">
-                        <x-nav.dropdown-link title="{{ __('Something else here') }}" />
+                        <x-nav.dropdown-link title="{{ __('Google it!') }}" href="https://www.google.com/" target="_blank" />
                     </div>
                 </div>
             </div>
@@ -37,10 +36,11 @@
             <div class="navbar-nav ms-auto">
                 @auth
                     <div class="dropdown">
-                        <x-nav.nav-link title="{{ Auth::user()->firstname }}" route="dashboard" class="dropdown-toggle"
+                        <x-nav.nav-link title="{{ Auth::user()->firstname }}" route="account.dashboard" class="dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" />
                         <div class="dropdown-menu dropdown-menu-end">
-                            <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="dashboard" />
+                            <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
+                            <x-nav.dropdown-link title="{{ __('Profile') }}" route="account.profile" />
                             <hr class="dropdown-divider">
                             {{-- Logout --}}
                             <form method="POST" action="{{ route('logout') }}">

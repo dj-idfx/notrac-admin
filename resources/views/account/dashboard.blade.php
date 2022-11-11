@@ -2,14 +2,14 @@
     <x-slot name="header">
         <div class="container py-3">
             <h1 class="fs-2 text-center mb-0">
-                {{ config('app.name', 'Notrac') }}
+                {{ __('Dashboard') }}
             </h1>
         </div>
     </x-slot>
 
     <div class="container py-3">
         <h2 class="fs-3 text-center">
-            {{ __('Welcome!') }}
+            {{ __('You\'re logged in!') }}
         </h2>
     </div>
 </x-app-layout>

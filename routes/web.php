@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\FallbackController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,22 +19,36 @@ use Illuminate\Support\Facades\Route;
 /**
  * Main web routes
  */
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
+
 
 /**
  * User account routes
  */
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::permanentRedirect('/account', '/account/dashboard');
+Route::controller(AccountController::class)
+    ->prefix('account')
+    ->name('account.')
+    ->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/profile', 'profile')->name('profile');
+    });
+
 
 /**
  * Authentication routes
  */
 require __DIR__.'/auth.php';
 
+
 /**
  * CMS admin routes
  */
+// TODO
+
+
+/**
+ * Fallback route (redirect 404's)
+ * This fallback route should always be the last route registered!
+ */
+Route::fallback(FallbackController::class);
