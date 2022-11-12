@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\FallbackController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -17,35 +16,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
- * Main web routes
+ * Public web routes
  */
 Route::get('/', HomeController::class)->name('home');
 
+/**
+ * User authentication routes
+ */
+require __DIR__.'/auth.php';
 
 /**
  * User account routes
  */
-Route::permanentRedirect('/account', '/account/dashboard');
-
-Route::controller(AccountController::class)
-    ->prefix('account')
-    ->name('account.')
-    ->group(function () {
-        Route::get('/dashboard', 'dashboard')->name('dashboard');
-        Route::get('/profile', 'profile')->name('profile');
-    });
-
-
-/**
- * Authentication routes
- */
-require __DIR__.'/auth.php';
-
+require __DIR__.'/account.php';
 
 /**
  * CMS admin routes
  */
-// TODO
+require __DIR__.'/cms.php';
+
+
+/*
+ * Test page - Use this route for all your try-outs
+ */
+//Route::middleware(['auth', 'verified', 'can:access super'])
+//    ->controller(Controller::class)
+//    ->group(function () {
+//        /* Test route  */
+//        Route::get('/test', 'test')->name('test');
+//    });
 
 
 /**

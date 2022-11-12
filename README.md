@@ -43,6 +43,14 @@ Docs are generated automatically after running `composer install`
 [Official documentation](https://laravel.com/docs/9.x/starter-kits#breeze-and-blade)    
 `composer require --dev laravel/breeze`
 
+### Laravel Permission
+
+Associate users with **permissions** and **roles**.   
+Settings can be found in the **permission.php** file inside the **config** folder.  
+[Official documentation](https://spatie.be/docs/laravel-permission/v5)    
+[Spatie Github](https://github.com/spatie/laravel-permission)       
+`composer require spatie/laravel-permission`
+
 
 ## NPM packages
 

@@ -14,6 +14,7 @@ class AccountController extends Controller
      */
     public function __construct()
     {
+        // Base middleware for all account routes
         $this->middleware(['auth', 'verified']);
     }
 

@@ -42,6 +42,13 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
                             <x-nav.dropdown-link title="{{ __('Profile') }}" route="account.profile" />
+
+                            {{-- CMS link --}}
+                            @can('access cms')
+                                <hr class="dropdown-divider">
+                                <x-nav.dropdown-link title="{{ __('CMS') }}" route="cms.index" class="link-primary"  />
+                            @endcan
+
                             <hr class="dropdown-divider">
                             {{-- Logout --}}
                             <form method="POST" action="{{ route('logout') }}">
