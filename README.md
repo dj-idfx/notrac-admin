@@ -51,6 +51,12 @@ Settings can be found in the **permission.php** file inside the **config** folde
 [Spatie Github](https://github.com/spatie/laravel-permission)       
 `composer require spatie/laravel-permission`
 
+### Laravel Sluggable
+
+Generate a unique **slug** when saving any Eloquent model.    
+[Spatie Github](https://github.com/spatie/laravel-sluggable)       
+`composer require spatie/laravel-sluggable`
+
 
 ## NPM packages
 

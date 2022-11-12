@@ -28,7 +28,8 @@ class NotracAdminSeeder extends Seeder
         Permission::create(['name' => 'manage content']);
 
         // Create Roles & assign Permissions
-        // The super-admin role's permissions is handled by a global Gate inside the AuthServiceProvider boot method
+        // The super-admin permissions are handled by a global Gate inside the AuthServiceProvider boot method
+        // Subscribers have no specific permissions (for now :-p)
         Role::create(['name' => 'super-admin']);
         Role::create(['name' => 'admin'])->givePermissionTo(Permission::all());
         Role::create(['name' => 'webmaster'])->givePermissionTo('access cms', 'manage users', 'manage content');
@@ -44,7 +45,7 @@ class NotracAdminSeeder extends Seeder
             'password'          => Hash::make('password'),
         ])->assignRole('super-admin');
 
-        // Create fake users
+        // Create fake cms users
         $adminUsers = User::factory(2)->create();
         foreach ($adminUsers as $user){
             $user->assignRole('admin');
@@ -60,14 +61,17 @@ class NotracAdminSeeder extends Seeder
             $user->assignRole('editor');
         }
 
+        // Create fake subscriber users
         $subscriberUsers = User::factory(20)->create();
         foreach ($subscriberUsers as $user){
             $user->assignRole('subscriber');
         }
+
         $unverifiedUsers = User::factory(5)->unverified()->create();
         foreach ($unverifiedUsers as $user){
             $user->assignRole('subscriber');
         }
+
         $nonactiveUsers = User::factory(5)->nonactive()->create();
         foreach ($nonactiveUsers as $user){
             $user->assignRole('subscriber');

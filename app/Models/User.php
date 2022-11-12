@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles, HasSlug;
 
     /**
      * The "booted" method of the model.
@@ -74,6 +76,34 @@ class User extends Authenticatable implements MustVerifyEmail
         'hashed_at'         => 'datetime',
         'full_name'         => 'string',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Slug settings
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('full_name')
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate()
+            ->slugsShouldBeNoLongerThan(48);
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     /*
     |--------------------------------------------------------------------------
