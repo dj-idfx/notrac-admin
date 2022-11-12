@@ -9,7 +9,6 @@
         "ext-pdo": "*",
         "guzzlehttp/guzzle": "^7.5.0",
         "laravel/framework": "^v9.39.0",
-        "laravel/sanctum": "^v3.0.1",
         "laravel/tinker": "^v2.7.2"
     },
     "require-dev": {

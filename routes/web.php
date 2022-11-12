@@ -26,6 +26,7 @@ Route::get('/', HomeController::class)->name('home');
  * User account routes
  */
 Route::permanentRedirect('/account', '/account/dashboard');
+
 Route::controller(AccountController::class)
     ->prefix('account')
     ->name('account.')
