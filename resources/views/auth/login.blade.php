@@ -36,7 +36,7 @@
 
             {{-- Submit --}}
             <div class="d-flex flex-wrap align-items-end justify-content-between">
-                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Log in') }}" />
+                <x-form.button class="btn-primary me-3" title="{{ __('Log in') }}" />
 
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="link-dark small pt-2">

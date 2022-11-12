@@ -8,8 +8,14 @@
     </x-slot>
 
     <div class="container py-3">
-        <h2 class="fs-3 text-center">
-            {{ __('Welcome!') }}
-        </h2>
+       <div class="row justify-content-center">
+            <div class="col text-center">
+                <h2 class="fs-3">
+                    {{ __('Welcome!') }}
+                </h2>
+
+                <x-svg.brand-logo class="w-100 text-secondary user-select-none" style="max-width: 720px;" />
+            </div>
+        </div>
     </div>
 </x-app-layout>

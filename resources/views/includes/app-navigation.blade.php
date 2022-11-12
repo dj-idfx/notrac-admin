@@ -1,4 +1,4 @@
-<nav class="l-navbar navbar navbar-expand-lg bg-light shadow-sm">
+<nav class="l-navbar navbar navbar-expand-lg bg-light shadow">
     <div class="container-md">
         {{-- App Logo + Name--}}
         <a class="navbar-brand d-flex align-items-center p-0" href="{{ route('home') }}">

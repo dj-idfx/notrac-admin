@@ -48,7 +48,7 @@
 
             {{-- Submit --}}
             <div class="d-flex flex-wrap align-items-end justify-content-between">
-                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Register') }}" />
+                <x-form.button class="btn-primary me-3" title="{{ __('Register') }}" />
 
                 @if (Route::has('login'))
                     <a href="{{ route('login') }}" class="link-dark small pt-2">

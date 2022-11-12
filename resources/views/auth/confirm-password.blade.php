@@ -20,7 +20,7 @@
 
             {{-- Submit --}}
             <div class="d-flex flex-wrap align-items-end justify-content-between">
-                <x-form.button class="btn-primary px-3 me-3" title="{{ __('Confirm') }}" />
+                <x-form.button class="btn-primary me-3" title="{{ __('Confirm') }}" />
             </div>
         </form>
     </x-auth.auth-card>
