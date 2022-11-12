@@ -2,22 +2,44 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\HashedScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new HashedScope());
+    }
 
     /*
     |--------------------------------------------------------------------------
     | Attribute settings
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'active' => true,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -48,8 +70,28 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'full_name' => 'string',
+        'active'            => 'boolean',
+        'hashed_at'         => 'datetime',
+        'full_name'         => 'string',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    ! Add global scopes inside the "booted" method of this model.
+    */
+
+    /**
+     * Local scope for only including active users.
+     *
+     * @param  Builder  $query
+     * @return void
+     */
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('active', true);
+    }
 
     /*
     |--------------------------------------------------------------------------
