@@ -5,3 +5,28 @@ $prefix:                      cms-;
 
 // Options
 $enable-important-utilities:  false;
+
+//
+// Color system
+//
+// gray-color-variables
+$white:    #fff;
+$gray-600: #6c757d;
+$black:    #000;
+
+// color-variables
+$blue:    #007bff;
+
+// theme-color-variables
+$primary:   $blue;
+$secondary: $gray-600;
+
+//
+// Components
+//
+
+// Navs
+// nav-variables
+$nav-pills-border-radius:     20rem;
+$nav-pills-link-active-color: $white;
+$nav-pills-link-active-bg:    $secondary;

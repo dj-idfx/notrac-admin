@@ -45,6 +45,12 @@ $cms-breakpoint-sidebar: lg;
     overflow: hidden;
 }
 
+.cms-sidebar-nav {}
+
+.cms-sidebar-footer {
+    border-top: 1px solid $light;
+}
+
 .cms-page {
     position: relative;
     min-height: 100vh;
