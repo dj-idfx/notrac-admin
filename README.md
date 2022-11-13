@@ -3,14 +3,14 @@
 Notrac administrator CMS: Take control over content in a simple & elegant way.
 
 ## Quick guide for local development:
-- Clone the git repo
-- Install composer dependencies: `composer install`
-- Update .env file (database, mailer, app key, ...)
-- Install node packages and build: `npm install && npm run build`   
-  When using Powershell terminal: `npm install; npm run build`
-- Migrate database: `php artisan migrate`
-- Optional db seed: `php artisan db:seed`
-- Run local hosting: `php artisan serve`  
+- Clone the [GitHub repo](https://github.com/dj-idfx/notrac-admin)   
+- Install composer dependencies: `composer install`   
+- Update .env file (app key, database, mail, ...)   
+- Install node packages and build: `npm install && npm run build`     
+  When using Powershell terminal: `npm install; npm run build`   
+- Migrate database: `php artisan migrate`   
+- Optional db seed: `php artisan db:seed`   
+- Run local hosting: `php artisan serve`   
   When using Laragon or another local server go to https://notrac-admin.local  
 
 ### created with:
@@ -26,8 +26,10 @@ Install the packages defined in the **composer.json** file.
 All files will be installed in the **vendor** directory:
 
 ```
-composer install
+composer install 
 ```
+
+**Check out this overview of cool packages I used for this project:**
 
 ### IDE Helper Generator
 
@@ -35,13 +37,13 @@ Complete **PHPDocs**, directly from the source.
 Package is registered in **AppServiceProvider**, settings can be found in the **ide-helper.php** file inside the **config** folder.    
 Docs are generated automatically after running `composer install`   
 [Barry Github](https://github.com/barryvdh/laravel-ide-helper)       
-`composer require --dev barryvdh/laravel-ide-helper` 
+`composer require --dev barryvdh/laravel-ide-helper`  
 
-### Laravel Breeze
+### Breeze
 
-**Authentication** scaffolding (Breeze & Blade).   
+**Authentication** scaffolding for Laravel (Controllers, Requests & Views).   
 [Official documentation](https://laravel.com/docs/9.x/starter-kits#breeze-and-blade)    
-`composer require --dev laravel/breeze`
+`composer require --dev laravel/breeze`   
 
 ### Laravel Permission
 
@@ -49,13 +51,20 @@ Associate users with **permissions** and **roles**.
 Settings can be found in the **permission.php** file inside the **config** folder.  
 [Official documentation](https://spatie.be/docs/laravel-permission/v5)    
 [Spatie Github](https://github.com/spatie/laravel-permission)       
-`composer require spatie/laravel-permission`
+`composer require spatie/laravel-permission`   
 
 ### Laravel Sluggable
 
 Generate a unique **slug** when saving any Eloquent model.    
 [Spatie Github](https://github.com/spatie/laravel-sluggable)       
-`composer require spatie/laravel-sluggable`
+`composer require spatie/laravel-sluggable`   
+
+### Log Viewer
+
+Log Viewer helps you quickly and clearly see individual **log entries**,   
+to search, filter, and make sense of your Laravel logs fast.  
+[Opcodesio Github](https://github.com/opcodesio/log-viewer)       
+`composer require opcodesio/log-viewer`   
 
 
 ## NPM packages
