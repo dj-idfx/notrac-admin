@@ -1,9 +1,9 @@
 <x-cms-layout>
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
-            CMS - {{ config('app.name', 'Notrac') }}
+            {{ config('app.name', 'Notrac') }} CMS
         </h1>
     </x-slot>
 
-    CMS INDEX
+    CMS INDEX DASHBOARD
 </x-cms-layout>

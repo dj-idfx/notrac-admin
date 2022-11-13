@@ -10,4 +10,4 @@
     $attributes = $attributes->except(['class', 'route', 'href', 'title', 'active']);
 @endphp
 
-<a @class(['nav-link', 'active' => $active, $class]) href="{{ $route ? route($route) : $href}}" @if($active)aria-current="page"@endif {{ $attributes }}>{{ $title }}</a>
+<a @class(['nav-link', 'active' => $active, $class]) href="{{ $route ? route($route) : $href}}" @if($active)aria-current="page"@endif {{ $attributes }}>{!! $title !!}</a>
