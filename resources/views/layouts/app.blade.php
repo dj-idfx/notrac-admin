@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Notrac Admin is a CMS starter template created with Laravel 9 and Bootstrap 5.">
     <title>{{ config('app.name', 'Notrac') }}</title>
     {{-- Scripts --}}
     @vite('resources/js/app.js')
@@ -15,7 +17,7 @@
 
     {{-- todo: breadcrumbs? (like page heading-> isset) --}}
 
-    {{-- View slot header --}}
+    {{-- View header --}}
     @if (isset($header))@include('includes.app-header')@endif
 
     {{-- View content --}}

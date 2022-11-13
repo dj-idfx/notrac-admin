@@ -1,3 +1,8 @@
-.cms-test {
-    color: deepskyblue;
-}
+// Import cms variables
+@import "cms/variables";
+
+// Import cms bootstrap 5
+@import "cms/bootstrap";
+
+// Import cms layout
+@import "cms/layout";

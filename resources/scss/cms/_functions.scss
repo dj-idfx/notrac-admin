@@ -1,0 +1,10 @@
+// CMS FUNCTIONS
+
+// Bootstrap 5 function overrides
+@function opaque($background, $foreground) {
+    // ORIGINAL (Deprecation Warning):
+    // @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+
+    // SOLUTION:
+    @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100%);
+}

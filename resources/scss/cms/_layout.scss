@@ -1,0 +1,97 @@
+//
+// CMS LAYOUT
+//
+
+// Variables
+
+$cms-sidebar-width: 180px;
+$cms-topbar-height: 40px;
+$cms-transition-sidebar: left 200ms ease-in-out;
+$cms-breakpoint-sidebar: lg;
+
+// Components
+
+.cms-body {}
+
+.cms-app {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: $dark;
+    background-color: $light;
+}
+
+.cms-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-height: 100%;
+    width: $cms-sidebar-width;
+    z-index: $zindex-fixed;
+    transition: $cms-transition-sidebar;
+    color: $light;
+    background-color: $dark;
+    border-right: 1px solid $light;
+
+    @include media-breakpoint-down($cms-breakpoint-sidebar) {
+        left: -$cms-sidebar-width;
+    }
+}
+
+.cms-sidebar-header {
+    height: $cms-topbar-height;
+    border-bottom: 1px solid $light;
+    overflow: hidden;
+}
+
+.cms-page {
+    position: relative;
+    min-height: 100vh;
+    margin-left: $cms-sidebar-width;
+    padding-top: $cms-topbar-height;
+    overflow: hidden;
+
+    @include media-breakpoint-down($cms-breakpoint-sidebar) {
+        margin-left: 0;
+    }
+}
+
+.cms-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: $cms-sidebar-width;
+    min-height: $cms-topbar-height;
+    z-index: $zindex-fixed;
+    transition: $cms-transition-sidebar;
+    color: $light;
+    background-color: $dark;
+    border-bottom: 1px solid $light;
+
+    @include media-breakpoint-down($cms-breakpoint-sidebar) {
+        left: 0;
+    }
+}
+
+.cms-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $secondary;
+}
+
+.cms-main {}
+
+// JS States - Sidebar toggle
+
+.js-show-sidebar {
+
+    @include media-breakpoint-down($cms-breakpoint-sidebar) {
+        .cms-sidebar {
+            left: 0;
+        }
+        .cms-nav {
+            left: $cms-sidebar-width;
+        }
+    }
+}

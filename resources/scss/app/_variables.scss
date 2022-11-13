@@ -36,21 +36,21 @@ $blue:    #007bff;
 
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
 // See https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
-$min-contrast-ratio:   3.5;
+$min-contrast-ratio: 3.5;
 
 // theme-color-variables
-$primary:       $blue;
+$primary:   $blue;
 //$secondary:     $gray-600 !default;
 //$success:       $green !default;
 //$info:          $cyan !default;
 //$warning:       $yellow !default;
 //$danger:        $red !default;
-$light:         $gray-100;
-$dark:          $gray-900;
+$light:     $gray-100;
+$dark:      $gray-900;
 
 // body-color-variables
-$body-bg:       $white;
-$body-color:    $gray-900;
+$body-bg:    $white;
+$body-color: $gray-900;
 
 //
 // Grid breakpoints
@@ -86,7 +86,6 @@ $box-shadow-lg: 0 0.75rem 1.5rem rgba($black, .175);
 $component-active-color: $white;
 $component-active-bg:    $primary;
 
-//
 // Buttons + Forms
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
@@ -97,3 +96,9 @@ $btn-padding-x: 1rem;
 $form-label-margin-bottom: .25rem;
 $input-border-color:        $gray-200;
 $input-focus-border-color:  rgba($component-active-bg, 20%);
+
+// Navbar
+//
+// navbar-variables
+$navbar-toggler-padding-y: .25rem;
+$navbar-toggler-padding-x: .5rem;
