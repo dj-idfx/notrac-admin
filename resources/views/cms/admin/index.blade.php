@@ -5,5 +5,11 @@
         </h1>
     </x-slot>
 
+    <x-slot name="actionButtons">
+        <div><button class="btn btn-primary btn-sm lh-sm">
+                <i class="bi bi-question-circle"></i> {{ __('Test') }}
+            </button></div>
+    </x-slot>
+
     CMS ADMIN INDEX
 </x-cms-layout>

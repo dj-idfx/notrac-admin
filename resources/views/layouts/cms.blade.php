@@ -22,6 +22,9 @@
         {{-- View header --}}
         @if (isset($header))@include('includes.cms-header')@endif
 
+        {{-- View action buttons --}}
+        @if (isset($actionButtons))@include('includes.cms-action-buttons') @endif
+
         {{-- View content --}}
         <main class="cms-main container-lg">
             {{ $slot }}

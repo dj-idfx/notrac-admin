@@ -5,7 +5,7 @@
     $route = $attributes['route'] ?? null;
     $href = $attributes['href'] ?? '#';
     $title = $attributes['title'] ?? '';
-    $active = $attributes['active'] ?? request()->routeIs($route);
+    $active = $attributes['active'] ?? request()->routeIs([$route, Str::beforeLast($route, '.') . '.*']);
 
     $attributes = $attributes->except(['class', 'route', 'href', 'title', 'active']);
 @endphp

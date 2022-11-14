@@ -19,7 +19,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
     /**
      * Dashboard controller
      */
-    Route::get('/', [CmsDashboardController::class, 'index'])->name('index');
+    Route::get('/', [CmsDashboardController::class, 'index'])->name('dashboard.index');
 
     /**
      * User controller

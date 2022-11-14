@@ -1,7 +1,7 @@
 <x-cms-layout>
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
-            <i class='bi bi-speedometer2'></i> {{ config('app.name', 'Notrac') }} CMS
+            <i class="bi bi-person"></i> {{ $user->full_name }}
         </h1>
     </x-slot>
 
@@ -11,5 +11,12 @@
             </button></div>
     </x-slot>
 
-    CMS INDEX DASHBOARD
+    <h2 class="fs-3 fw-light">
+        {{ __('User details') }}
+    </h2>
+
+    <p>
+        {{ $user->full_name }} <br>
+        {{ $user->email }} <br>
+    </p>
 </x-cms-layout>

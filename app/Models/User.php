@@ -78,6 +78,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'active'            => 'boolean',
         'hashed_at'         => 'datetime',
         'full_name'         => 'string',
+        'full_name_rev'     => 'string',
     ];
 
     /*
@@ -139,6 +140,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $appends = [
         'full_name',
+        'full_name_rev',
     ];
 
     /**
@@ -175,6 +177,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function fullName(): Attribute
     {
         return Attribute::get(fn () => "$this->first_name $this->last_name");
+    }
+
+    /**
+     * Get the user's reversed full name.
+     *
+     * @return Attribute
+     */
+    protected function fullNameRev(): Attribute
+    {
+        return Attribute::get(fn () => "$this->last_name $this->first_name");
     }
 
     /**

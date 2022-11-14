@@ -46,7 +46,7 @@
                             {{-- CMS link --}}
                             @can('access cms')
                                 <hr class="dropdown-divider">
-                                <x-nav.dropdown-link title="<i class='bi bi-speedometer2'></i> {{ __('CMS') }}" route="cms.index" class="link-primary"  />
+                                <x-nav.dropdown-link title="<i class='bi bi-speedometer2'></i> {{ __('CMS') }}" route="cms.dashboard.index" class="link-primary"  />
                             @endcan
 
                             <hr class="dropdown-divider">

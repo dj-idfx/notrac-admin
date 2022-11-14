@@ -86,7 +86,21 @@ $cms-breakpoint-sidebar: lg;
     border-bottom: 1px solid $secondary;
 }
 
-.cms-main {}
+.cms-action-buttons {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid $secondary;
+
+    .row > * {
+        flex: 0 0 auto;
+        width: auto;
+    }
+}
+
+.cms-main {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 
 // JS States - Sidebar toggle
 
