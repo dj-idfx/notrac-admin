@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="container py-3">
             <h1 class="fs-2 text-center mb-0">
-                {{ __('Dashboard') }}
+                <i class="bi bi-boxes"></i> {{ __('Dashboard') }}
             </h1>
         </div>
     </x-slot>

@@ -24,11 +24,11 @@
                     <x-nav.nav-link title="{{ __('Dropdown') }}" class="dropdown-toggle"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                     <div class="dropdown-menu">
-                        <x-nav.dropdown-link title="{{ __('Home') }}" route="home" />
-                        <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
+                        <x-nav.dropdown-link title="<i class='bi bi-house-door'></i> {{ __('Home') }}" route="home" />
+                        <x-nav.dropdown-link title="<i class='bi bi-boxes'></i> {{ __('Dashboard') }}" route="account.dashboard" />
                         <hr class="dropdown-divider">
-                        <x-nav.dropdown-link title="{{ __('Github') }}" href="https://github.com/dj-idfx/notrac-admin" target="_blank" />
-                        <x-nav.dropdown-link title="{{ __('Google it!') }}" href="https://www.google.com/" target="_blank" />
+                        <x-nav.dropdown-link title="<i class='bi bi-github'></i> {{ __('Github') }}" href="https://github.com/dj-idfx/notrac-admin" target="_blank" />
+                        <x-nav.dropdown-link title="<i class='bi bi-google'></i> {{ __('Google it!') }}" href="https://www.google.com/" target="_blank" />
                     </div>
                 </div>
             </div>
@@ -40,20 +40,20 @@
                         <x-nav.nav-link title="{{ Auth::user()->full_name }}" route="account.dashboard" class="dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" />
                         <div class="dropdown-menu dropdown-menu-end">
-                            <x-nav.dropdown-link title="{{ __('Dashboard') }}" route="account.dashboard" />
-                            <x-nav.dropdown-link title="{{ __('Profile') }}" route="account.profile" />
+                            <x-nav.dropdown-link title="<i class='bi bi-boxes'></i> {{ __('Dashboard') }}" route="account.dashboard" />
+                            <x-nav.dropdown-link title="<i class='bi bi-person-circle'></i> {{ __('Profile') }}" route="account.profile" />
 
                             {{-- CMS link --}}
                             @can('access cms')
                                 <hr class="dropdown-divider">
-                                <x-nav.dropdown-link title="{{ __('CMS') }}" route="cms.index" class="link-primary"  />
+                                <x-nav.dropdown-link title="<i class='bi bi-speedometer2'></i> {{ __('CMS') }}" route="cms.index" class="link-primary"  />
                             @endcan
 
                             <hr class="dropdown-divider">
                             {{-- Logout --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-form.button class="dropdown-item" title="{{ __('Log Out') }}" />
+                                <x-form.button class="dropdown-item" title="<i class='bi bi-power'></i> {{ __('Log Out') }}" />
                             </form>
                         </div>
                     </div>

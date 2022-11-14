@@ -20,7 +20,7 @@ class CmsAdminController extends BaseCmsController
     }
 
     /**
-     * Display the CMS admin view.
+     * Display the CMS admin index view.
      *
      * @return View
      */

@@ -1,1 +1,1 @@
-<button {{ $attributes->except('title')->merge(['type' => 'submit', 'class' => 'btn']) }}>{{ $title }}</button>
+<button {{ $attributes->except('title')->merge(['type' => 'submit', 'class' => 'btn']) }}>{!! $title !!}</button>

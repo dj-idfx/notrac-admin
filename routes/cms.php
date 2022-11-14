@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cms\CmsAdminController;
 use App\Http\Controllers\Cms\CmsDashboardController;
+use App\Http\Controllers\Cms\CmsUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,11 @@ Route::prefix('cms')->name('cms.')->group(function () {
      * Dashboard controller
      */
     Route::get('/', [CmsDashboardController::class, 'index'])->name('index');
+
+    /**
+     * User controller
+     */
+    Route::resource('users', CmsUserController::class);
 
     /**
      * Admin secured area
