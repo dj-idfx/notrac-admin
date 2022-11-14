@@ -7,6 +7,11 @@
     <meta name="robots" content="index, follow">
     <meta name="description" content="Notrac Admin is a CMS starter template created with Laravel 9 and Bootstrap 5.">
     <title>{{ config('app.name', 'Notrac') }}</title>
+    {{-- Favicons --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ Vite::favicon('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ Vite::favicon('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ Vite::favicon('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ Vite::favicon('site.webmanifest') }}">
     {{-- Scripts --}}
     @vite('resources/js/app.js')
 </head>

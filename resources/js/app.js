@@ -15,3 +15,8 @@ window.Popper = Popper;
 // import { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip } from 'bootstrap';
 import 'bootstrap/js/dist/collapse'
 import 'bootstrap/js/dist/dropdown';
+
+// Proces static assets
+import.meta.glob([
+    '../favicon/**', '!../favicon/info.txt',
+]);
