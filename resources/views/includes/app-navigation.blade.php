@@ -17,7 +17,9 @@
             {{-- Main navigation --}}
             <div class="navbar-nav">
                 <x-nav.nav-link title="{{ __('Home') }}" route="home" />
-                <x-nav.nav-link title="{{ __('Dashboard') }}" route="account.dashboard" />
+
+                {{-- Link example --}}
+                <x-nav.nav-link title="{{ __('Example') }}" />
 
                 {{-- Dropdown example--}}
                 <div class="dropdown">

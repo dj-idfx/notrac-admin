@@ -4,6 +4,7 @@
 $prefix:                      cms-;
 
 // Options
+$enable-rounded:              false;
 $enable-important-utilities:  false;
 
 //
@@ -22,6 +23,13 @@ $secondary: $gray-600;
 //
 // Components
 //
+
+// Navbar
+//
+// navbar-variables
+$navbar-padding-y:         .25rem;
+$navbar-toggler-padding-y: .2rem;
+$navbar-toggler-padding-x: .375rem;
 
 // Navs
 // nav-variables

@@ -6,9 +6,11 @@
     </x-slot>
 
     <x-slot name="actionButtons">
-        <div><button class="btn btn-primary btn-sm lh-sm">
-                <i class="bi bi-question-circle"></i> {{ __('Test') }}
-            </button></div>
+        @can('manage users')
+            <div><button class="btn btn-outline-primary btn-sm lh-sm">
+                    <i class="bi bi-plus-circle"></i> {{ __('Create new user') }}
+                </button></div>
+        @endcan
     </x-slot>
 
     <h2 class="fs-3 fw-light">
