@@ -25,7 +25,7 @@
         @endcan
 
         @can('access admin')
-            <x-nav.nav-link title="<i class='bi bi-gear'></i> {{ __('ADMIN') }}" />
+            <x-nav.nav-link title="<i class='bi bi-gear'></i> {{ __('ADMIN') }}" route="cms.admin.index" />
             <hr class="my-2">
         @endcan
 

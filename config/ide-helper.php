@@ -140,6 +140,7 @@ return [
 
     'model_locations' => [
         'app',
+        'vendor/spatie/laravel-permission/src/Models'
     ],
 
     /*

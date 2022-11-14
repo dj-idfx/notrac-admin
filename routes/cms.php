@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cms\CmsAdminController;
 use App\Http\Controllers\Cms\CmsDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,12 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth', 'verified', 'can:access cms'])
-    ->prefix('cms')
-    ->name('cms.')
-    ->group(function () {
+Route::prefix('cms')->name('cms.')->group(function () {
 
-        /* Index dashboard page */
-        Route::get('/', [CmsDashboardController::class, 'index'])->name('index');
+    /**
+     * Dashboard controller
+     */
+    Route::get('/', [CmsDashboardController::class, 'index'])->name('index');
 
+    /**
+     * Admin secured area
+     */
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [CmsAdminController::class, 'index'])->name('index');
     });
+});

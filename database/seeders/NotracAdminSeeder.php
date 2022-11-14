@@ -47,34 +47,30 @@ class NotracAdminSeeder extends Seeder
         ])->assignRole('super-admin');
 
         // Create fake cms users
-        $adminUsers = User::factory(2)->create();
+        $adminUsers = User::factory(1)->create();
         foreach ($adminUsers as $user){
             $user->assignRole('admin');
         }
-
-        $webmasterUsers = User::factory(3)->create();
+        $webmasterUsers = User::factory(2)->create();
         foreach ($webmasterUsers as $user){
             $user->assignRole('webmaster');
         }
-
-        $editorUsers = User::factory(4)->create();
+        $editorUsers = User::factory(3)->create();
         foreach ($editorUsers as $user){
             $user->assignRole('editor');
         }
 
         // Create fake subscriber users
-        $subscriberUsers = User::factory(20)->create();
-        foreach ($subscriberUsers as $user){
-            $user->assignRole('subscriber');
-        }
-
-        $unverifiedUsers = User::factory(5)->unverified()->create();
+        $unverifiedUsers = User::factory(4)->unverified()->create();
         foreach ($unverifiedUsers as $user){
             $user->assignRole('subscriber');
         }
-
         $nonactiveUsers = User::factory(5)->nonactive()->create();
         foreach ($nonactiveUsers as $user){
+            $user->assignRole('subscriber');
+        }
+        $subscriberUsers = User::factory(10)->create();
+        foreach ($subscriberUsers as $user){
             $user->assignRole('subscriber');
         }
     }

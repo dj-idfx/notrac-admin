@@ -12,19 +12,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::prefix('account')->name('account.')->group(function () {
 
-    Route::permanentRedirect('/account', '/account/dashboard');
+    Route::permanentRedirect('/', '/account/dashboard');
 
     /**
      * Account Controller
      */
-    Route::controller(AccountController::class)
-        ->prefix('account')
-        ->name('account.')
-        ->group(function () {
-            Route::get('/dashboard', 'dashboard')->name('dashboard');
-            Route::get('/profile', 'profile')->name('profile');
-        });
-
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/profile', 'profile')->name('profile');
+    });
 });
