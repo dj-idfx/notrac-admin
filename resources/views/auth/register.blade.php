@@ -17,7 +17,7 @@
             {{-- Firstname --}}
             <div class="mb-2">
                 <x-form.input-label for="first_name" :value="__('First Name')" />
-                <x-form.text-input id="first_name" type="text" name="first_name" :value="old('first_name')" required autofocus />
+                <x-form.text-input id="first_name" type="text" name="first_name" :value="old('first_name')" required :autofocus="$errors->any() ? false : true" />
                 <x-form.input-error :errors="$errors->get('first_name')" />
             </div>
 

@@ -20,7 +20,7 @@
             {{-- Email --}}
             <div class="mb-3">
                 <x-form.input-label for="email" :value="__('Email')" />
-                <x-form.text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-form.text-input id="email" type="email" name="email" :value="old('email')" required :autofocus="$errors->any() ? false : true" autocomplete="username" />
                 <x-form.input-error :errors="$errors->get('email')" />
             </div>
 
