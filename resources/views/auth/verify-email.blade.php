@@ -16,6 +16,8 @@
         <div class="d-flex flex-wrap align-items-end justify-content-between">
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
+                {{-- Honeypot hidden fields --}}
+                <x-honeypot />
                 <x-form.button class="btn-outline-primary btn-sm my-1 me-3" title="{{ __('Resend Verification Email') }}" />
             </form>
 

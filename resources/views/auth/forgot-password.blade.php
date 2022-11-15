@@ -14,6 +14,9 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
+            {{-- Honeypot hidden fields --}}
+            <x-honeypot />
+
             {{-- Email --}}
             <div class="mb-3">
                 <x-form.input-label for="email" :value="__('Email')" />

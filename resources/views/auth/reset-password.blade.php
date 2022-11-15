@@ -11,6 +11,9 @@
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 
+            {{-- Honeypot hidden fields --}}
+            <x-honeypot />
+
             {{-- Password Reset Token --}}
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 

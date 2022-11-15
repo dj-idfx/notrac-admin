@@ -11,6 +11,7 @@
         "laravel/framework": "^v9.39.0",
         "laravel/tinker": "^v2.7.2",
         "opcodesio/log-viewer": "^v1.6.5",
+        "spatie/laravel-honeypot": "^4.3",
         "spatie/laravel-permission": "^5.5.16",
         "spatie/laravel-sluggable": "^3.4.0"
     },

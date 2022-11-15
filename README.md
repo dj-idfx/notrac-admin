@@ -59,6 +59,13 @@ Generate a unique **slug** when saving any Eloquent model.
 [Spatie Github](https://github.com/spatie/laravel-sluggable)       
 `composer require spatie/laravel-sluggable`   
 
+### Laravel Honeypot
+
+Preventing **spam** submitted through **forms**.    
+Settings can be found in the **honeypot.php** file inside the **config** folder.   
+[Spatie Github](https://github.com/spatie/laravel-honeypot)       
+`composer require spatie/laravel-honeypot`
+
 ### Log Viewer
 
 Log Viewer helps you quickly and clearly see individual **log entries**,   

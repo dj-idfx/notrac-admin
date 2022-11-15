@@ -11,6 +11,9 @@
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
+            {{-- Honeypot hidden fields --}}
+            <x-honeypot />
+
             {{-- Password --}}
             <div class="mb-3">
                 <x-form.input-label for="password" :value="__('Password')" />

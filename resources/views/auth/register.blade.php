@@ -11,6 +11,9 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            {{-- Honeypot hidden fields --}}
+            <x-honeypot />
+
             {{-- Firstname --}}
             <div class="mb-2">
                 <x-form.input-label for="first_name" :value="__('First Name')" />
