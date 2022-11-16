@@ -66,6 +66,13 @@ Settings can be found in the **honeypot.php** file inside the **config** folder.
 [Spatie Github](https://github.com/spatie/laravel-honeypot)       
 `composer require spatie/laravel-honeypot`
 
+### LaravelCollective HTML
+
+HTML and **Form** Builders.  
+[Official documentation](https://laravelcollective.com/docs/6.x/html)    
+[LaravelCollective Github](https://github.com/LaravelCollective/html)       
+`composer require laravelcollective/html`
+
 ### Log Viewer
 
 Log Viewer helps you quickly and clearly see individual **log entries**,   

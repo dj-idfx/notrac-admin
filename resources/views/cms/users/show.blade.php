@@ -90,6 +90,21 @@
                     @endif
                 @endcan
             </table>
+
+            <h3 class="fs-4 fw-light">
+                {{ __('User roles') }}
+            </h3>
+
+            @forelse($user->getRoleNames() as $role)
+                @if($loop->first)<ul>@endif
+                    <li>{{ $role }}</li>
+                @if($loop->last)</ul>@endif
+
+            @empty
+                <p class="fw-bold fst-italic">
+                    <i class="bi bi-exclamation-circle-fill"></i> {{ __('No roles found') }}
+                </p>
+            @endforelse
         </div>
     </div>
 </x-cms-layout>

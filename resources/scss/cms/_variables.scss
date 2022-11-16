@@ -7,6 +7,9 @@ $prefix:                      cms-;
 $enable-rounded:              false;
 $enable-important-utilities:  false;
 
+// Spacing
+$spacer: 1rem;
+
 //
 // Color system
 //
@@ -36,3 +39,7 @@ $navbar-toggler-padding-x: .375rem;
 $nav-pills-border-radius:     20rem;
 $nav-pills-link-active-color: $white;
 $nav-pills-link-active-bg:    $secondary;
+
+// Alerts
+//  alert-variables
+$alert-padding-y:   $spacer * 0.5;

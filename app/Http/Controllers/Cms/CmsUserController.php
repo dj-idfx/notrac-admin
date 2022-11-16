@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Requests\Cms\CmsStoreUserRequest;
 use App\Http\Requests\Cms\CmsUpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
@@ -38,22 +39,25 @@ class CmsUserController extends BaseCmsController
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('cms.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param CmsStoreUserRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(CmsStoreUserRequest $request)
+    public function store(CmsStoreUserRequest $request): RedirectResponse
     {
-        //
+        /* Request actions */
+        $user = $request->actions();
+
+        return redirect()->route('cms.users.show', $user);
     }
 
     /**

@@ -20,15 +20,18 @@
         @include('includes.cms-navigation')
 
         {{-- View header --}}
-        @if (isset($header))@include('includes.cms-header')@endif
+        @if (isset($header)) @include('includes.cms-header') @endif
 
         {{-- View action buttons --}}
-        @if (isset($actionButtons))@include('includes.cms-action-buttons') @endif
+        @if (isset($actionButtons)) @include('includes.cms-action-buttons') @endif
 
         {{-- View content --}}
         <main class="cms-main container-lg">
             {{ $slot }}
         </main>
+
+        {{-- Session flash messages --}}
+        @if(Session::has('flash_message')) @include('includes.cms-flash-message') @endif
     </div>
 </div>
 </body>

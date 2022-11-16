@@ -7,9 +7,9 @@
 
     <x-slot name="actionButtons">
         @can('manage users')
-            <div><button class="btn btn-outline-primary btn-sm lh-sm">
+            <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.create') }}">
                     <i class="bi bi-plus-circle"></i> {{ __('Create new user') }}
-                </button></div>
+                </a></div>
         @endcan
     </x-slot>
 
