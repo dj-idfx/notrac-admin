@@ -17,7 +17,7 @@ class CmsStoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if (Auth::user()->can('manage users')){
+        if (Auth::user()->can('manage users')) {
             return true;
         }
 
@@ -47,7 +47,11 @@ class CmsStoreUserRequest extends FormRequest
     public function actions(): User
     {
         // Create new User
-        $user = new User($this->safe()->only(['first_name', 'last_name', 'email']));
+        $user = new User($this->safe()->only([
+            'first_name',
+            'last_name',
+            'email',
+        ]));
         $user->password = Hash::make(str()->random(12));
         $user->save();
 
@@ -55,7 +59,7 @@ class CmsStoreUserRequest extends FormRequest
         $user->syncRoles($this->safe()->only(['role']));
 
         // Flash message:
-        session()->flash('flash_message', __('New user created successfully'));
+        session()->flash('flash_message', __('New user created successfully!'));
         session()->flash('flash_level', 'success');
 
         // Return User

@@ -18,7 +18,7 @@ class CmsUserController extends BaseCmsController
      */
     public function __construct()
     {
-        // Import BaseCmsController constructor with base middleware
+        // Import BaseCmsController constructor with the basic CMS routes middleware
         parent::__construct();
         // Add extra 'manage users' middleware
         $this->middleware(['can:manage users'])->except(['index', 'show']);
@@ -54,7 +54,6 @@ class CmsUserController extends BaseCmsController
      */
     public function store(CmsStoreUserRequest $request): RedirectResponse
     {
-        /* Request actions */
         $user = $request->actions();
 
         return redirect()->route('cms.users.show', $user);
@@ -74,24 +73,26 @@ class CmsUserController extends BaseCmsController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User $user
-     * @return Response
+     * @param User $user
+     * @return View
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        //
+        return view('cms.users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param CmsUpdateUserRequest $request
-     * @param  User $user
-     * @return Response
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function update(CmsUpdateUserRequest $request, User $user)
+    public function update(CmsUpdateUserRequest $request, User $user): RedirectResponse
     {
-        //
+        $user = $request->actions($user);
+
+        return redirect()->route('cms.users.show', $user);
     }
 
     /**

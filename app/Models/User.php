@@ -95,7 +95,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return SlugOptions::create()
             ->generateSlugsFrom('full_name')
             ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnUpdate()
             ->slugsShouldBeNoLongerThan(48);
     }
 

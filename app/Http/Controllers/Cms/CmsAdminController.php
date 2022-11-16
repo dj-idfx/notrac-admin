@@ -13,7 +13,7 @@ class CmsAdminController extends BaseCmsController
      */
     public function __construct()
     {
-        // Import BaseCmsController constructor with base middleware
+        // Import BaseCmsController constructor with the basic CMS routes middleware
         parent::__construct();
         // Add extra 'admin acces' middleware
         $this->middleware(['can:access admin']);

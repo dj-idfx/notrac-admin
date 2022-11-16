@@ -13,7 +13,7 @@ class CmsDashboardController extends BaseCmsController
      */
     public function __construct()
     {
-        // Import BaseCmsController constructor with base middleware
+        // Import BaseCmsController constructor with the basic CMS routes middleware
         parent::__construct();
     }
 

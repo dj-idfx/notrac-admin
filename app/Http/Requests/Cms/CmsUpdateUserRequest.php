@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Cms;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CmsUpdateUserRequest extends FormRequest
 {
@@ -13,6 +16,10 @@ class CmsUpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if (Auth::user()->can('manage users')) {
+            return true;
+        }
+
         return false;
     }
 
@@ -24,7 +31,38 @@ class CmsUpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name'    => 'required|string|max:255',
+            'last_name'     => 'required|string|max:255',
+            'email'         => ['required','string','email','max:255', Rule::unique('users')->ignore($this->user)],
+            'role'          => ['required', 'string', 'max:255', Rule::in(array_keys(config('permission.default_roles'))) ],
         ];
+    }
+
+    /**
+     * Actions to perform after validation passes
+     *
+     * @param User $user
+     * @return User
+     */
+    public function actions(User $user): User
+    {
+        // Update User
+        $user->update($this->safe()->only([
+            'first_name',
+            'last_name',
+            'email',
+        ]));
+
+        // Re-assign Role to User, only when the edited user is not a super-admin
+        if (! $user->hasRole('super-admin')) {
+            $user->syncRoles($this->safe()->only(['role']));
+        }
+
+        // Flash message:
+        session()->flash('flash_message', __('User updated successfully!'));
+        session()->flash('flash_level', 'success');
+
+        // Return User
+        return $user;
     }
 }

@@ -6,23 +6,33 @@
     </x-slot>
 
     <x-slot name="actionButtons">
+        {{-- Index user link --}}
         <div><a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.users.index') }}" style="--cms-btn-active-border-color: transparent;">
                 <i class="bi bi-arrow-left"></i> {{ __('All users') }}
             </a></div>
 
-        @can('manage users')
-            <div><button class="btn btn-outline-secondary btn-sm lh-sm">
-                    <i class="bi bi-pencil-square"></i> {{ __('Edit user') }}
-                </button></div>
-        @endcan
-
+        {{-- Account profile link --}}
         @if($user->is(Auth::user()))
-            <div><a class="btn btn-primary btn-sm lh-sm" href="{{ route('account.profile') }}">
-                    <i class="bi bi-eye"></i> {{ __('Public account') }}
+            <div><a class="btn btn-outline-secondary btn-sm lh-sm" href="{{ route('account.profile') }}">
+                    <i class="bi bi-eye"></i> {{ __('My account') }}
                 </a></div>
         @endif
+
+        @can('manage users')
+            {{-- Edit user link --}}
+            <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.edit', $user) }}">
+                    <i class="bi bi-pencil-square"></i> {{ __('Edit user') }}
+                </a></div>
+
+            {{-- Delete user toggle modal --}}
+            <div class="ms-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+                                         data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                    <i class="bi bi-trash"></i> {{ __('Delete user') }}
+                </button></div>
+        @endcan
     </x-slot>
 
+    {{-- $slot --}}
     <div class="row">
         <div class="col">
             <h2 class="fs-3 fw-light">
@@ -52,7 +62,9 @@
                 </tr>
                 <tr>
                     <th>{{ __('Active') }}:</th>
-                    <td>{{ $user->active ? __('Yes') : __('No')}}</td>
+                    <td class="{{ $user->active ? null : 'text-danger fw-bold' }}">
+                        {{ $user->active ? __('Yes') : __('No')}}
+                    </td>
                 </tr>
 
                 @can('manage users')
@@ -107,4 +119,39 @@
             @endforelse
         </div>
     </div>
+
+    @can('manage users')
+        {{-- Delete user  modal--}}
+        <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="deleteUserModalLabel">
+                            {{ __('Delete user') .': ' . $user->full_name }}
+                        </h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{ __('Are you sure?') }}
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            {{ __('Cancel') }}
+                        </button>
+
+                        {!! Form::open([
+                            'id' => 'cmsDeleteUserForm',
+                            'route' => ['cms.users.destroy', $user],
+                            'method' => 'delete']) !!}
+                        {!! Form::button('<i class="bi bi-trash"></i>  '.__('Delete user'), [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger',
+                            'id' => 'cmsDeleteUserSubmit']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 </x-cms-layout>
