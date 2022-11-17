@@ -7,6 +7,7 @@ return [
      */
     'default_roles' => [
         'subscriber'    => 'Subscriber',
+        'writer'        => 'Writer',
         'editor'        => 'Editor',
         'webmaster'     => 'Webmaster',
         'admin'         => 'Administrator',

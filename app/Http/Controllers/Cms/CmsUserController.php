@@ -6,7 +6,6 @@ use App\Http\Requests\Cms\CmsStoreUserRequest;
 use App\Http\Requests\Cms\CmsUpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class CmsUserController extends BaseCmsController
@@ -96,13 +95,83 @@ class CmsUserController extends BaseCmsController
     }
 
     /**
+     * Softdelete the specified resource.
+     *
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function destroy(User $user): RedirectResponse
+    {
+        $user->delete();
+
+        // Flash message:
+        session()->flash('flash_message', __('User trashed successfully!'));
+        session()->flash('flash_level', 'success');
+
+        return redirect()->route('cms.users.index');
+    }
+
+    /**
+     * Display a listing of soft deleted resources.
+     *
+     * @return View
+     */
+    public function trash(): View
+    {
+        $users = User::onlyTrashed()->orderBy('last_name')->get();
+
+        return view('cms.users.trash', compact('users'));
+    }
+
+    /**
+     * Restore the specified resource.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function restore(int $id): RedirectResponse
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
+
+        // Flash message:
+        session()->flash('flash_message', __('User restored successfully!'));
+        session()->flash('flash_level', 'success');
+
+        return redirect()->route('cms.users.show', $user);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  User $user
-     * @return Response
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function destroy(User $user)
+    public function delete(int $id): RedirectResponse
     {
-        //
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+
+        // Flash message:
+        session()->flash('flash_message', __('User deleted successfully!'));
+        session()->flash('flash_level', 'success');
+
+        return redirect()->route('cms.users.trash');
+    }
+
+    /**
+     * Remove all soft deleted resources from storage.
+     *
+     * @return RedirectResponse
+     */
+    public function empty(): RedirectResponse
+    {
+        User::onlyTrashed()->forceDelete();
+
+        // Flash message:
+        session()->flash('flash_message', __('User trash empty!'));
+        session()->flash('flash_level', 'success');
+
+        return redirect()->route('cms.users.trash');
     }
 }

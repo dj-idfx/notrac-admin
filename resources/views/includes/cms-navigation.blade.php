@@ -21,8 +21,8 @@
             {{-- User menu --}}
             <div class="navbar-nav ms-auto">
                 <div class="dropdown">
-                    <x-nav.nav-link title="{{ Auth::user()->full_name }}" class="dropdown-toggle py-lg-0" route="cms.users.show" routeParam="{{ Auth::user()->slug }}"
-                                    role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" />
+                    <a class="nav-link dropdown-toggle py-lg-0" href="{{ route('cms.users.show', Auth::user()) }}"
+                       role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">{{ Auth::user()->full_name }}</a>
                     <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow-sm" style="--cms-dropdown-min-width: 8.25rem;">
                         <x-nav.dropdown-link title="<i class='bi bi-person'></i> {{ __('Profile') }}" route="cms.users.show" routeParam="{{ Auth::user()->slug }}" />
                         <hr class="dropdown-divider border-secondary">

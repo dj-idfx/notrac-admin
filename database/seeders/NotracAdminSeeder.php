@@ -27,6 +27,7 @@ class NotracAdminSeeder extends Seeder
         Permission::create(['name' => 'access cms']);
         Permission::create(['name' => 'manage users']);
         Permission::create(['name' => 'manage content']);
+        Permission::create(['name' => 'publish content']);
 
         // Create Roles & assign Permissions
         // The super-admin permissions are handled by a global Gate inside the AuthServiceProvider boot method
@@ -35,30 +36,53 @@ class NotracAdminSeeder extends Seeder
         Role::create(['name' => 'admin'])->givePermissionTo(Permission::all());
         Role::create(['name' => 'webmaster'])->givePermissionTo('access cms', 'manage users', 'manage content');
         Role::create(['name' => 'editor'])->givePermissionTo('access cms', 'manage content');
+        Role::create(['name' => 'writer'])->givePermissionTo('access cms', 'publish content');
         Role::create(['name' => 'subscriber']);
 
         // Create super-admin user
         User::create([
-            'first_name'        => 'Web',
-            'last_name'         => 'Master',
+            'first_name'        => 'Super',
+            'last_name'         => 'Admin',
             'email'             => config('mail.from.address'),
             'email_verified_at' => now(),
             'password'          => Hash::make('password'),
         ])->assignRole('super-admin');
 
-        // Create fake cms users
-        $adminUsers = User::factory(1)->create();
-        foreach ($adminUsers as $user){
-            $user->assignRole('admin');
-        }
-        $webmasterUsers = User::factory(2)->create();
-        foreach ($webmasterUsers as $user){
-            $user->assignRole('webmaster');
-        }
-        $editorUsers = User::factory(3)->create();
-        foreach ($editorUsers as $user){
-            $user->assignRole('editor');
-        }
+        // Create regular admin user
+        User::create([
+            'first_name'        => 'John',
+            'last_name'         => 'Admin',
+            'email'             => 'admin@test.local',
+            'email_verified_at' => now(),
+            'password'          => Hash::make('password'),
+        ])->assignRole('admin');
+
+        // Create webmaster user
+        User::create([
+            'first_name'        => 'Web',
+            'last_name'         => 'Master',
+            'email'             => 'webmaster@test.local',
+            'email_verified_at' => now(),
+            'password'          => Hash::make('password'),
+        ])->assignRole('webmaster');
+
+        // Create editor user
+        User::create([
+            'first_name'        => 'Joe',
+            'last_name'         => 'Editor',
+            'email'             => 'editor@test.local',
+            'email_verified_at' => now(),
+            'password'          => Hash::make('password'),
+        ])->assignRole('editor');
+
+        // Create writer user
+        User::create([
+            'first_name'        => 'Jack',
+            'last_name'         => 'Writer',
+            'email'             => 'writer@test.local',
+            'email_verified_at' => now(),
+            'password'          => Hash::make('password'),
+        ])->assignRole('writer');
 
         // Create fake subscriber users
         $unverifiedUsers = User::factory(4)->unverified()->create();

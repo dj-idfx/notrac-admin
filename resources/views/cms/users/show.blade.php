@@ -25,7 +25,7 @@
                 </a></div>
 
             {{-- Delete user toggle modal --}}
-            <div class="ms-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+            <div class="ms-sm-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                                          data-bs-toggle="modal" data-bs-target="#deleteUserModal">
                     <i class="bi bi-trash"></i> {{ __('Delete user') }}
                 </button></div>
@@ -121,7 +121,7 @@
     </div>
 
     @can('manage users')
-        {{-- Delete user  modal--}}
+        {{-- Delete user modal--}}
         <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

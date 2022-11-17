@@ -10,6 +10,10 @@
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.create') }}">
                     <i class="bi bi-plus-circle"></i> {{ __('Create new user') }}
                 </a></div>
+
+            <div class="ms-sm-auto"><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
+                    <i class="bi bi-trash"></i> {{ __('User trash') }}
+                </a></div>
         @endcan
     </x-slot>
 
