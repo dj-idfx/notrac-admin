@@ -24,10 +24,29 @@
                     <i class="bi bi-pencil-square"></i> {{ __('Edit user') }}
                 </a></div>
 
+            {{-- (de)-activate user --}}
+            <div class="ms-sm-auto">
+                {!! Form::open([
+                    'id' => 'cmsActivateUserForm',
+                    'route' => ['cms.users.activate', $user],
+                    'method' => 'patch']) !!}
+                {!! Form::button($user->active ? '<i class="bi bi-caret-down-square"></i>  '.__('De-activate user') : '<i class="bi bi-caret-up-square"></i>  '.__('Activate user'), [
+                    'type' => 'submit',
+                    'class' => 'btn btn-outline-warning btn-sm lh-sm',
+                    'id' => 'cmsActivateUserSubmit']) !!}
+                {!! Form::close() !!}
+            </div>
+
             {{-- Delete user toggle modal --}}
-            <div class="ms-sm-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
-                                         data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+            <div><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+                         data-bs-toggle="modal" data-bs-target="#deleteUserModal">
                     <i class="bi bi-trash"></i> {{ __('Delete user') }}
+                </button></div>
+
+            {{-- Hash user toggle modal --}}
+            <div><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+                         data-bs-toggle="modal" data-bs-target="#hashUserModal">
+                    <i class="bi bi-hash"></i>
                 </button></div>
         @endcan
     </x-slot>
@@ -110,7 +129,7 @@
             @forelse($user->getRoleNames() as $role)
                 @if($loop->first)<ul>@endif
                     <li>{{ $role }}</li>
-                @if($loop->last)</ul>@endif
+                    @if($loop->last)</ul>@endif
 
             @empty
                 <p class="fw-bold fst-italic">
@@ -148,6 +167,40 @@
                             'type' => 'submit',
                             'class' => 'btn btn-danger',
                             'id' => 'cmsDeleteUserSubmit']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Hash user modal--}}
+        <div class="modal fade" id="hashUserModal" tabindex="-1" aria-labelledby="hashUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-light">
+                        <h2 class="modal-title fs-5" id="hashUserModalLabel">
+                            {{ __('Hash user') .': ' . $user->full_name }}
+                        </h2>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <strong>{{ __('Are you sure?') }}</strong><br>
+                        {{ __('This action is permanent and can not be un-done!') }}
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                            {{ __('Cancel') }}
+                        </button>
+
+                        {!! Form::open([
+                            'id' => 'cmsHashUserForm',
+                            'route' => ['cms.users.hash', $user],
+                            'method' => 'patch']) !!}
+                        {!! Form::button('<i class="bi bi-hash"></i>  '.__('Hash user'), [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger',
+                            'id' => 'cmsHashUserSubmit']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

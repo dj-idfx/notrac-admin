@@ -6,6 +6,7 @@ use App\Http\Requests\Cms\CmsStoreUserRequest;
 use App\Http\Requests\Cms\CmsUpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class CmsUserController extends BaseCmsController
@@ -106,7 +107,7 @@ class CmsUserController extends BaseCmsController
 
         // Flash message:
         session()->flash('flash_message', __('User trashed successfully!'));
-        session()->flash('flash_level', 'success');
+        session()->flash('flash_level', 'warning');
 
         return redirect()->route('cms.users.index');
     }
@@ -154,7 +155,7 @@ class CmsUserController extends BaseCmsController
 
         // Flash message:
         session()->flash('flash_message', __('User deleted successfully!'));
-        session()->flash('flash_level', 'success');
+        session()->flash('flash_level', 'warning');
 
         return redirect()->route('cms.users.trash');
     }
@@ -170,8 +171,57 @@ class CmsUserController extends BaseCmsController
 
         // Flash message:
         session()->flash('flash_message', __('User trash empty!'));
-        session()->flash('flash_level', 'success');
+        session()->flash('flash_level', 'warning');
 
         return redirect()->route('cms.users.trash');
+    }
+
+    /**
+     * (de-)Activate the specified resource.
+     *
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function activate(User $user): RedirectResponse
+    {
+        if ($user->active) {
+            $user->active = false;
+
+            // Flash message:
+            session()->flash('flash_message', __('User de-activated!'));
+            session()->flash('flash_level', 'warning');
+        } else {
+            $user->active = true;
+
+            // Flash message:
+            session()->flash('flash_message', __('User activated!'));
+            session()->flash('flash_level', 'success');
+        }
+
+        $user->save();
+
+        return redirect()->route('cms.users.show', $user);
+    }
+
+    /**
+     * Hash the specified resource.
+     *
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function hash(User $user): RedirectResponse
+    {
+        $user->first_name = Hash::make($user->first_name);
+        $user->last_name = Hash::make($user->last_name);
+        $user->email = Hash::make($user->email);
+        $user->active = false;
+        $user->hashed_at = now();
+        $user->save();
+
+        // Flash message:
+        session()->flash('flash_message', __('User hashed!'));
+        session()->flash('flash_level', 'warning');
+
+        return redirect()->route('cms.users.show', $user);
     }
 }
