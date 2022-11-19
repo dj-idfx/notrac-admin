@@ -105,11 +105,18 @@ class CmsUserController extends BaseCmsController
      */
     public function destroy(User $user): RedirectResponse
     {
-        $user->delete();
+        if (! $user->hasRole('super-admin')) {
+            $user->delete();
 
-        // Flash message:
-        session()->flash('flash_message', __('User trashed successfully!'));
-        session()->flash('flash_level', 'warning');
+            // Flash message:
+            session()->flash('flash_message', __('User trashed successfully!'));
+            session()->flash('flash_level', 'warning');
+
+        } else {
+            session()->flash('flash_message', __('Unable to delete user!'));
+            session()->flash('flash_level', 'danger');
+            return redirect()->route('cms.users.show', $user);
+        }
 
         return redirect()->route('cms.users.index');
     }
@@ -153,11 +160,18 @@ class CmsUserController extends BaseCmsController
     public function delete(int $id): RedirectResponse
     {
         $user = User::onlyTrashed()->findOrFail($id);
-        $user->forceDelete();
 
-        // Flash message:
-        session()->flash('flash_message', __('User deleted successfully!'));
-        session()->flash('flash_level', 'warning');
+        if (! $user->hasRole('super-admin')) {
+            $user->forceDelete();
+
+            // Flash message:
+            session()->flash('flash_message', __('User deleted successfully!'));
+            session()->flash('flash_level', 'warning');
+
+        } else {
+            session()->flash('flash_message', __('Unable to delete user!'));
+            session()->flash('flash_level', 'danger');
+        }
 
         return redirect()->route('cms.users.trash');
     }
@@ -169,7 +183,9 @@ class CmsUserController extends BaseCmsController
      */
     public function empty(): RedirectResponse
     {
-        User::onlyTrashed()->forceDelete();
+        User::onlyTrashed()->whereHas('roles', function ($query) {
+            $query->where('name','!=', 'super-admin');
+        })->forceDelete();
 
         // Flash message:
         session()->flash('flash_message', __('User trash empty!'));
@@ -187,20 +203,26 @@ class CmsUserController extends BaseCmsController
     public function activate(User $user): RedirectResponse
     {
         if ($user->active) {
-            $user->active = false;
+            if (! $user->hasRole('super-admin')) {
 
-            // Flash message:
-            session()->flash('flash_message', __('User de-activated!'));
-            session()->flash('flash_level', 'warning');
+                $user->active = false;
+                $user->save();
+
+                session()->flash('flash_message', __('User de-activated!'));
+                session()->flash('flash_level', 'warning');
+
+            } else {
+                session()->flash('flash_message', __('Unable to de-activate user!'));
+                session()->flash('flash_level', 'danger');
+            }
+
         } else {
             $user->active = true;
+            $user->save();
 
-            // Flash message:
             session()->flash('flash_message', __('User activated!'));
             session()->flash('flash_level', 'success');
         }
-
-        $user->save();
 
         return redirect()->route('cms.users.show', $user);
     }
@@ -217,13 +239,21 @@ class CmsUserController extends BaseCmsController
          * Note: Hashing the actual data is not yet implemented here, this depends on the use-case of the project.
          * Users with the hashed_at timestamp set are excluded from authentication and can not log in.
          */
-        $user->active = false;
-        $user->hashed_at = now();
-        $user->save();
+        if (! $user->hasRole('super-admin')) {
+            $user->active = false;
+            $user->hashed_at = now();
+            $user->save();
 
-        // Flash message:
-        session()->flash('flash_message', __('User hashed!'));
-        session()->flash('flash_level', 'warning');
+            // Flash message:
+            session()->flash('flash_message', __('User hashed!'));
+            session()->flash('flash_level', 'warning');
+
+        } else {
+            session()->flash('flash_message', __('Unable to hash user!'));
+            session()->flash('flash_level', 'danger');
+            return redirect()->route('cms.users.show', $user);
+
+        }
 
         return redirect()->route('cms.users.hashed');
     }

@@ -46,21 +46,23 @@ class CmsUpdateUserRequest extends FormRequest
      */
     public function actions(User $user): User
     {
-        // Update User
-        $user->update($this->safe()->only([
-            'first_name',
-            'last_name',
-            'email',
-        ]));
-
-        // Re-assign Role to User, only when the edited user is not a super-admin
+        // Update User, only when the edited user is not a super-admin
         if (! $user->hasRole('super-admin')) {
-            $user->syncRoles($this->safe()->only(['role']));
-        }
+            $user->update($this->safe()->only([
+                'first_name',
+                'last_name',
+                'email',
+            ]));
 
-        // Flash message:
-        session()->flash('flash_message', __('User updated successfully!'));
-        session()->flash('flash_level', 'success');
+            $user->syncRoles($this->safe()->only(['role']));
+
+            session()->flash('flash_message', __('User updated successfully!'));
+            session()->flash('flash_level', 'success');
+
+        } else {
+            session()->flash('flash_message', __('Unable to update user!'));
+            session()->flash('flash_level', 'danger');
+        }
 
         // Return User
         return $user;
