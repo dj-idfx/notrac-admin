@@ -35,18 +35,6 @@ require __DIR__.'/account.php';
  */
 require __DIR__.'/cms.php';
 
-
-/*
- * Test page - Use this route for all your try-outs
- */
-//Route::middleware(['auth', 'verified', 'can:access super'])
-//    ->controller(Controller::class)
-//    ->group(function () {
-//        /* Test route  */
-//        Route::get('/test', 'test')->name('test');
-//    });
-
-
 /**
  * Fallback route (redirect 404's)
  * This fallback route should always be the last route registered!

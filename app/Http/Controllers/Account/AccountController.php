@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AccountController extends Controller
@@ -14,8 +16,9 @@ class AccountController extends Controller
      */
     public function __construct()
     {
-        // Base middleware for all account routes
+        // Middleware for all account routes
         $this->middleware(['auth', 'verified']);
+        $this->middleware(['active'])->except('inactive');
     }
 
     /**
@@ -37,4 +40,18 @@ class AccountController extends Controller
     {
         return view('account.profile');
     }
+
+    /**
+     * User inactive view.
+     *
+     * @return RedirectResponse|View
+     */
+    public function inactive(): RedirectResponse|View
+    {
+        if (Auth::user()->active) {
+            return redirect()->route('account.dashboard');
+        }
+        return view('account.inactive');
+    }
+
 }

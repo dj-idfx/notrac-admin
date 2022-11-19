@@ -14,6 +14,6 @@ class BaseCmsController extends Controller
     public function __construct()
     {
         // Base middleware for all CMS routes
-        $this->middleware(['auth', 'verified', 'can:access cms']);
+        $this->middleware(['auth', 'verified', 'active', 'can:access cms']);
     }
 }

@@ -22,5 +22,8 @@ Route::prefix('account')->name('account.')->group(function () {
     Route::controller(AccountController::class)->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
         Route::get('/profile', 'profile')->name('profile');
+
+        // Route for redirect inactive users
+        Route::get('/inactive', 'inactive')->name('inactive');
     });
 });

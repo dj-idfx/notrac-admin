@@ -108,13 +108,13 @@ class CmsUserController extends BaseCmsController
         if (! $user->hasRole('super-admin')) {
             $user->delete();
 
-            // Flash message:
             session()->flash('flash_message', __('User trashed successfully!'));
             session()->flash('flash_level', 'warning');
 
         } else {
             session()->flash('flash_message', __('Unable to delete user!'));
             session()->flash('flash_level', 'danger');
+
             return redirect()->route('cms.users.show', $user);
         }
 
@@ -144,7 +144,6 @@ class CmsUserController extends BaseCmsController
         $user = User::onlyTrashed()->findOrFail($id);
         $user->restore();
 
-        // Flash message:
         session()->flash('flash_message', __('User restored successfully!'));
         session()->flash('flash_level', 'success');
 
@@ -164,7 +163,6 @@ class CmsUserController extends BaseCmsController
         if (! $user->hasRole('super-admin')) {
             $user->forceDelete();
 
-            // Flash message:
             session()->flash('flash_message', __('User deleted successfully!'));
             session()->flash('flash_level', 'warning');
 
@@ -187,7 +185,6 @@ class CmsUserController extends BaseCmsController
             $query->where('name','!=', 'super-admin');
         })->forceDelete();
 
-        // Flash message:
         session()->flash('flash_message', __('User trash empty!'));
         session()->flash('flash_level', 'warning');
 
@@ -244,15 +241,14 @@ class CmsUserController extends BaseCmsController
             $user->hashed_at = now();
             $user->save();
 
-            // Flash message:
             session()->flash('flash_message', __('User hashed!'));
             session()->flash('flash_level', 'warning');
 
         } else {
             session()->flash('flash_message', __('Unable to hash user!'));
             session()->flash('flash_level', 'danger');
-            return redirect()->route('cms.users.show', $user);
 
+            return redirect()->route('cms.users.show', $user);
         }
 
         return redirect()->route('cms.users.hashed');
@@ -270,7 +266,6 @@ class CmsUserController extends BaseCmsController
         $user->hashed_at = null;
         $user->save();
 
-        // Flash message:
         session()->flash('flash_message', __('User un-hashed!'));
         session()->flash('flash_level', 'success');
 
