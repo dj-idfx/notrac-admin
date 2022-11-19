@@ -213,6 +213,10 @@ class CmsUserController extends BaseCmsController
      */
     public function hash(User $user): RedirectResponse
     {
+        /*
+         * Note: Hashing the actual data is not yet implemented here, this depends on the use-case of the project.
+         * Users with the hashed_at timestamp set are excluded from authentication and can not log in.
+         */
         $user->active = false;
         $user->hashed_at = now();
         $user->save();

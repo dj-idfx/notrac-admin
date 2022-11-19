@@ -51,4 +51,29 @@ class UserFactory extends Factory
             'active' => false,
         ]);
     }
+
+    /**
+     * Indicate that the model is hashed.
+     *
+     * @return static
+     */
+    public function hashed(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'active' => false,
+            'hashed_at' => now(),
+        ]);
+    }
+
+    /**
+     * Indicate that the model is deleted.
+     *
+     * @return static
+     */
+    public function deleted(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'deleted_at' => now(),
+        ]);
+    }
 }

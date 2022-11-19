@@ -1,7 +1,15 @@
 <x-cms-layout>
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
-            <i class="bi bi-person"></i> {{ $user->full_name }}
+            @if(! $user->active)
+                <i class="bi bi-person-fill-slash text-danger"></i>
+            @elseif(! $user->email_verified_at)
+                <i class="bi bi-person-dash text-warning"></i>
+            @else
+                <i class="bi bi-person"></i>
+            @endif
+
+            {{ $user->full_name }}
         </h1>
     </x-slot>
 
@@ -97,7 +105,9 @@
                     </tr>
                     <tr>
                         <th>{{ __('Email verified at') }}:</th>
-                        <td>{{ $user->email_verified_at }}</td>
+                        <td class="{{ $user->email_verified_at ? null : 'text-warning fw-bold' }}">
+                            {{ $user->email_verified_at ?? __('No')}}
+                        </td>
                     </tr>
                     <tr>
                         <th>{{ __('Created at') }}:</th>

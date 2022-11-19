@@ -28,9 +28,17 @@
     </h2>
 
     @forelse($users as $user)
-        @if($loop->first)<ul>@endif
-            <li>
-                <a href="{{ route('cms.users.show', $user) }}" class="link-dark">
+        @if($loop->first)<ul class="list-unstyled">@endif
+            <li class="mb-1">
+                @if(! $user->active)
+                    <i class="bi bi-person-fill-slash text-danger"></i>
+                @elseif(! $user->email_verified_at)
+                   <i class="bi bi-person-dash text-warning"></i>
+                @else
+                    <i class="bi bi-person-check text-success"></i>
+                @endif
+
+                <a href="{{ route('cms.users.show', $user) }}" class="link-dark ms-1">
                     {{ $user->full_name_rev }}
                 </a>
             </li>

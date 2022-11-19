@@ -85,6 +85,14 @@ class NotracAdminSeeder extends Seeder
         ])->assignRole('writer');
 
         // Create fake subscriber users
+        $hashedUsers = User::factory(2)->hashed()->create();
+        foreach ($hashedUsers as $user){
+            $user->assignRole('subscriber');
+        }
+        $deletedUsers = User::factory(2)->deleted()->create();
+        foreach ($deletedUsers as $user){
+            $user->assignRole('subscriber');
+        }
         $unverifiedUsers = User::factory(4)->unverified()->create();
         foreach ($unverifiedUsers as $user){
             $user->assignRole('subscriber');
