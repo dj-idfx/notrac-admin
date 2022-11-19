@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected static function booted(): void
     {
-        static::addGlobalScope(new HashedScope());
+        static::addGlobalScope(new HashedScope);
     }
 
     /*

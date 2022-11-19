@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Requests\Cms\CmsStoreUserRequest;
 use App\Http\Requests\Cms\CmsUpdateUserRequest;
+use App\Models\Scopes\HashedScope;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class CmsUserController extends BaseCmsController
@@ -22,6 +22,8 @@ class CmsUserController extends BaseCmsController
         parent::__construct();
         // Add extra 'manage users' middleware
         $this->middleware(['can:manage users'])->except(['index', 'show']);
+        // Add extra 'access admin' middleware to hashing routes
+        $this->middleware(['can:access admin'])->only(['hash', 'unhash', 'hashed']);
     }
 
     /**
@@ -211,9 +213,6 @@ class CmsUserController extends BaseCmsController
      */
     public function hash(User $user): RedirectResponse
     {
-        $user->first_name = Hash::make($user->first_name);
-        $user->last_name = Hash::make($user->last_name);
-        $user->email = Hash::make($user->email);
         $user->active = false;
         $user->hashed_at = now();
         $user->save();
@@ -222,6 +221,37 @@ class CmsUserController extends BaseCmsController
         session()->flash('flash_message', __('User hashed!'));
         session()->flash('flash_level', 'warning');
 
+        return redirect()->route('cms.users.hashed');
+    }
+
+    /**
+     * Un-hash the specified resource.
+     *
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function unhash(int $id): RedirectResponse
+    {
+        $user = User::withoutGlobalScope(HashedScope::class)->whereNotNull('hashed_at')->findOrFail($id);
+        $user->hashed_at = null;
+        $user->save();
+
+        // Flash message:
+        session()->flash('flash_message', __('User un-hashed!'));
+        session()->flash('flash_level', 'success');
+
         return redirect()->route('cms.users.show', $user);
+    }
+
+    /**
+     * Display a listing of hashed resources.
+     *
+     * @return View
+     */
+    public function hashed(): View
+    {
+        $users = User::withoutGlobalScope(HashedScope::class)->whereNotNull('hashed_at')->get();
+
+        return view('cms.users.hash', compact('users'));
     }
 }

@@ -30,6 +30,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
     Route::delete('/users/{user}/delete', [CmsUserController::class, 'delete'])->name('users.delete');
     Route::patch('/users/{user}/activate', [CmsUserController::class, 'activate'])->name('users.activate');
     Route::patch('/users/{user}/hash', [CmsUserController::class, 'hash'])->name('users.hash');
+    Route::patch('/users/{user}/unhash', [CmsUserController::class, 'unhash'])->name('users.unhash');
+    Route::get('/users/hashed', [CmsUserController::class, 'hashed'])->name('users.hashed');
     Route::resource('users', CmsUserController::class);
 
     /**

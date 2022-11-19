@@ -14,6 +14,12 @@
             <div class="ms-sm-auto"><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
                     <i class="bi bi-trash"></i> {{ __('User trash') }}
                 </a></div>
+
+            @can('access admin')
+                <div><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.hashed') }}">
+                        <i class="bi bi-hash"></i> {{ __('Hashed users') }}
+                    </a></div>
+            @endcan
         @endcan
     </x-slot>
 
