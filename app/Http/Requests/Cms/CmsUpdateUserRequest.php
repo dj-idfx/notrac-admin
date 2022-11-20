@@ -34,7 +34,7 @@ class CmsUpdateUserRequest extends FormRequest
             'first_name'    => 'required|string|max:255',
             'last_name'     => 'required|string|max:255',
             'email'         => ['required','string','email','max:255', Rule::unique('users')->ignore($this->user)],
-            'role'          => ['required', 'string', 'max:255', Rule::in(array_keys(config('permission.default_roles'))) ],
+            'role'          => ['required', 'string', 'max:255', 'exists:roles,name' ],
         ];
     }
 
@@ -54,7 +54,10 @@ class CmsUpdateUserRequest extends FormRequest
                 'email',
             ]));
 
-            $user->syncRoles($this->safe()->only(['role']));
+            // Assign Role to User
+            if ($this->safe()->role != 'super-admin') {
+                $user->syncRoles([$this->safe()->role]);
+            }
 
             session()->flash('flash_message', __('User updated successfully!'));
             session()->flash('flash_level', 'success');

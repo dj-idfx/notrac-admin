@@ -1,18 +1,6 @@
 <?php
 
 return [
-    /*
-     * Default roles for use in form select & validation rules.
-     * Do NOT include the super-admin role in this array!
-     */
-    'default_roles' => [
-        'subscriber'    => 'Subscriber',
-        'writer'        => 'Writer',
-        'editor'        => 'Editor',
-        'webmaster'     => 'Webmaster',
-        'admin'         => 'Administrator',
-    ],
-
     'models' => [
 
         /*

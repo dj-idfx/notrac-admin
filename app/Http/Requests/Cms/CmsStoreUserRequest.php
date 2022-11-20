@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class CmsStoreUserRequest extends FormRequest
 {
@@ -35,7 +34,7 @@ class CmsStoreUserRequest extends FormRequest
             'first_name'    => 'required|string|max:255',
             'last_name'     => 'required|string|max:255',
             'email'         => 'required|string|email|max:255|unique:users',
-            'role'          => ['required', 'string', 'max:255', Rule::in(array_keys(config('permission.default_roles'))) ],
+            'role'          => ['required', 'string', 'max:255', 'exists:roles,name'],
         ];
     }
 
@@ -56,7 +55,9 @@ class CmsStoreUserRequest extends FormRequest
         $user->save();
 
         // Assign Role to User
-        $user->syncRoles($this->safe()->only(['role']));
+        if ($this->safe()->role != 'super-admin') {
+            $user->syncRoles([$this->safe()->role]);
+        }
 
         // Flash message:
         session()->flash('flash_message', __('New user created successfully!'));

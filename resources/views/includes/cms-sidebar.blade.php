@@ -19,7 +19,7 @@
         <hr class="my-2">
 
         @can('view logs')
-            <x-nav.nav-link title="<i class='bi bi-journal-code'></i> {{ __('Log Viewer') }}" route="blv.index" />
+            <x-nav.nav-link title="<i class='bi bi-journal-code'></i> {{ __('Log Viewer') }}" route="blv.index" target="_blank" />
             <hr class="my-2">
         @endcan
 

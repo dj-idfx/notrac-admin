@@ -68,6 +68,7 @@
                 {{ __('User details') }}
             </h2>
 
+            {{-- User table fields --}}
             <table class="table table-sm w-auto">
                 <tr>
                     <th>{{ __('ID') }}:</th>
@@ -138,16 +139,36 @@
                 {{ __('User roles') }}
             </h3>
 
+            {{-- User roles --}}
             @forelse($user->getRoleNames() as $role)
-                @if($loop->first)<ul>@endif
-                    <li>{{ $role }}</li>
+                @if($loop->first)<ul>
+                    @if($user->hasRole('super-admin'))<li>super-admin</li>@endif
+                    @endif
+                    @if($role != 'super-admin')<li>{{ $role }}</li> @endif
                     @if($loop->last)</ul>@endif
-
             @empty
                 <p class="fw-bold fst-italic">
-                    <i class="bi bi-exclamation-circle-fill"></i> {{ __('No roles found') }}
+                    {{ __('No roles found') }}
                 </p>
             @endforelse
+
+            {{-- User permissions --}}
+            @can('manage roles')
+                <h3 class="fs-4 fw-light">
+                    {{ __('User permissions') }}
+                </h3>
+
+                @forelse($user->getAllPermissions() as $permission)
+                    @if($loop->first)<ul>@endif
+                        <li>{{ $permission->name }}</li>
+                        @if($loop->last)</ul>@endif
+
+                @empty
+                    <p class="fw-bold fst-italic">
+                        {{ __('No permissions found') }}
+                    </p>
+                @endforelse
+            @endcan
         </div>
     </div>
 

@@ -23,9 +23,10 @@ class NotracAdminSeeder extends Seeder
 
         // Create Permissions
         Permission::create(['name' => 'access admin']);
-        Permission::create(['name' => 'view logs']);
         Permission::create(['name' => 'access cms']);
+        Permission::create(['name' => 'view logs']);
         Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'manage roles']);
         Permission::create(['name' => 'manage content']);
         Permission::create(['name' => 'publish content']);
 

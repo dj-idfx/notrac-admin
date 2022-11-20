@@ -6,10 +6,21 @@
     </x-slot>
 
     <x-slot name="actionButtons">
+        {{-- Index user link --}}
+        <div><a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.dashboard.index') }}" style="--cms-btn-active-border-color: transparent;">
+                <i class="bi bi-arrow-left"></i> {{ __('Dashboard') }}
+            </a></div>
+
         @can('manage users')
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.create') }}">
                     <i class="bi bi-plus-circle"></i> {{ __('Create new user') }}
                 </a></div>
+
+            @can('manage roles')
+                <div><a class="btn btn-outline-secondary btn-sm lh-sm" href="{{ route('cms.roles.index') }}">
+                        <i class="bi bi-bricks"></i> {{ __('Manage roles') }}
+                    </a></div>
+            @endcan
 
             <div class="ms-sm-auto"><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
                     <i class="bi bi-trash"></i> {{ __('User trash') }}
@@ -33,7 +44,7 @@
                 @if(! $user->active)
                     <i class="bi bi-person-fill-slash text-danger"></i>
                 @elseif(! $user->email_verified_at)
-                   <i class="bi bi-person-dash text-warning"></i>
+                    <i class="bi bi-person-dash text-warning"></i>
                 @else
                     <i class="bi bi-person-check text-success"></i>
                 @endif
@@ -42,7 +53,7 @@
                     {{ $user->full_name_rev }}
                 </a>
             </li>
-        @if($loop->last)</ul>@endif
+            @if($loop->last)</ul>@endif
 
     @empty
         <p class="fw-bold fst-italic">

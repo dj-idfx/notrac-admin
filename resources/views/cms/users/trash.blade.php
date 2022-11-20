@@ -55,7 +55,7 @@
 
                 <strong>{{ $user->full_name_rev }}</strong>
             </li>
-        @if($loop->last)</ul>@endif
+            @if($loop->last)</ul>@endif
 
     @empty
         <p class="fst-italic">

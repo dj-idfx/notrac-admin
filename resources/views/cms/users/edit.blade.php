@@ -24,7 +24,7 @@
                 {{ __('User details') }}
             </h2>
 
-            {{--  first_name --}}
+            {{-- first_name --}}
             <div class="col-md-6">
                 {!! Form::label('first_name', __('First Name'), ['class' => 'form-label']) !!}
                 {!! Form::text('first_name', null, [
@@ -35,7 +35,7 @@
                 {!! $errors->first('first_name', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
             </div>
 
-            {{--  last_name --}}
+            {{-- last_name --}}
             <div class="col-md-6">
                 {!! Form::label('last_name', __('Last Name'), ['class' => 'form-label']) !!}
                 {!! Form::text('last_name', null, [
@@ -46,7 +46,7 @@
                 {!! $errors->first('last_name', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
             </div>
 
-            {{--  email --}}
+            {{-- email --}}
             <div class="col-md-6">
                 {!! Form::label('email', __('Email'), ['class' => 'form-label']) !!}
                 {!! Form::email('email', null, [
@@ -61,10 +61,10 @@
                 {{ __('User role') }}
             </h3>
 
-            {{--  role select --}}
+            {{-- role select --}}
             <div class="col-md-6">
                 {!! Form::label('role', __('Role'), ['class' => 'form-label d-none']) !!}
-                {!! Form::select('role', config('permission.default_roles'), $user->getRoleNames()->get(0), [
+                {!! Form::select('role', $roles, $user->getRoleNames()->get(0), [
                     'aria-label' => 'role',
                     'class' => $errors->has('role') ? 'form-select is-invalid' : 'form-select',
                     'required'

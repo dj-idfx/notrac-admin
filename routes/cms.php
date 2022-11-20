@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cms\CmsAdminController;
 use App\Http\Controllers\Cms\CmsDashboardController;
+use App\Http\Controllers\Cms\CmsRoleController;
 use App\Http\Controllers\Cms\CmsUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,11 @@ Route::prefix('cms')->name('cms.')->group(function () {
     Route::patch('/users/{user}/unhash', [CmsUserController::class, 'unhash'])->name('users.unhash');
     Route::get('/users/hashed', [CmsUserController::class, 'hashed'])->name('users.hashed');
     Route::resource('users', CmsUserController::class);
+
+    /**
+     * Role controller
+     */
+    Route::resource('roles', CmsRoleController::class);
 
     /**
      * Admin secured area

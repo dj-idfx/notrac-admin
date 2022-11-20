@@ -8,6 +8,7 @@ use App\Models\Scopes\HashedScope;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class CmsUserController extends BaseCmsController
 {
@@ -45,7 +46,9 @@ class CmsUserController extends BaseCmsController
      */
     public function create(): View
     {
-        return view('cms.users.create');
+        $roles = Role::whereNotIn('name', ['super-admin'])->pluck('name', 'name');
+
+        return view('cms.users.create', compact('roles'));
     }
 
     /**
@@ -80,7 +83,9 @@ class CmsUserController extends BaseCmsController
      */
     public function edit(User $user): View
     {
-        return view('cms.users.edit', compact('user'));
+        $roles = Role::whereNotIn('name', ['super-admin'])->pluck('name', 'name');
+
+        return view('cms.users.edit', compact('user', "roles"));
     }
 
     /**
