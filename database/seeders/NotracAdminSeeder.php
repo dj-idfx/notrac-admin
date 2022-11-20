@@ -98,7 +98,7 @@ class NotracAdminSeeder extends Seeder
         foreach ($unverifiedUsers as $user){
             $user->assignRole('subscriber');
         }
-        $nonactiveUsers = User::factory(5)->nonactive()->create();
+        $nonactiveUsers = User::factory(2)->nonactive()->create();
         foreach ($nonactiveUsers as $user){
             $user->assignRole('subscriber');
         }

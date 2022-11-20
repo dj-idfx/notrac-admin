@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Models\User;
 use Illuminate\View\View;
 
 class CmsDashboardController extends BaseCmsController
@@ -24,6 +25,9 @@ class CmsDashboardController extends BaseCmsController
      */
     public function index(): View
     {
-        return view('cms.index');
+        $userCount = User::count();
+        $userUnverifiedCount = User::whereNull('email_verified_at')->count();
+        $userInactiveCount = User::where('active', false)->count();
+        return view('cms.index', compact('userCount', 'userUnverifiedCount', 'userInactiveCount'));
     }
 }
