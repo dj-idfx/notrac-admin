@@ -141,10 +141,10 @@ class CmsUserController extends BaseCmsController
     /**
      * Restore the specified resource.
      *
-     * @param int $id
+     * @param string $id
      * @return RedirectResponse
      */
-    public function restore(int $id): RedirectResponse
+    public function restore(string $id): RedirectResponse
     {
         $user = User::onlyTrashed()->findOrFail($id);
         $user->restore();
@@ -158,10 +158,10 @@ class CmsUserController extends BaseCmsController
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param string $id
      * @return RedirectResponse
      */
-    public function delete(int $id): RedirectResponse
+    public function delete(string $id): RedirectResponse
     {
         $user = User::onlyTrashed()->findOrFail($id);
 
@@ -262,10 +262,10 @@ class CmsUserController extends BaseCmsController
     /**
      * Un-hash the specified resource.
      *
-     * @param int $id
+     * @param string $id
      * @return RedirectResponse
      */
-    public function unhash(int $id): RedirectResponse
+    public function unhash(string $id): RedirectResponse
     {
         $user = User::withoutGlobalScope(HashedScope::class)->whereNotNull('hashed_at')->findOrFail($id);
         $user->hashed_at = null;

@@ -72,7 +72,9 @@
             <table class="table table-sm w-auto">
                 <tr>
                     <th>{{ __('ID') }}:</th>
-                    <td>{{ $user->id }}</td>
+                    <td style="overflow: hidden; max-width: 24ch; text-overflow: ellipsis; white-space: nowrap;">
+                        {{ $user->id }}
+                    </td>
                 </tr>
                 <tr>
                     <th>{{ __('Slug') }}:</th>
