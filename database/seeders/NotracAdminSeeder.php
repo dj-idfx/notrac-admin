@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -76,14 +77,17 @@ class NotracAdminSeeder extends Seeder
             'password'          => Hash::make('password'),
         ])->assignRole('editor');
 
-        // Create writer user
-        User::create([
-            'first_name'        => 'Jack',
-            'last_name'         => 'Writer',
-            'email'             => 'writer@test.local',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('password'),
-        ])->assignRole('writer');
+        // Create writer user with posts
+        Post::factory()
+            ->count(10)
+            ->for(User::create([
+                'first_name'        => 'Jack',
+                'last_name'         => 'Writer',
+                'email'             => 'writer@test.local',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('password'),
+            ])->assignRole('writer'))
+            ->create();
 
         // Create fake subscriber users
         $hashedUsers = User::factory(2)->hashed()->create();
