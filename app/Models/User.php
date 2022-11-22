@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -90,6 +91,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Get the options for generating the slug.
+     *
+     * @return SlugOptions
      */
     public function getSlugOptions() : SlugOptions
     {
@@ -122,7 +125,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param  Builder  $query
      * @return void
      */
-    public function scopeActive(Builder $query): void
+    public function scopeIsActive(Builder $query): void
     {
         $query->where('active', true);
     }
@@ -207,5 +210,13 @@ class User extends Authenticatable implements MustVerifyEmail
     | Relationships
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Get all posts from the user.
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }

@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-slot name="actionButtons">
-        {{-- Index user link --}}
+        {{-- Dashboard link --}}
         <div><a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.dashboard.index') }}" style="--cms-btn-active-border-color: transparent;">
                 <i class="bi bi-arrow-left"></i> {{ __('Dashboard') }}
             </a></div>

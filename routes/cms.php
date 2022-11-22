@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cms\CmsAdminController;
 use App\Http\Controllers\Cms\CmsDashboardController;
+use App\Http\Controllers\Cms\CmsPostController;
 use App\Http\Controllers\Cms\CmsRoleController;
 use App\Http\Controllers\Cms\CmsUserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,16 @@ Route::prefix('cms')->name('cms.')->group(function () {
      * Role controller
      */
     Route::resource('roles', CmsRoleController::class);
+
+    /**
+     * Post controller
+     */
+    Route::get('/posts/trash', [CmsPostController::class, 'trash'])->name('posts.trash');
+    Route::delete('/posts/trash/empty', [CmsPostController::class, 'empty'])->name('posts.trash.empty');
+    Route::patch('/posts/{post}/restore', [CmsPostController::class, 'restore'])->name('posts.restore');
+    Route::delete('/posts/{post}/delete', [CmsPostController::class, 'delete'])->name('posts.delete');
+    Route::patch('/posts/{post}/publish', [CmsPostController::class, 'publish'])->name('posts.publish');
+    Route::resource('posts', CmsPostController::class);
 
     /**
      * Admin secured area

@@ -28,7 +28,7 @@ class NotracAdminSeeder extends Seeder
         Permission::create(['name' => 'manage users']);
         Permission::create(['name' => 'manage roles']);
         Permission::create(['name' => 'manage content']);
-        Permission::create(['name' => 'publish content']);
+        Permission::create(['name' => 'write article']);
 
         // Create Roles & assign Permissions
         // The super-admin permissions are handled by a global Gate inside the AuthServiceProvider boot method
@@ -37,7 +37,7 @@ class NotracAdminSeeder extends Seeder
         Role::create(['name' => 'admin'])->givePermissionTo(Permission::all());
         Role::create(['name' => 'webmaster'])->givePermissionTo('access cms', 'manage users', 'manage content');
         Role::create(['name' => 'editor'])->givePermissionTo('access cms', 'manage content');
-        Role::create(['name' => 'writer'])->givePermissionTo('access cms', 'publish content');
+        Role::create(['name' => 'writer'])->givePermissionTo('access cms', 'write article');
         Role::create(['name' => 'subscriber']);
 
         // Create super-admin user

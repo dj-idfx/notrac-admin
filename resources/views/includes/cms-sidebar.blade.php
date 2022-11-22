@@ -11,20 +11,20 @@
 
         <x-nav.nav-link title="<i class='bi bi-speedometer2'></i> {{ __('Dashboard') }}" class="mb-2" route="cms.dashboard.index" />
         <x-nav.nav-link title="<i class='bi bi-people'></i> {{ __('Users') }}" class="mb-2" route="cms.users.index" />
+        <x-nav.nav-link title="<i class='bi bi-journals'></i> {{ __('Posts') }}" class="mb-2" route="cms.posts.index" />
 
-        <x-nav.nav-link title="<i class='bi bi-link'></i> {{ __('Example') }}" class="mb-2" />
         <x-nav.nav-link title="<i class='bi bi-link'></i> {{ __('Example') }}" class="mb-2" />
         <x-nav.nav-link title="<i class='bi bi-link-45deg'></i> {{ __('Disabled') }}" class="mb-2 disabled" />
 
         <hr class="my-2">
 
-        @can('view logs')
-            <x-nav.nav-link title="<i class='bi bi-journal-code'></i> {{ __('Log Viewer') }}" route="blv.index" target="_blank" />
+        @can('access admin')
+            <x-nav.nav-link title="<i class='bi bi-gear'></i> {{ __('ADMIN') }}" route="cms.admin.index" />
             <hr class="my-2">
         @endcan
 
-        @can('access admin')
-            <x-nav.nav-link title="<i class='bi bi-gear'></i> {{ __('ADMIN') }}" route="cms.admin.index" />
+        @can('view logs')
+            <x-nav.nav-link title="<i class='bi bi-journal-code'></i> {{ __('Log Viewer') }}" route="blv.index" target="_blank" />
             <hr class="my-2">
         @endcan
 
