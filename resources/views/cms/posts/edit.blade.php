@@ -26,7 +26,7 @@
 
             {{-- title --}}
             <div class="col-12">
-                {!! Form::label('title', __('Title'), ['class' => 'form-label']) !!}
+                {!! Form::label('title', __('Title (Heading 1)'), ['class' => 'form-label']) !!}
                 {!! Form::text('title', null, [
                     'aria-label' => 'title',
                     'class' => $errors->has('title') ? 'form-control is-invalid' : 'form-control',

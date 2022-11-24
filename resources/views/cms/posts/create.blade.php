@@ -1,4 +1,8 @@
 <x-cms-layout>
+    @push('scripts-head')
+        @vite('resources/js/quill.js')
+    @endpush
+
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
             <i class="bi bi-journal-plus"></i> {{ __('Create new post') }}
@@ -26,7 +30,7 @@
 
             {{-- title --}}
             <div class="col-12">
-                {!! Form::label('title', __('Title'), ['class' => 'form-label']) !!}
+                {!! Form::label('title', __('Title (Heading 1)'), ['class' => 'form-label']) !!}
                 {!! Form::text('title', null, [
                     'aria-label' => 'title',
                     'class' => $errors->has('title') ? 'form-control is-invalid' : 'form-control',
@@ -34,6 +38,16 @@
                     'required'
                     ]) !!}
                 {!! $errors->first('title', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+            </div>
+
+            {{-- quill --}}
+            <div class="col-12">
+                <input name="quill" id="quill" type="hidden" required>
+                {!! $errors->first('quill', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+
+                <div class="quill-container">
+                    <div class="quill-create-editor"></div>
+                </div>
             </div>
 
             {{-- buttons --}}

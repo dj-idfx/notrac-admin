@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('title');
+            $table->longText('quill');
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

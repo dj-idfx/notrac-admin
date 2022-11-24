@@ -81,9 +81,7 @@
                     </tr>
                 @endif
             </table>
-        </div>
 
-        <div class="col">
             <h3 class="fs-4 fw-light">
                 {{ __('Post author') }}
             </h3>
@@ -91,6 +89,16 @@
             <p>
                 <a href="{{ route('cms.users.show', $post->user) }}">{{ $post->user->full_name }}</a>
             </p>
+        </div>
+
+        <div class="col">
+            <h3 class="fs-4 fw-light">
+                {{ __('Post content') }}
+            </h3>
+
+           <div class="quill-content">
+               {!! $post->quill !!}
+           </div>
         </div>
     </div>
 

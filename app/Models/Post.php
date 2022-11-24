@@ -37,7 +37,9 @@ class Post extends Model
      *
      * @var array
      */
-    protected $attributes = [];
+    protected $attributes = [
+        'quill' => '',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -46,6 +48,7 @@ class Post extends Model
      */
     protected $fillable = [
         'title',
+        'quill',
     ];
 
     /**

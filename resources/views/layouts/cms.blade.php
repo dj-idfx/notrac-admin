@@ -9,6 +9,7 @@
     <title>CMS | {{ config('app.name', 'Notrac') }}</title>
     {{-- Scripts --}}
     @vite('resources/js/cms.js')
+    @stack('scripts-head')
 </head>
 <body class="cms-body">
 <div class="cms-app">
@@ -34,5 +35,6 @@
         @if(Session::has('flash_message')) @include('includes.cms-flash-message') @endif
     </div>
 </div>
+@stack('scripts-bottom')
 </body>
 </html>

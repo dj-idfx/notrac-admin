@@ -83,7 +83,14 @@ to search, filter, and make sense of your Laravel logs fast.
 
 ## NPM packages
 
-### Bootstrap 5 + Icons
+### Bootstrap 5 + Icons   
+Powerful, extensible, and feature-packed **frontend toolkit**.   
+[Official website](https://getbootstrap.com/)   
 `npm i --save bootstrap @popperjs/core`   
 `npm i --save-dev sass`
 `npm i bootstrap-icons`
+
+### Quill 
+Your powerful **rich text editor**.   
+[Official website](https://quilljs.com/)   
+`npm install quill`   

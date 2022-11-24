@@ -31,6 +31,7 @@ class CmsStorePostRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'quill' => 'required|string',
         ];
     }
 
@@ -41,7 +42,10 @@ class CmsStorePostRequest extends FormRequest
      */
     public function actions(): Post
     {
-        $post = new Post(['title' => $this->safe()->title]);
+        $post = new Post([
+            'title' => $this->safe()->title,
+            'quill' =>$this->safe()->quill,
+        ]);
         Auth::user()->posts()->save($post);
 
         // Flash message:
