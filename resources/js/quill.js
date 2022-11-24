@@ -3,7 +3,7 @@ import Quill from 'quill/dist/quill';
 
 document.addEventListener("DOMContentLoaded", function() {
     /* Quill toolbar setting */
-    const quillCreateToolbar = [
+    const quillToolbar = [
         ['bold', 'italic', 'underline', 'strike'],
         ['blockquote', 'code-block'],
 
@@ -23,27 +23,29 @@ document.addEventListener("DOMContentLoaded", function() {
         ['clean'],
     ];
 
-    /* Quill create editor */
-    window.quillCreateEditor = new Quill('.quill-create-editor', {
+    /* Quill editor */
+    window.quillCreateEditor = new Quill('.quill-editor', {
         debug: 'warn',
         modules: {
             syntax: false,
-            toolbar: quillCreateToolbar,
+            toolbar: quillToolbar,
         },
         placeholder: 'Type something ...',
         readOnly: false,
         theme: 'snow',
     })
 
-    /* Quill create Post form */
-    const form = document.querySelector('#cmsCreatePostForm');
+    /* Quill form */
+    const form = document.querySelector('.quill-form');
     if (form) {
         form.onsubmit = function() {
             const quillInput = document.querySelector('input[name=quill]');
             // quillInput.value = JSON.stringify(quillCreateEditor.getContents());
-            quillInput.value = quillCreateEditor.root.innerHTML;
-            return true;
+            if (quillInput) {
+                quillInput.value = quillCreateEditor.root.innerHTML;
+                return true;
+            }
+            return false;
         };
     }
-
 });

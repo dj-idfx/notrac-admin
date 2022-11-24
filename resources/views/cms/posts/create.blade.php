@@ -20,7 +20,7 @@
             'id' => 'cmsCreatePostForm',
             'route' => 'cms.posts.store',
             'method' => 'post',
-            'class' => 'col-lg-10 col-xl-8'
+            'class' => 'quill-form col-lg-10 col-xl-8'
         ]) !!}
 
         <div class="row g-3">
@@ -33,7 +33,7 @@
                 {!! Form::label('title', __('Title (Heading 1)'), ['class' => 'form-label']) !!}
                 {!! Form::text('title', null, [
                     'aria-label' => 'title',
-                    'class' => $errors->has('title') ? 'form-control is-invalid' : 'form-control',
+                    'class' => $errors->has('title') ? 'form-control is-invalid ' : 'form-control',
                     $errors->any() ? '' : 'autofocus',
                     'required'
                     ]) !!}
@@ -42,11 +42,12 @@
 
             {{-- quill --}}
             <div class="col-12">
+                {!! Form::label('quill', __('Content'), ['class' => 'form-label']) !!}
                 <input name="quill" id="quill" type="hidden" required>
                 {!! $errors->first('quill', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
 
                 <div class="quill-container">
-                    <div class="quill-create-editor"></div>
+                    <div class="quill-editor"></div>
                 </div>
             </div>
 

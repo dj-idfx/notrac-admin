@@ -31,6 +31,7 @@ class CmsUpdatePostRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'quill' => 'required|string',
         ];
     }
 
@@ -44,6 +45,7 @@ class CmsUpdatePostRequest extends FormRequest
     {
         $post->update($this->safe()->only([
             'title',
+            'quill',
         ]));
 
         session()->flash('flash_message', __('Post updated successfully!'));

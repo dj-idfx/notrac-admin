@@ -43,6 +43,16 @@
     {{-- $slot --}}
     <div class="row">
         <div class="col">
+            <h3 class="fs-4 fw-light">
+                {{ __('Post content') }}
+            </h3>
+
+            <div class="border-start ps-3 mb-3">
+                {!! $post->quill !!}
+            </div>
+        </div>
+
+        <div class="col-auto">
             <h2 class="fs-3 fw-light">
                 {{ __('Post details') }}
             </h2>
@@ -89,16 +99,6 @@
             <p>
                 <a href="{{ route('cms.users.show', $post->user) }}">{{ $post->user->full_name }}</a>
             </p>
-        </div>
-
-        <div class="col">
-            <h3 class="fs-4 fw-light">
-                {{ __('Post content') }}
-            </h3>
-
-           <div class="quill-content">
-               {!! $post->quill !!}
-           </div>
         </div>
     </div>
 

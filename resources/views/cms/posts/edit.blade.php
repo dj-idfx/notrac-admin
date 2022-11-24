@@ -1,4 +1,8 @@
 <x-cms-layout>
+    @push('scripts-head')
+        @vite('resources/js/quill.js')
+    @endpush
+
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
             <i class="bi bi-pencil-square"></i> {{ __('Edit  post') . ': ' . $post->title }}
@@ -16,7 +20,7 @@
             'id' => 'cmsEditPostForm',
             'route' => ['cms.posts.update', $post],
             'method' => 'patch',
-            'class' => 'col-lg-10 col-xl-8'
+            'class' => 'quill-form col-lg-10 col-xl-8'
         ]) !!}
 
         <div class="row g-3">
@@ -33,6 +37,17 @@
                     'required',
                     ]) !!}
                 {!! $errors->first('title', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+            </div>
+
+            {{-- quill --}}
+            <div class="col-12">
+                {!! Form::label('quill', __('Content'), ['class' => 'form-label']) !!}
+                <input name="quill" id="quill" type="hidden" required>
+                {!! $errors->first('quill', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+
+                <div class="quill-container">
+                    <div class="quill-editor">{!! $post->quill !!}</div>
+                </div>
             </div>
 
             {{-- buttons --}}
