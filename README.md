@@ -66,6 +66,14 @@ Settings can be found in the **honeypot.php** file inside the **config** folder.
 [Spatie Github](https://github.com/spatie/laravel-honeypot)       
 `composer require spatie/laravel-honeypot`
 
+### Laravel Media Library
+
+**Associate files** with Eloquent **models**.    
+Settings can be found in the **media-library.php** file inside the **config** folder.  
+[Official documentation](https://spatie.be/docs/laravel-medialibrary/)    
+[Spatie Github](https://github.com/spatie/laravel-medialibrary/)       
+`composer require spatie/laravel-medialibrary`
+
 ### LaravelCollective HTML
 
 HTML and **Form** Builders.  

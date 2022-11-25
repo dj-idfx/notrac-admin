@@ -12,13 +12,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-    use HasUuids, HasFactory, Notifiable, SoftDeletes, HasRoles, HasSlug;
+    use HasUuids, HasFactory, Notifiable, SoftDeletes, HasRoles, HasSlug, InteractsWithMedia;
 
     /**
      * The "booted" method of the model.
@@ -110,6 +115,38 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Media Library settings
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Defining media collections for this model
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatar')->singleFile();
+
+        $this->addMediaCollection('images');
+    }
+
+    /**
+     * Generate thumbnail conversion for items in the collection.
+     *
+     * @param Media|null $media
+     * @return void
+     * @throws InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumbnail')
+            ->fit(Manipulations::FIT_CROP, 250, 250)
+            ->nonQueued();
     }
 
     /*
