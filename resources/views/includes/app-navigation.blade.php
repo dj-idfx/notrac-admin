@@ -17,9 +17,7 @@
             {{-- Main navigation --}}
             <div class="navbar-nav">
                 <x-nav.nav-link title="{{ __('Home') }}" route="home" />
-
-                {{-- Link example --}}
-                <x-nav.nav-link title="{{ __('Example') }}" />
+                <x-nav.nav-link title="{{ __('Posts') }}" route="posts.index" />
 
                 {{-- Dropdown example--}}
                 <div class="dropdown">
@@ -27,7 +25,7 @@
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false" />
                     <div class="dropdown-menu">
                         <x-nav.dropdown-link title="<i class='bi bi-house-door'></i> {{ __('Home') }}" route="home" />
-                        <x-nav.dropdown-link title="<i class='bi bi-boxes'></i> {{ __('Dashboard') }}" route="account.dashboard" />
+                        <x-nav.dropdown-link title="<i class='bi bi-journals'></i> {{ __('Posts') }}" route="posts.index" childsActive />
                         <hr class="dropdown-divider">
                         <x-nav.dropdown-link title="<i class='bi bi-github'></i> {{ __('Github') }}" href="https://github.com/dj-idfx/notrac-admin" target="_blank" />
                         <x-nav.dropdown-link title="<i class='bi bi-google'></i> {{ __('Google it!') }}" href="https://www.google.com/" target="_blank" />

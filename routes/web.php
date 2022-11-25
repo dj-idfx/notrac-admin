@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FallbackController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 /**
  * Public web routes
  */
+/* Homepage */
 Route::get('/', HomeController::class)->name('home');
+
+/* Posts */
+Route::resource('posts', PostController::class)->only('index', 'show');
+
 
 /**
  * User authentication routes

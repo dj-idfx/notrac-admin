@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="container py-3">
             <h1 class="fs-2 text-center mb-0">
-                {{ config('app.name', 'Notrac') }}
+                <i class="bi bi-house-door"></i> {{ config('app.name', 'Notrac') }}
             </h1>
         </div>
     </x-slot>

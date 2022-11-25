@@ -19,6 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->realText(64),
+            'published_at' => now(),
         ];
     }
 }
