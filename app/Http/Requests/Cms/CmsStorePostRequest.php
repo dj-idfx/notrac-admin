@@ -5,6 +5,10 @@ namespace App\Http\Requests\Cms;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CmsStorePostRequest extends FormRequest
 {
@@ -32,6 +36,10 @@ class CmsStorePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'quill' => 'required|string',
+            'cover' => [
+                'nullable',
+                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(2000)->maxHeight(2000)),
+            ],
         ];
     }
 
@@ -39,6 +47,8 @@ class CmsStorePostRequest extends FormRequest
      * Actions to perform after validation passes
      *
      * @return Post
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function actions(): Post
     {
@@ -47,6 +57,11 @@ class CmsStorePostRequest extends FormRequest
             'quill' =>$this->safe()->quill,
         ]);
         Auth::user()->posts()->save($post);
+
+        // Upload cover
+        if($this->hasFile("cover")) {
+            $post->addMedia($this->safe()->cover)->toMediaCollection('cover');
+        }
 
         // Flash message:
         session()->flash('flash_message', __('New post created successfully!'));

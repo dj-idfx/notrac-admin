@@ -9,6 +9,10 @@
 
     <div class="container py-3 mb-3">
         <div class="row">
+            <div class="col-md-auto text-center">
+                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid mb-3">
+            </div>
+
             <div class="col">
                 <div class="quill-content">
                     {!! $post->quill !!}

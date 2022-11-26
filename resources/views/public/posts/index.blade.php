@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="container py-3 mb-3">
-       <h2 class="fs-3 fw-light mb-0">
+        <h2 class="fs-3 fw-light mb-0">
             {{ __('All posts') }}
         </h2>
 
@@ -17,18 +17,32 @@
                 <div class="col-12">
                     <hr class="border-dark border-opacity-50">
 
-                    <h3 class="fs-4">
-                        {{ $post->title }}
-                    </h3>
+                    <div class="row">
+                        <div class="col-4 col-md-auto">
+                            <a href="{{ route('posts.show', $post) }}" class="text-decoration-none">
+                                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}"
+                                     alt="{{ $post->title }}"
+                                     class="img-fluid"
+                                     @if($loop->index > 3) loading="lazy" @endif>
+                            </a>
+                        </div>
 
-                    <p>
-                        {{ $post->user->full_name }} <br>
-                        <small class="fst-italic">{{ $post->created_at }}</small>
-                    </p>
+                        <div class="col d-flex flex-column">
+                            <h3 class="fs-4">
+                                {{ $post->title }}
+                            </h3>
 
-                    <a href="{{ route('posts.show', $post) }}" class="btn btn-primary btn-sm">
-                        {{ __('Read more') }}
-                    </a>
+                            <p class="mt-auto">
+                                {{ $post->user->full_name }}
+                                <br>
+                                <small class="fst-italic">{{ $post->created_at }}</small>
+                                <br>
+                                <a href="{{ route('posts.show', $post) }}" class="btn btn-primary btn-sm mt-2">
+                                    {{ __('Read more') }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
             @empty

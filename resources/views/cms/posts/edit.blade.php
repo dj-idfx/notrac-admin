@@ -20,7 +20,8 @@
             'id' => 'cmsEditPostForm',
             'route' => ['cms.posts.update', $post],
             'method' => 'patch',
-            'class' => 'quill-form col-lg-10 col-xl-8'
+            'class' => 'quill-form col-lg-10 col-xl-8',
+            'files' => true,
         ]) !!}
 
         <div class="row g-3">
@@ -48,6 +49,19 @@
                 <div class="quill-container">
                     <div class="quill-editor">{!! $post->quill !!}</div>
                 </div>
+            </div>
+
+            {{-- image file --}}
+            <div class="col-12">
+                {!! Form::label('cover', __('Post cover'), ['class' => 'h3 fs-4 fw-light']) !!}
+                {!! Form::file('cover', [
+                    'aria-label' => 'cover',
+                    'class' => $errors->has('cover') ? 'form-control is-invalid' : 'form-control',
+                    'accept' => 'image/*',
+                    'id' => 'cover',
+                    ]) !!}
+                {!! $errors->first('cover', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+                <div id="coverHelp" class="form-text">{{ __('max. 2MB') }}</div>
             </div>
 
             {{-- buttons --}}

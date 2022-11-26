@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $posts = Post::with('user')->orderByDesc('created_at')->get();
+        $posts = Post::isPublished()->with('user')->orderByDesc('created_at')->get();
 
         return view('public.posts.index', compact('posts'));
     }
@@ -23,10 +24,14 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param Post $post
-     * @return View
+     * @return RedirectResponse|View
      */
-    public function show(Post $post): View
+    public function show(Post $post): View|RedirectResponse
     {
+        if (! $post->published) {
+            return redirect()->route('posts.index');
+        }
+
         return view('public.posts.show', compact('post'));
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Requests\Cms\CmsUpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CmsPostController extends BaseCmsController
 {
@@ -52,6 +54,8 @@ class CmsPostController extends BaseCmsController
      *
      * @param CmsStorePostRequest $request
      * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function store(CmsStorePostRequest $request): RedirectResponse
     {
@@ -88,6 +92,8 @@ class CmsPostController extends BaseCmsController
      * @param CmsUpdatePostRequest $request
      * @param Post $post
      * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(CmsUpdatePostRequest $request, Post $post): RedirectResponse
     {

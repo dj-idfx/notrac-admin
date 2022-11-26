@@ -33,6 +33,12 @@
     @forelse($posts as $post)
         @if($loop->first)<ul class="list-unstyled">@endif
             <li class="mb-1">
+                @if(! $post->published)
+                    <i class="bi bi-journal-minus text-warning"></i>
+                @else
+                    <i class="bi bi-journal-text text-success"></i>
+                @endif
+
                 <a href="{{ route('cms.posts.show', $post) }}" class="link-dark ms-1">
                     <small>{{ $post->created_at }} - </small> {{ $post->title }}
                 </a>
