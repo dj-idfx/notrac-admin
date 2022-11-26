@@ -127,6 +127,7 @@ class Post extends Model implements HasMedia
 
     /**
      * Generate thumbnail conversion for items in the collection.
+     * todo: check if we can put this universal? same method for all models?
      *
      * @param Media|null $media
      * @return void

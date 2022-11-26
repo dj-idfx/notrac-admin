@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cms\CmsAdminController;
 use App\Http\Controllers\Cms\CmsDashboardController;
+use App\Http\Controllers\Cms\CmsMediaController;
 use App\Http\Controllers\Cms\CmsPostController;
 use App\Http\Controllers\Cms\CmsRoleController;
 use App\Http\Controllers\Cms\CmsUserController;
@@ -50,6 +51,11 @@ Route::prefix('cms')->name('cms.')->group(function () {
     Route::delete('/posts/{post}/delete', [CmsPostController::class, 'delete'])->name('posts.delete');
     Route::patch('/posts/{post}/publish', [CmsPostController::class, 'publish'])->name('posts.publish');
     Route::resource('posts', CmsPostController::class);
+
+    /**
+     * Media controller
+     */
+    Route::resource('media', CmsMediaController::class);
 
     /**
      * Admin secured area

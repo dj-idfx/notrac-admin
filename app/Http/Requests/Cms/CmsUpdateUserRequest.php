@@ -40,7 +40,7 @@ class CmsUpdateUserRequest extends FormRequest
             'role'       => ['required', 'string', 'max:255', 'exists:roles,name' ],
             'avatar'     => [
                 'nullable',
-                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(2000)->maxHeight(2000)),
+                File::image()->max(10240)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
             ],
         ];
     }
@@ -70,7 +70,9 @@ class CmsUpdateUserRequest extends FormRequest
 
             // Upload avatar
             if($this->hasFile("avatar")) {
-                $user->addMedia($this->safe()->avatar)->toMediaCollection('avatar');
+                $user->addMedia($this->safe()->avatar)
+                    ->withResponsiveImages()
+                    ->toMediaCollection('avatar');
             }
 
             session()->flash('flash_message', __('User updated successfully!'));

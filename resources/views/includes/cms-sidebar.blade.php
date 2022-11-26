@@ -12,8 +12,8 @@
         <x-nav.nav-link title="<i class='bi bi-speedometer2'></i> {{ __('Dashboard') }}" class="mb-2" route="cms.dashboard.index" />
         <x-nav.nav-link title="<i class='bi bi-people'></i> {{ __('Users') }}" class="mb-2" route="cms.users.index" />
         <x-nav.nav-link title="<i class='bi bi-journals'></i> {{ __('Posts') }}" class="mb-2" route="cms.posts.index" />
+        <x-nav.nav-link title="<i class='bi bi-images'></i> {{ __('Media') }}" class="mb-2" route="cms.media.index" />
 
-        <x-nav.nav-link title="<i class='bi bi-link'></i> {{ __('Example') }}" class="mb-2" />
         <x-nav.nav-link title="<i class='bi bi-link-45deg'></i> {{ __('Disabled') }}" class="mb-2 disabled" />
 
         <hr class="my-2">
