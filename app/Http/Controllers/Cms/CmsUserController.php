@@ -8,6 +8,8 @@ use App\Models\Scopes\HashedScope;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\Permission\Models\Role;
 
 class CmsUserController extends BaseCmsController
@@ -56,6 +58,8 @@ class CmsUserController extends BaseCmsController
      *
      * @param CmsStoreUserRequest $request
      * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function store(CmsStoreUserRequest $request): RedirectResponse
     {
@@ -94,6 +98,8 @@ class CmsUserController extends BaseCmsController
      * @param CmsUpdateUserRequest $request
      * @param User $user
      * @return RedirectResponse
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(CmsUpdateUserRequest $request, User $user): RedirectResponse
     {
@@ -186,6 +192,7 @@ class CmsUserController extends BaseCmsController
      */
     public function empty(): RedirectResponse
     {
+        /* todo: trash all images / avatars? */
         User::onlyTrashed()->whereHas('roles', function ($query) {
             $query->where('name','!=', 'super-admin');
         })->forceDelete();

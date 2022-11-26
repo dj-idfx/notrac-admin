@@ -130,7 +130,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatar')->singleFile();
+        $this->addMediaCollection('avatar')->singleFile()
+            ->useFallbackUrl('/media/placeholder.png')
+            ->useFallbackPath(public_path('/media/placeholder.png'));
 
         $this->addMediaCollection('images');
     }

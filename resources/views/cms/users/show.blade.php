@@ -63,12 +63,12 @@
 
     {{-- $slot --}}
     <div class="row">
+        {{-- Users details --}}
         <div class="col">
             <h2 class="fs-3 fw-light">
                 {{ __('User details') }}
             </h2>
 
-            {{-- User table fields --}}
             <table class="table table-sm w-auto">
                 <tr>
                     <th>{{ __('ID') }}:</th>
@@ -136,25 +136,30 @@
                     @endif
                 @endcan
             </table>
+        </div>
 
+        {{-- User roles & permissions --}}
+        <div class="col">
             <h3 class="fs-4 fw-light">
                 {{ __('User roles') }}
             </h3>
 
-            {{-- User roles --}}
-            @forelse($user->getRoleNames() as $role)
-                @if($loop->first)<ul>
-                    @if($user->hasRole('super-admin'))<li>super-admin</li>@endif
+            @forelse($user->roles as $role)
+                @if($loop->first) <ul>  @if($user->hasRole('super-admin'))<li>super-admin</li>@endif @endif
+                    @if($role->name != 'super-admin')
+                        <li>
+                        @can('manage roles') <a href="{{ route('cms.roles.show', $role) }}" class="link-dark"> @endif
+                            {{ $role->name }}
+                        @can('manage roles') </a> @endif
+                        </li>
                     @endif
-                    @if($role != 'super-admin')<li>{{ $role }}</li> @endif
-                    @if($loop->last)</ul>@endif
+                @if($loop->last)</ul>@endif
             @empty
                 <p class="fw-bold fst-italic">
                     {{ __('No roles found') }}
                 </p>
             @endforelse
 
-            {{-- User permissions --}}
             @can('manage roles')
                 <h3 class="fs-4 fw-light">
                     {{ __('User permissions') }}
@@ -171,6 +176,15 @@
                     </p>
                 @endforelse
             @endcan
+        </div>
+
+        {{-- Users avatar --}}
+        <div class="col">
+            <h3 class="fs-4 fw-light">
+                {{ __('User avatar') }}
+            </h3>
+
+            <img src="{{ $user->getFirstMediaUrl('avatar', 'thumbnail') }}" alt="{{ $user->full_name }}" class="img-fluid">
         </div>
     </div>
 

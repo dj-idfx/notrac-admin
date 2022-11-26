@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CmsUpdateUserRequest extends FormRequest
 {
@@ -31,10 +34,14 @@ class CmsUpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name'    => 'required|string|max:255',
-            'last_name'     => 'required|string|max:255',
-            'email'         => ['required','string','email','max:255', Rule::unique('users')->ignore($this->user)],
-            'role'          => ['required', 'string', 'max:255', 'exists:roles,name' ],
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => ['required','string','email','max:255', Rule::unique('users')->ignore($this->user)],
+            'role'       => ['required', 'string', 'max:255', 'exists:roles,name' ],
+            'avatar'     => [
+                'nullable',
+                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(2000)->maxHeight(2000)),
+            ],
         ];
     }
 
@@ -43,6 +50,8 @@ class CmsUpdateUserRequest extends FormRequest
      *
      * @param User $user
      * @return User
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function actions(User $user): User
     {
@@ -57,6 +66,11 @@ class CmsUpdateUserRequest extends FormRequest
             // Assign Role to User
             if ($this->safe()->role != 'super-admin') {
                 $user->syncRoles([$this->safe()->role]);
+            }
+
+            // Upload avatar
+            if($this->hasFile("avatar")) {
+                $user->addMedia($this->safe()->avatar)->toMediaCollection('avatar');
             }
 
             session()->flash('flash_message', __('User updated successfully!'));

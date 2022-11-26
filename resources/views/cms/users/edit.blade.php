@@ -16,7 +16,8 @@
             'id' => 'cmsEditUserForm',
             'route' => ['cms.users.update', $user],
             'method' => 'patch',
-            'class' => 'col-lg-10 col-xl-8'
+            'class' => 'col-lg-10 col-xl-8',
+            'files' => true,
         ]) !!}
 
         <div class="row g-3">
@@ -57,19 +58,31 @@
                 {!! $errors->first('email', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
             </div>
 
-            <h3 class="fs-4 fw-light col-12 mb-0">
-                {{ __('User role') }}
-            </h3>
+            {{-- Force next columns to break to new line --}}
+            <div class="w-100 m-0 p-0"></div>
 
             {{-- role select --}}
             <div class="col-md-6">
-                {!! Form::label('role', __('Role'), ['class' => 'form-label d-none']) !!}
+                {!! Form::label('role', __('User role'), ['class' => 'h3 fs-4 fw-light']) !!}
                 {!! Form::select('role', $roles, $user->getRoleNames()->get(0), [
                     'aria-label' => 'role',
                     'class' => $errors->has('role') ? 'form-select is-invalid' : 'form-select',
                     'required'
                     ]) !!}
                 {!! $errors->first('role', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+            </div>
+
+            {{-- image file --}}
+            <div class="col-md-6">
+                {!! Form::label('avatar', __('User avatar'), ['class' => 'h3 fs-4 fw-light']) !!}
+                {!! Form::file('avatar', [
+                    'aria-label' => 'avatar',
+                    'class' => $errors->has('avatar') ? 'form-control is-invalid' : 'form-control',
+                    'accept' => 'image/*',
+                    'id' => 'avatar',
+                    ]) !!}
+                {!! $errors->first('avatar', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+                <div id="avatarHelp" class="form-text">{{ __('max. 2MB') }}</div>
             </div>
 
             {{-- buttons --}}
