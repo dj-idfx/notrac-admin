@@ -14,8 +14,8 @@ Notrac administrator CMS: Take control over content in a simple & elegant way.
   When using Laragon or another local server go to https://notrac-admin.local  
 
 ### created with:
-- [Laravel 9](https://laravel.com/), the PHP Framework for Web Artisans
-- [Bootstrap 5](https://getbootstrap.com/), the most popular HTML, CSS, and JS library in the world.
+- [Laravel 9](https://laravel.com/): the PHP Framework for Web Artisans
+- [Bootstrap 5](https://getbootstrap.com/): the most popular HTML, CSS, and JS library in the world.
 
 
 ## Composer packages
@@ -102,3 +102,8 @@ Powerful, extensible, and feature-packed **frontend toolkit**.
 Your powerful **rich text editor**.   
 [Official website](https://quilljs.com/)   
 `npm install quill`   
+
+### Dropzone
+A JavaScript library to add **file drag and drop** functionality to web forms  
+[Official website](https://docs.dropzone.dev/)   
+`npm install dropzone`   

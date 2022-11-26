@@ -38,7 +38,7 @@ class CmsStorePostRequest extends FormRequest
             'quill' => 'required|string',
             'cover' => [
                 'nullable',
-                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(2000)->maxHeight(2000)),
+                File::image()->max(10240)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
             ],
         ];
     }
@@ -60,10 +60,12 @@ class CmsStorePostRequest extends FormRequest
 
         // Upload cover
         if($this->hasFile("cover")) {
-            $post->addMedia($this->safe()->cover)->toMediaCollection('cover');
+            $post->addMedia($this->safe()->cover)
+                ->withResponsiveImages()
+                ->toMediaCollection('cover');
         }
 
-        // Flash message:
+        // Flash message
         session()->flash('flash_message', __('New post created successfully!'));
         session()->flash('flash_level', 'success');
 

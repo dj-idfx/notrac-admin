@@ -7,7 +7,7 @@
         </div>
     </x-slot>
 
-    <div class="container py-3 mb-3">
+    <div class="container py-3 mb-4">
         <h2 class="fs-3 fw-light mb-0">
             {{ __('All posts') }}
         </h2>

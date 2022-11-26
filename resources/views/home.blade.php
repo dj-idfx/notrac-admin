@@ -7,8 +7,8 @@
         </div>
     </x-slot>
 
-    <div class="container py-3">
-        <h2 class="fs-3 text-center">
+    <div class="container py-3 mb-4">
+        <h2 class="fs-3 fw-light text-center">
             {{ __('Welcome!') }}
         </h2>
 

@@ -1842,16 +1842,16 @@
         },
         {
             "name": "maennchen/zipstream-php",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maennchen/ZipStream-PHP.git",
-                "reference": "c31a03f3b707876641875428cda9ecb4d05c3823"
+                "reference": "30ad6f93cf3efe4192bc7a4c9cad11ff8f4f237f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/c31a03f3b707876641875428cda9ecb4d05c3823",
-                "reference": "c31a03f3b707876641875428cda9ecb4d05c3823",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/30ad6f93cf3efe4192bc7a4c9cad11ff8f4f237f",
+                "reference": "30ad6f93cf3efe4192bc7a4c9cad11ff8f4f237f",
                 "shasum": ""
             },
             "require": {
@@ -1904,7 +1904,7 @@
             ],
             "support": {
                 "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
-                "source": "https://github.com/maennchen/ZipStream-PHP/tree/2.2.5"
+                "source": "https://github.com/maennchen/ZipStream-PHP/tree/2.2.6"
             },
             "funding": [
                 {
@@ -1916,7 +1916,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-11-25T18:21:57+00:00"
+            "time": "2022-11-25T18:57:19+00:00"
         },
         {
             "name": "monolog/monolog",

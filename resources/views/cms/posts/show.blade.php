@@ -13,6 +13,13 @@
                 <i class="bi bi-arrow-left"></i> {{ __('All posts') }}
             </a></div>
 
+        @if($post->published)
+            {{-- View post link --}}
+            <div><a class="btn btn-outline-dark btn-sm lh-sm" href="{{ route('posts.show', $post) }}">
+                    <i class="bi bi-eye"></i> {{ __('View post') }}
+                </a></div>
+        @endif
+
         @can('manage content')
             {{-- Edit post link --}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.posts.edit', $post) }}">
@@ -33,7 +40,7 @@
             </div>
 
             {{-- Delete post toggle modal --}}
-            <div class="ms-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+            <div class="ms-md-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                                          data-bs-toggle="modal" data-bs-target="#deletePostModal">
                     <i class="bi bi-trash"></i> {{ __('Delete post') }}
                 </button></div>
@@ -50,9 +57,17 @@
             <div class="border-start ps-3 mb-3">
                 {!! $post->quill !!}
             </div>
+
+            <h3 class="fs-4 fw-light">
+                {{ __('Post author') }}
+            </h3>
+
+            <p>
+                <a href="{{ route('cms.users.show', $post->user) }}">{{ $post->user->full_name }}</a>
+            </p>
         </div>
 
-        <div class="col-auto">
+        <div class="col-md-auto">
             <h3 class="fs-4 fw-light">
                 {{ __('Post cover') }}
             </h3>
@@ -96,16 +111,48 @@
                     </tr>
                 @endif
             </table>
-
-            <h3 class="fs-4 fw-light">
-                {{ __('Post author') }}
-            </h3>
-
-            <p>
-                <a href="{{ route('cms.users.show', $post->user) }}">{{ $post->user->full_name }}</a>
-            </p>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h3 class="fs-4 fw-light">
+                {{ __('Post images') }}
+            </h3>
+
+            <div class="row">
+                @forelse($post->getMedia('images') as $image)
+                    <div class="col">
+                        xxxx
+                    </div>
+
+                @empty
+                    <div class="col">
+                        <p class="fst-italic">
+                            <i class="bi bi-exclamation-circle"></i> {{ __('No images found') }}
+                        </p>
+                    </div>
+                @endforelse
+
+                <div class="col-12">
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewImages" aria-expanded="false" aria-controls="collapseNewImages">
+                        <i class="bi bi-plus-circle"></i> {{ __('Upload new images') }}
+                    </button>
+
+                    <div class="collapse" id="collapseNewImages">
+                        <div>
+                            {{-- todo: Dropzone--}}
+                            <strong>TODO....</strong> Some placeholder content for the collapse component. <br>
+                            This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {{-- / $slot --}}
+
 
     {{-- Delete post modal--}}
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
