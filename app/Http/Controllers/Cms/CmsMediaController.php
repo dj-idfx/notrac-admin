@@ -19,6 +19,8 @@ class CmsMediaController extends BaseCmsController
         parent::__construct();
         // Add extra 'manage content' middleware
         $this->middleware(['can:manage content'])->except(['index', 'show']);
+        // Start media queue
+        $this->middleware(['queue_media'])->only(['show']);
     }
 
     /**

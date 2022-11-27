@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Cms;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\View\View;
 
 class CmsAdminController extends BaseCmsController
@@ -19,6 +18,8 @@ class CmsAdminController extends BaseCmsController
         parent::__construct();
         // Add extra 'admin acces' middleware
         $this->middleware(['can:access admin']);
+        // Start media queue
+        $this->middleware(['queue_media'])->only(['queue']);
     }
 
     /**
@@ -38,8 +39,6 @@ class CmsAdminController extends BaseCmsController
      */
     public function queue(): RedirectResponse
     {
-        Artisan::call('queue:work --queue=media --stop-when-empty');
-
         session()->flash('flash_message', __('Media queue started!'));
         session()->flash('flash_level', 'success');
 

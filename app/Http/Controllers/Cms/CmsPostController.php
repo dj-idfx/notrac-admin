@@ -25,6 +25,8 @@ class CmsPostController extends BaseCmsController
         $this->middleware(['can:write article'])->only(['create', 'store']);
         // Add extra 'manage content' middleware to all other editing routes
         $this->middleware(['can:manage content'])->except(['index', 'show', 'create', 'store']);
+        // Start media queue
+        $this->middleware(['queue_media'])->only(['show']);
     }
 
     /**

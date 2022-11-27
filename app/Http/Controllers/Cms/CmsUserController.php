@@ -27,6 +27,8 @@ class CmsUserController extends BaseCmsController
         $this->middleware(['can:manage users'])->except(['index', 'show']);
         // Add extra 'access admin' middleware to hashing routes
         $this->middleware(['can:access admin'])->only(['hash', 'unhash', 'hashed']);
+        // Start media queue
+        $this->middleware(['queue_media'])->only(['show']);
     }
 
     /**

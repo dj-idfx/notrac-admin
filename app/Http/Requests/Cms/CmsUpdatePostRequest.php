@@ -63,7 +63,7 @@ class CmsUpdatePostRequest extends FormRequest
             $post->addMedia($this->safe()->cover)
                 ->toMediaCollection('cover');
 
-            exec('php artisan queue:work --queue=media --stop-when-empty &');
+//            exec('php artisan queue:work --queue=media --stop-when-empty  > /dev/null  2>&1  &');
         }
 
         // Flash message
