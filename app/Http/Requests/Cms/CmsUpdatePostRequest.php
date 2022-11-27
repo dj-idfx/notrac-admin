@@ -61,8 +61,9 @@ class CmsUpdatePostRequest extends FormRequest
         // Upload cover
         if($this->hasFile("cover")) {
             $post->addMedia($this->safe()->cover)
-                ->withResponsiveImages()
                 ->toMediaCollection('cover');
+
+            exec('php artisan queue:work --queue=media --stop-when-empty &');
         }
 
         // Flash message

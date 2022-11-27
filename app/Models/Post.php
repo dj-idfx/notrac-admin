@@ -119,10 +119,12 @@ class Post extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('cover')->singleFile()
+            ->withResponsiveImages()
             ->useFallbackUrl('/media/placeholder250.png')
             ->useFallbackPath(public_path('/media/placeholder250.png'));
 
-        $this->addMediaCollection('images');
+        $this->addMediaCollection('images')
+            ->withResponsiveImages();
     }
 
     /**

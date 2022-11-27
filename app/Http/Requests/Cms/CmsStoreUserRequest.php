@@ -72,8 +72,9 @@ class CmsStoreUserRequest extends FormRequest
         // Upload avatar
         if($this->hasFile("avatar")) {
             $user->addMedia($this->safe()->avatar)
-                ->withResponsiveImages()
                 ->toMediaCollection('avatar');
+
+            exec('php artisan queue:work --queue=media --stop-when-empty &');
         }
 
         // Flash message:

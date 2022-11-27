@@ -71,8 +71,9 @@ class CmsUpdateUserRequest extends FormRequest
             // Upload avatar
             if($this->hasFile("avatar")) {
                 $user->addMedia($this->safe()->avatar)
-                    ->withResponsiveImages()
                     ->toMediaCollection('avatar');
+
+                exec('php artisan queue:work --queue=media --stop-when-empty &');
             }
 
             session()->flash('flash_message', __('User updated successfully!'));
