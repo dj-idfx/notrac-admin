@@ -62,5 +62,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
      */
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [CmsAdminController::class, 'index'])->name('index');
+        Route::get('/queue', [CmsAdminController::class, 'queue'])->name('queue');
     });
 });

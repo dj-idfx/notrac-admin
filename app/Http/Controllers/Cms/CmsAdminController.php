@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Cms;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\View\View;
 
 class CmsAdminController extends BaseCmsController
@@ -27,5 +29,20 @@ class CmsAdminController extends BaseCmsController
     public function index(): View
     {
         return view('cms.admin.index');
+    }
+
+    /**
+     * Start the media queue worker.
+     *
+     * @return RedirectResponse
+     */
+    public function queue(): RedirectResponse
+    {
+        Artisan::call('queue:work --queue=media --stop-when-empty');
+
+        session()->flash('flash_message', __('Media queue started!'));
+        session()->flash('flash_level', 'success');
+
+        return redirect()->route('cms.admin.index');
     }
 }

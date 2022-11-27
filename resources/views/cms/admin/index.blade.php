@@ -11,5 +11,11 @@
             </button></div>
     </x-slot>
 
-    CMS ADMIN INDEX
+    <div class="row">
+        <div class="col">
+            <a href="{{ route('cms.admin.queue') }}">
+                Start media queue
+            </a>
+        </div>
+    </div>
 </x-cms-layout>
