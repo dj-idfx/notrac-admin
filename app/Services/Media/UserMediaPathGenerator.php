@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Media;
 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
-class CustomMediaPathGenerator implements PathGenerator
+class UserMediaPathGenerator implements PathGenerator
 {
     /**
      * Get a unique base path for all given media.
@@ -16,7 +16,7 @@ class CustomMediaPathGenerator implements PathGenerator
 
         /* Put media in year subfolder */
         if ($prefix !== '') {
-            return $prefix . '/' . $media->created_at->format('Y') . '/' . $media->getKey();
+            return $prefix . '/users/' . $media->created_at->format('Y') . '/' . $media->getKey();
         }
 
         return $media->getKey();

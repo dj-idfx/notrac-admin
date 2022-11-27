@@ -23,7 +23,9 @@
                     <small class="fst-italic">{{ $post->created_at }}</small>
                 </p>
 
-                {{ $post->getFirstMedia('cover')->img()->attributes(['class' => 'img-fluid']) }}
+                @if($post->getFirstMedia('cover'))
+                    {{ $post->getFirstMedia('cover')->img()->attributes(['class' => 'img-fluid']) }}
+                @endif
             </div>
         </div>
     </div>

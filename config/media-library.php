@@ -1,6 +1,10 @@
 <?php
 
-use App\Services\CustomMediaPathGenerator;
+use App\Models\Post;
+use App\Models\User;
+use App\Services\Media\CustomMediaPathGenerator;
+use App\Services\Media\PostMediaPathGenerator;
+use App\Services\Media\UserMediaPathGenerator;
 
 return [
 
@@ -71,7 +75,8 @@ return [
      * Here you can specify which path generator should be used for the given class.
      */
     'custom_path_generators' => [
-        // Model::class => PathGenerator::class
+        Post::class => PostMediaPathGenerator::class,
+        User::class => UserMediaPathGenerator::class,
     ],
 
     /*
