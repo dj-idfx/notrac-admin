@@ -191,7 +191,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     protected function firstName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ucfirst($value),
+            get: fn ($value) => ucwords($value),
             set: fn ($value) => strtolower($value),
         );
     }
@@ -204,7 +204,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     protected function lastName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ucfirst($value),
+            get: fn ($value) => ucwords($value),
             set: fn ($value) => strtolower($value),
         );
     }
