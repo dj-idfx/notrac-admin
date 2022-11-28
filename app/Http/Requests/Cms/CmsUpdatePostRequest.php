@@ -38,7 +38,7 @@ class CmsUpdatePostRequest extends FormRequest
             'quill' => 'required|string',
             'cover' => [
                 'nullable',
-                File::image()->max(10240)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
+                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
             ],
         ];
     }
@@ -62,8 +62,6 @@ class CmsUpdatePostRequest extends FormRequest
         if($this->hasFile("cover")) {
             $post->addMedia($this->safe()->cover)
                 ->toMediaCollection('cover');
-
-//            exec('php artisan queue:work --queue=media --stop-when-empty  > /dev/null  2>&1  &');
         }
 
         // Flash message

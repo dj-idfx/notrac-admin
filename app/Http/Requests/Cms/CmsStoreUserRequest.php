@@ -41,7 +41,7 @@ class CmsStoreUserRequest extends FormRequest
             'role'       => ['required', 'string', 'max:255', 'exists:roles,name'],
             'avatar'     => [
                 'nullable',
-                File::image()->max(10240)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
+                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
             ],
         ];
     }
@@ -73,8 +73,6 @@ class CmsStoreUserRequest extends FormRequest
         if($this->hasFile("avatar")) {
             $user->addMedia($this->safe()->avatar)
                 ->toMediaCollection('avatar');
-
-//            exec('php artisan queue:work --queue=media --stop-when-empty  > /dev/null  2>&1  &');
         }
 
         // Flash message:
