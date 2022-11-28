@@ -37,7 +37,7 @@ class CmsAdminController extends BaseCmsController
      *
      * @return RedirectResponse
      */
-    public function queue(): RedirectResponse
+    public function queueMedia(): RedirectResponse
     {
         session()->flash('flash_message', __('Media queue started!'));
         session()->flash('flash_level', 'success');

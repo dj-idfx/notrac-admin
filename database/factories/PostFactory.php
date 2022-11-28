@@ -22,4 +22,28 @@ class PostFactory extends Factory
             'published_at' => now(),
         ];
     }
+
+    /**
+     * Indicate that the model is not published
+     *
+     * @return static
+     */
+    public function unpublished(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'published_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model is deleted.
+     *
+     * @return static
+     */
+    public function deleted(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'deleted_at' => now(),
+        ]);
+    }
 }

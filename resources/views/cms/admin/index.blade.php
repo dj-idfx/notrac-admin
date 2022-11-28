@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col">
-            <a href="{{ route('cms.admin.queue') }}">
+            <a href="{{ route('cms.admin.queue_media') }}">
                 Start media queue
             </a>
         </div>

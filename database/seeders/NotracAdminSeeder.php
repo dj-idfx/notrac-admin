@@ -77,17 +77,18 @@ class NotracAdminSeeder extends Seeder
             'password'          => Hash::make('password'),
         ])->assignRole('editor');
 
-        // Create writer user with posts
-        Post::factory()
-            ->count(10)
-            ->for(User::create([
-                'first_name'        => 'Jack',
-                'last_name'         => 'Writer',
-                'email'             => 'writer@test.local',
-                'email_verified_at' => now(),
-                'password'          => Hash::make('password'),
-            ])->assignRole('writer'))
-            ->create();
+        // Create writer user & posts
+        $writer = User::create([
+            'first_name'        => 'Jack',
+            'last_name'         => 'Writer',
+            'email'             => 'writer@test.local',
+            'email_verified_at' => now(),
+            'password'          => Hash::make('password'),
+        ])->assignRole('writer');
+
+        Post::factory(10)->for($writer)->create();
+        Post::factory(3)->unpublished()->for($writer)->create();
+        Post::factory(2)->deleted()->for($writer)->create();
 
         // Create fake subscriber users
         $hashedUsers = User::factory(2)->hashed()->create();
