@@ -1,4 +1,8 @@
 <x-cms-layout>
+    @push('scripts-head')
+        @vite('resources/js/dropzone.js')
+    @endpush
+
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
             <i class="bi bi-journal-text"></i>
@@ -135,24 +139,19 @@
                 @endforelse
 
                 <div class="col-12">
+                    <div class="collapse" id="collapseNewImages">
+                        <div class="dropzone mb-3"></div>
+                    </div>
+
                     <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewImages" aria-expanded="false" aria-controls="collapseNewImages">
                         <i class="bi bi-plus-circle"></i> {{ __('Upload new images') }}
                     </button>
-
-                    <div class="collapse" id="collapseNewImages">
-                        <div>
-                            {{-- todo: Dropzone--}}
-                            <strong>TODO....</strong> Some placeholder content for the collapse component. <br>
-                            This panel is hidden by default but revealed when the user activates the relevant trigger.
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <hr>
     {{-- / $slot --}}
-
 
     {{-- Delete post modal--}}
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
@@ -186,4 +185,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            const MediaDropzone = new dropzone('.dropzone', {
+                url: "/test/url",
+                method: "post",
+                parallelUploads: 2,
+                paramName: "media", // The name that will be used to transfer the file
+                maxFilesize: 2, // MB
+            });
+
+            MediaDropzone.on("addedfile", file => {
+                console.log(`File added: ${file.name}`);
+            });
+        });
+    </script>
 </x-cms-layout>
