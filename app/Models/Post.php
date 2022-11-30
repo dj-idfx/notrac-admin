@@ -129,7 +129,6 @@ class Post extends Model implements HasMedia
 
     /**
      * Generate thumbnail conversion for items in the collection.
-     * todo: check if we can put this universal? same method for all models?
      *
      * @param Media|null $media
      * @return void
@@ -138,7 +137,7 @@ class Post extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 250, 250)
+            ->fit(Manipulations::FIT_CROP, 200, 200)
             ->nonQueued();
     }
 
