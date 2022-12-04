@@ -8,6 +8,7 @@ export default defineConfig({
             input: [
                 'resources/js/app.js',
                 'resources/js/cms.js',
+                'resources/js/chocolat.js',
                 'resources/js/dropzone.js',
                 'resources/js/quill.js',
             ],
@@ -18,6 +19,7 @@ export default defineConfig({
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             '~bootstrap-icons': path.resolve(__dirname, 'node_modules/bootstrap-icons'),
+            '~chocolat': path.resolve(__dirname, 'node_modules/chocolat'),
             '~dropzone': path.resolve(__dirname, 'node_modules/dropzone'),
             '~quill': path.resolve(__dirname, 'node_modules/quill'),
         }

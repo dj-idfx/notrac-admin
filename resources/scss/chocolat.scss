@@ -1,0 +1,10 @@
+/* Chocolat CSS */
+@import '~chocolat/src/css/chocolat.css';
+
+.chocolat-wrapper {
+    z-index: 1050;
+}
+
+.chocolat-overlay {
+    background-color: #000;
+}

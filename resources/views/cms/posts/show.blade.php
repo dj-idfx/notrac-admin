@@ -1,6 +1,7 @@
 <x-cms-layout>
     @push('scripts-head')
         @vite('resources/js/dropzone.js')
+        @vite('resources/js/chocolat.js')
 
         <style>
             .collapse.show + button { display: none; }
@@ -11,8 +12,7 @@
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
             <i class="bi bi-journal-text"></i>
-
-            {{ $post->title }}
+            <small>{{ $post->title }}</small>
         </h1>
     </x-slot>
 
@@ -57,6 +57,7 @@
     </x-slot>
 
     <div class="row">
+        {{-- Content --}}
         <div class="col">
             <h2 class="fs-3 fw-light">
                 {{ __('Post content') }}
@@ -75,12 +76,15 @@
             </p>
         </div>
 
+        {{-- Details --}}
         <div class="col-md-auto">
             <h3 class="fs-4 fw-light">
                 {{ __('Post cover') }}
             </h3>
 
-            <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid mb-3">
+            <a class="chocolat-image-link" href="#" data-href="{{ $post->getFirstMediaUrl('cover') }}" title="{{ $post->title }}">
+                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid w-100 mb-3">
+            </a>
 
             <h3 class="fs-4 fw-light">
                 {{ __('Post details') }}
@@ -134,7 +138,9 @@
             <div class="row">
                 @forelse($post->getMedia('images') as $medium)
                     <div class="col-6 col-sm-4 col-md-2 mb-3">
-                        <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
+                        <a class="chocolat-image-link" href="#" data-href="{{ $medium->getUrl() }}" title="{{ $medium->file_name }}">
+                            <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
+                        </a>
                     </div>
 
                 @empty
@@ -205,9 +211,11 @@
         </div>
     </div>
 
+    {{-- Extra JS --}}
     @push('scripts-bottom')
         <script>
-            window.addEventListener('load', function () {
+            /* Dropzone */
+            window.addEventListener('load', () => {
                 const MediaDropzone = new dropzone('.dropzone', {
                     url: "{{ route('cms.posts.images', $post) }}",
                     method: "post",
@@ -216,17 +224,30 @@
                     },
                     paramName: "media", // The name that will be used to transfer the file
                     maxFilesize: 2, // MB
-                    parallelUploads: 2,
-                    maxFiles: 12,
+                    parallelUploads: 4,
+                    maxFiles: 16,
                     uploadMultiple: true,
                     acceptedFiles: `image/*`,
-                    addRemoveLinks: true,
                 });
 
                 MediaDropzone.on("addedfile", file => {
                     console.log(`File added: ${file.name}`);
                 });
             });
+
+            /* Chocolat */
+            document.addEventListener("DOMContentLoaded", () => {
+                let imageLinks = document.querySelectorAll('.chocolat-image-link');
+
+                imageLinks.forEach(link => {
+                    link.href = link.getAttribute('data-href');
+                })
+
+                chocolat(imageLinks, {
+                    loop: true,
+                    imageSize: 'contain',
+                })
+            })
         </script>
     @endpush
 </x-cms-layout>

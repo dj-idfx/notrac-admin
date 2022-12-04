@@ -107,3 +107,9 @@ Your powerful **rich text editor**.
 A JavaScript library to add **file drag and drop** functionality to web forms  
 [Official website](https://www.dropzone.dev/)   
 `npm install dropzone`   
+
+### Chocolat
+Responsive **image lightbox**     
+[Official website](http://chocolat.insipi.de/)   
+[Official documentation](https://chocolat.gitbook.io/chocolat/)   
+`npm install chocolat`   
