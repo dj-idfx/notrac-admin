@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Requests\Cms\CmsStoreDropzoneImagesRequest;
 use App\Http\Requests\Cms\CmsStorePostRequest;
 use App\Http\Requests\Cms\CmsUpdatePostRequest;
 use App\Models\Post;
@@ -205,5 +206,22 @@ class CmsPostController extends BaseCmsController
         }
 
         return redirect()->route('cms.posts.show', $post);
+    }
+
+    /**
+     * Add images
+     *
+     * @param CmsStoreDropzoneImagesRequest $request
+     * @param Post $post
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
+     */
+    public function images(CmsStoreDropzoneImagesRequest $request, Post $post)
+    {
+        $media = $request->safe()->media;
+
+        foreach ($media as $medium) {
+            $post->addMedia($medium)->toMediaCollection('images');
+        }
     }
 }

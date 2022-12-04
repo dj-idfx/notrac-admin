@@ -25,9 +25,9 @@
 
     <div class="row g-2">
         @forelse($media as $medium)
-            <div class="col-auto">
+            <div class="col-6 col-sm-4 col-md-2">
                 <a href="{{ route('cms.media.show', $medium) }}">
-                    <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid">
+                    <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
                 </a>
             </div>
 

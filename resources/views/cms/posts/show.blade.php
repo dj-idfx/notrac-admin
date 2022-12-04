@@ -1,6 +1,11 @@
 <x-cms-layout>
     @push('scripts-head')
         @vite('resources/js/dropzone.js')
+
+        <style>
+            .collapse.show + button { display: none; }
+            .collapse.show ~ a { display: inline-block; }
+        </style>
     @endpush
 
     <x-slot name="header">
@@ -45,13 +50,12 @@
 
             {{-- Delete post toggle modal --}}
             <div class="ms-md-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
-                                         data-bs-toggle="modal" data-bs-target="#deletePostModal">
+                                            data-bs-toggle="modal" data-bs-target="#deletePostModal">
                     <i class="bi bi-trash"></i> {{ __('Delete post') }}
                 </button></div>
         @endcan
     </x-slot>
 
-    {{-- $slot --}}
     <div class="row">
         <div class="col">
             <h2 class="fs-3 fw-light">
@@ -117,7 +121,10 @@
             </table>
         </div>
     </div>
+
     <hr>
+
+    {{-- Images --}}
     <div class="row">
         <div class="col">
             <h3 class="fs-4 fw-light">
@@ -125,9 +132,9 @@
             </h3>
 
             <div class="row">
-                @forelse($post->getMedia('images') as $image)
-                    <div class="col">
-                        xxxx
+                @forelse($post->getMedia('images') as $medium)
+                    <div class="col-6 col-sm-4 col-md-2 mb-3">
+                        <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
                     </div>
 
                 @empty
@@ -138,20 +145,32 @@
                     </div>
                 @endforelse
 
+                {{-- Dropzone --}}
                 <div class="col-12">
                     <div class="collapse" id="collapseNewImages">
-                        <div class="dropzone mb-3"></div>
+                        <div class="dropzone mb-3">
+                            <div class="fallback">
+                                <input name="media" type="file" multiple />
+                            </div>
+                            <div class="dz-message">
+                                <strong>{{ __('Drop files here to upload') }}</strong>
+                            </div>
+                        </div>
                     </div>
 
                     <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNewImages" aria-expanded="false" aria-controls="collapseNewImages">
                         <i class="bi bi-plus-circle"></i> {{ __('Upload new images') }}
                     </button>
+
+                    <a href="" class="btn btn-sm btn-outline-dark d-none">
+                        <i class="bi bi-arrow-counterclockwise"></i> {{ __('Refresh') }}
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
     <hr>
-    {{-- / $slot --}}
 
     {{-- Delete post modal--}}
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
@@ -186,19 +205,28 @@
         </div>
     </div>
 
-    <script>
-        window.addEventListener('load', function () {
-            const MediaDropzone = new dropzone('.dropzone', {
-                url: "/test/url",
-                method: "post",
-                parallelUploads: 2,
-                paramName: "media", // The name that will be used to transfer the file
-                maxFilesize: 2, // MB
-            });
+    @push('scripts-bottom')
+        <script>
+            window.addEventListener('load', function () {
+                const MediaDropzone = new dropzone('.dropzone', {
+                    url: "{{ route('cms.posts.images', $post) }}",
+                    method: "post",
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    paramName: "media", // The name that will be used to transfer the file
+                    maxFilesize: 2, // MB
+                    parallelUploads: 2,
+                    maxFiles: 12,
+                    uploadMultiple: true,
+                    acceptedFiles: `image/*`,
+                    addRemoveLinks: true,
+                });
 
-            MediaDropzone.on("addedfile", file => {
-                console.log(`File added: ${file.name}`);
+                MediaDropzone.on("addedfile", file => {
+                    console.log(`File added: ${file.name}`);
+                });
             });
-        });
-    </script>
+        </script>
+    @endpush
 </x-cms-layout>

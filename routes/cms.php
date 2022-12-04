@@ -50,6 +50,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
     Route::patch('/posts/{post}/restore', [CmsPostController::class, 'restore'])->name('posts.restore');
     Route::delete('/posts/{post}/delete', [CmsPostController::class, 'delete'])->name('posts.delete');
     Route::patch('/posts/{post}/publish', [CmsPostController::class, 'publish'])->name('posts.publish');
+    Route::post('/posts/{post}/images', [CmsPostController::class, 'images'])->name('posts.images');
     Route::resource('posts', CmsPostController::class);
 
     /**
