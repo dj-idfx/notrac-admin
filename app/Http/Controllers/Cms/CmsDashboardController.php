@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Models\Media;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\View\View;
@@ -34,9 +35,14 @@ class CmsDashboardController extends BaseCmsController
         $postPublishedCount = Post::isPublished()->count();
         $postNotPublishedCount = Post::isUnpublished()->count();
 
+        $mediaCount = Media::count();
+        $mediaImageCount = Media::where('mime_type', 'like', 'image/%')->count();
+        $mediaVideoCount = Media::where('mime_type', 'like', 'video/%')->count();
+
         return view('cms.index', compact(
             'userCount', 'userUnverifiedCount', 'userInactiveCount',
             'postCount', 'postPublishedCount', 'postNotPublishedCount',
+            'mediaCount', 'mediaImageCount', 'mediaVideoCount',
         ));
     }
 }

@@ -16,7 +16,7 @@
         {{-- User management --}}
         <div class="col">
             <a href="{{ route('cms.users.index') }}" class="link-secondary text-decoration-none user-select-none">
-                <div class="d-flex flex-column align-items-center border border-secondary py-3 px-2 px-sm-3">
+                <div class="d-flex flex-column align-items-center h-100 border border-secondary py-3 px-2 px-sm-3">
                     <h2 class="text-center">
                         <i class="bi bi-people display-3 lh-1"></i> <br>
                         {{ $userCount }} {{ __('Users') }}
@@ -34,7 +34,7 @@
         {{-- Posts management --}}
         <div class="col">
             <a href="{{ route('cms.posts.index') }}" class="link-secondary text-decoration-none user-select-none">
-                <div class="d-flex flex-column align-items-center border border-secondary py-3 px-2 px-sm-3">
+                <div class="d-flex flex-column align-items-center h-100 border border-secondary py-3 px-2 px-sm-3">
                     <h2 class="text-center">
                         <i class="bi bi-journals display-3 lh-1"></i> <br>
                         {{ $postCount }} {{ __('Posts') }}
@@ -44,6 +44,24 @@
                         <strong><i class="bi bi-journal-text text-success"></i> {{ $postPublishedCount }}</strong> {{ __('Published') }}
                         <br>
                         <strong><i class="bi bi-journal-minus text-warning"></i> {{ $postNotPublishedCount }}</strong> {{ __('Not published') }}
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        {{-- Media management --}}
+        <div class="col">
+            <a href="{{ route('cms.media.index') }}" class="link-secondary text-decoration-none user-select-none">
+                <div class="d-flex flex-column align-items-center h-100 border border-secondary py-3 px-2 px-sm-3">
+                    <h2 class="text-center">
+                        <i class="bi bi-images display-3 lh-1"></i> <br>
+                        {{ $mediaCount }} {{ __('Media') }}
+                    </h2>
+
+                    <p class="m-0">
+                        <strong><i class="bi bi-image-fill"></i> {{ $mediaImageCount }}</strong> {{ __('Images') }}
+                        <br>
+                        <strong><i class="bi bi-camera-video"></i> {{ $mediaVideoCount }}</strong> {{ __('Videos') }}
                     </p>
                 </div>
             </a>
