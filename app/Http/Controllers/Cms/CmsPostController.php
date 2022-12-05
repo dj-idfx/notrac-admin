@@ -221,7 +221,8 @@ class CmsPostController extends BaseCmsController
         $media = $request->safe()->media;
 
         foreach ($media as $medium) {
-            $post->addMedia($medium)->toMediaCollection('images');
+            $medium = $post->addMedia($medium)->toMediaCollection('images');
+            $request->actions($medium);
         }
     }
 }

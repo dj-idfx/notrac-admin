@@ -146,7 +146,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 200, 200)
+            ->fit(Manipulations::FIT_CROP, 250, 250)
             ->nonQueued();
     }
 

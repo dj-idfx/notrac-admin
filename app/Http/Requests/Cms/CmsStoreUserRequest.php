@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Spatie\Image\Image;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -71,8 +72,13 @@ class CmsStoreUserRequest extends FormRequest
 
         // Upload avatar
         if($this->hasFile("avatar")) {
-            $user->addMedia($this->safe()->avatar)
+            $media = $user->addMedia($this->safe()->avatar)
                 ->toMediaCollection('avatar');
+
+            $image = Image::load($media->getFullUrl());
+            $media->width = $image->getWidth();
+            $media->height = $image->getHeight();
+            $media->save();
         }
 
         // Flash message:

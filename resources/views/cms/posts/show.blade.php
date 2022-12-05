@@ -83,7 +83,7 @@
             </h3>
 
             <a class="chocolat-image-link" href="#" data-href="{{ $post->getFirstMediaUrl('cover') }}" title="{{ $post->title }}">
-                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid w-100 mb-3">
+                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid w-100 mb-3" width="250" height="250">
             </a>
 
             <h3 class="fs-4 fw-light">
@@ -139,7 +139,7 @@
                 @forelse($post->getMedia('images') as $medium)
                     <div class="col-6 col-sm-4 col-md-2 mb-3">
                         <a class="chocolat-image-link" href="#" data-href="{{ $medium->getUrl() }}" title="{{ $medium->file_name }}">
-                            <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
+                            <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100" width="250" height="250" loading="lazy">
                         </a>
                     </div>
 
@@ -156,7 +156,7 @@
                     <div class="collapse" id="collapseNewImages">
                         <div class="dropzone mb-3">
                             <div class="fallback">
-                                <input name="media" type="file" multiple />
+                                <input name="media" type="file" multiple>
                             </div>
                             <div class="dz-message">
                                 <strong>{{ __('Drop files here to upload') }}</strong>
