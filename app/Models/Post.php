@@ -7,13 +7,10 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class Post extends BaseModel
 {
-    use HasUuids, HasFactory, SoftDeletes, HasSlug;
+    use HasUuids, HasFactory;
 
     /**
      * The "booted" method of the model.
@@ -69,35 +66,6 @@ class Post extends BaseModel
         'published'     => 'boolean',
         'published_at'  => 'datetime',
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Slug settings
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Get the options for generating the slug.
-     *
-     * @return SlugOptions
-     */
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug')
-            ->slugsShouldBeNoLongerThan(48);
-    }
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
 
     /*
     |--------------------------------------------------------------------------

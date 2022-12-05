@@ -3,27 +3,27 @@
 namespace App\Models;
 
 use App\Models\Scopes\HashedScope;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, HasFactory, HasUuids, Notifiable, SoftDeletes, HasRoles, HasSlug;
+    use HasUuids, HasFactory, Notifiable, SoftDeletes, HasRoles, HasSlug, InteractsWithMedia;
 
     /**
      * The "booted" method of the model.
@@ -115,6 +115,39 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Media Library settings
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Defining media collections for this model
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('cover')->singleFile()
+            ->withResponsiveImages()
+            ->useFallbackUrl('/media/placeholder250.png')
+            ->useFallbackPath(public_path('/media/placeholder250.png'));
+    }
+
+    /**
+     * Generate thumbnail conversion for items in the collection.
+     *
+     * @param Media|null $media
+     * @return void
+     * @throws InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumbnail')
+            ->fit(Manipulations::FIT_CROP, 250, 250)
+            ->nonQueued();
     }
 
     /*
