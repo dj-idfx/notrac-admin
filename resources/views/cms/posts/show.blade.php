@@ -131,9 +131,9 @@
     {{-- Images --}}
     <div class="row">
         <div class="col">
-            <h3 class="fs-4 fw-light">
+            <h2 class="fs-3 fw-light">
                 {{ __('Post images') }}
-            </h3>
+            </h2>
 
             <div class="row">
                 @forelse($post->getMedia('images') as $medium)
