@@ -56,7 +56,7 @@ Route::prefix('cms')->name('cms.')->group(function () {
     /**
      * Media controller
      */
-    Route::resource('media', CmsMediaController::class);
+    Route::resource('media', CmsMediaController::class)->except(['create', 'store']);
 
     /**
      * Admin secured area
