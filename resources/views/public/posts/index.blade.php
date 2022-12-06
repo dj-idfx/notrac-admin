@@ -23,6 +23,7 @@
                                 <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}"
                                      alt="{{ $post->title }}"
                                      class="img-fluid"
+                                     width="250" height="250"
                                      @if($loop->index > 3) loading="lazy" @endif>
                             </a>
                         </div>
@@ -37,8 +38,8 @@
                                 <br>
                                 <small class="fst-italic">{{ $post->created_at }}</small>
                                 <br>
-                                <a href="{{ route('posts.show', $post) }}" class="btn btn-primary btn-sm mt-2">
-                                    {{ __('Read more') }}
+                                <a href="{{ route('posts.show', $post) }}" class="btn btn-primary btn-sm mt-2" title="{{ $post->title }}">
+                                    {{ __('Read this post') }}
                                 </a>
                             </p>
                         </div>
