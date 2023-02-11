@@ -25,7 +25,9 @@
         @if($post->published)
             {{-- View post link --}}
             <div><a class="btn btn-outline-dark btn-sm lh-sm" href="{{ route('posts.show', $post) }}">
-                    <i class="bi bi-eye"></i> {{ __('View post') }}
+                    <i class="bi bi-eye"></i>
+                    <span class="d-md-none">{{ __('View') }}</span>
+                    <span class="d-none d-md-inline">{{ __('View post') }}</span>
                 </a></div>
         @endif
 
