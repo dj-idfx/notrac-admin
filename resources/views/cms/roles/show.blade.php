@@ -16,13 +16,17 @@
         @can('manage roles')
             {{-- Edit role link --}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.roles.edit', $role) }}">
-                    <i class="bi bi-pencil-square"></i> {{ __('Edit role') }}
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="d-md-none">{{ __('Edit') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Edit role') }}</span>
                 </a></div>
 
             {{-- Delete role toggle modal --}}
             <div class="ms-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                                          data-bs-toggle="modal" data-bs-target="#deleteRoleModal">
-                    <i class="bi bi-trash"></i> {{ __('Delete role') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Delete') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Delete role') }}</span>
                 </button></div>
         @endcan
     </x-slot>

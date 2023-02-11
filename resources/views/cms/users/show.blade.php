@@ -33,7 +33,9 @@
         @can('manage users')
             {{-- Edit user link --}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.edit', $user) }}">
-                    <i class="bi bi-pencil-square"></i> {{ __('Edit user') }}
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="d-md-none">{{ __('Edit') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Edit user') }}</span>
                 </a></div>
 
             {{-- (de)-activate user --}}
@@ -52,7 +54,9 @@
             {{-- Delete user toggle modal --}}
             <div><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                          data-bs-toggle="modal" data-bs-target="#deleteUserModal">
-                    <i class="bi bi-trash"></i> {{ __('Delete user') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Delete') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Delete user') }}</span>
                 </button></div>
 
             @can('access admin')

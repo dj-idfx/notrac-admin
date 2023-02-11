@@ -19,13 +19,17 @@
         @can('manage content')
             {{-- Edit media link --}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.media.edit', $medium) }}">
-                    <i class="bi bi-pencil-square"></i> {{ __('Edit media') }}
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="d-md-none">{{ __('Edit') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Edit media') }}</span>
                 </a></div>
 
             {{-- Delete media toggle modal --}}
             <div class="ms-md-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                                             data-bs-toggle="modal" data-bs-target="#deleteMediaModal">
-                    <i class="bi bi-trash"></i> {{ __('Delete media') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Delete') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Delete media') }}</span>
                 </button></div>
         @endcan
     </x-slot>
