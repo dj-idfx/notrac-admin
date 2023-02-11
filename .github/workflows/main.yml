@@ -2,31 +2,31 @@ name: 🚀 Deploy website on push
 on:
   push:
     branches:
-    - master
+      - master
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
 
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
-    - name: Use Node.js 18
-      uses: actions/setup-node@v2
-      with:
-        node-version: 'v18.14.0'
+      - name: Use Node.js 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'v18.14.0'
 
-    - name: 🔨 Build Project
-      run: |
-        composer install --no-dev --optimize-autoloader
-        npm install
-        npm run build
+      - name: 🔨 Build Project
+        run: |
+          composer install --optimize-autoloader --no-dev
+          npm install
+          npm run build
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: ${{ secrets.FTP_NOTRAC_ADMIN_HOST }}
-        username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
-        password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
-        dry-run: false
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_NOTRAC_ADMIN_HOST }}
+          username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
+          password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
+          dry-run: false
