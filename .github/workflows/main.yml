@@ -7,9 +7,15 @@ jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
+
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
+
+    - name: Use Composer (php-actions)
+      uses: php-actions/composer@v6
+      with:
+        dev: no
       
     - name: Use Node.js 18
       uses: actions/setup-node@v2
@@ -27,4 +33,4 @@ jobs:
         server: ${{ secrets.FTP_NOTRAC_ADMIN_HOST }}
         username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
         password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
-        dry-run: false
+        dry-run: true
