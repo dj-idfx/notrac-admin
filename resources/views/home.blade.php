@@ -9,7 +9,7 @@
 
     <div class="container py-3 mb-4">
         <h2 class="fs-3 fw-light text-center">
-            {{ __('Welcome!') }} TEST
+            {{ __('Welcome!') }}
         </h2>
 
         <div class="row justify-content-center">
