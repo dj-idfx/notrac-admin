@@ -17,4 +17,4 @@ jobs:
         server: ${{ secrets.FTP_NOTRAC_ADMIN_HOST }}
         username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
         password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
-        dry-run: true
+        dry-run: false
