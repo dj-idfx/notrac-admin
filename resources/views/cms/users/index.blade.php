@@ -22,14 +22,25 @@
                     </a></div>
             @endcan
 
-            <div class="ms-sm-auto"><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
+            {{-- Trash overview --}}
+            <div class="ms-sm-auto">
+                <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
                     <i class="bi bi-trash"></i> {{ __('User trash') }}
-                </a></div>
+                    <span class="{{ $trashCount > 0 ? 'fw-bold' : 'fw-light' }}">
+                        {{ '(' . $trashCount . ')' }}
+                    </span>
+                </a>
+            </div>
 
             @can('access admin')
-                <div><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.hashed') }}">
+                <div>
+                    <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.hashed') }}">
                         <i class="bi bi-hash"></i> {{ __('Hashed users') }}
-                    </a></div>
+                        <span class="{{ $hashCount > 0 ? 'fw-bold' : 'fw-light' }}">
+                            {{ '(' . $hashCount . ')' }}
+                        </span>
+                    </a>
+                </div>
             @endcan
         @endcan
     </x-slot>

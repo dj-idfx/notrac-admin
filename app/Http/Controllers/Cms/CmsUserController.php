@@ -39,8 +39,10 @@ class CmsUserController extends BaseCmsController
     public function index(): View
     {
         $users = User::with('roles:id,name')->orderBy('last_name')->get();
+        $trashCount = User::onlyTrashed()->count();
+        $hashCount = User::withoutGlobalScope(HashedScope::class)->whereNotNull('hashed_at')->count();
 
-        return view('cms.users.index', compact('users'));
+        return view('cms.users.index', compact('users', 'trashCount', "hashCount"));
     }
 
     /**

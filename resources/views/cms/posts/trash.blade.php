@@ -7,15 +7,19 @@
 
     <x-slot name="actionButtons">
         {{-- Index post link --}}
-        <div><a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.posts.index') }}" style="--cms-btn-active-border-color: transparent;">
+        <div>
+            <a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.posts.index') }}" style="--cms-btn-active-border-color: transparent;">
                 <i class="bi bi-arrow-left"></i> {{ __('All posts') }}
-            </a></div>
+            </a>
+        </div>
 
         {{-- Delete All posts toggle modal --}}
-        <div class="ms-sm-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#deleteAllPostsModal">
+        <div class="ms-sm-auto">
+            <button class="btn btn-outline-danger btn-sm lh-sm" type="button" {{ $posts->count() == 0 ? 'disabled' : '' }}
+                    data-bs-toggle="modal" data-bs-target="#deleteAllPostsModal">
                 <i class="bi bi-trash-fill"></i> {{ __('Empty post trash') }}
-            </button></div>
+            </button>
+        </div>
     </x-slot>
 
     <h2 class="fs-3 fw-light">

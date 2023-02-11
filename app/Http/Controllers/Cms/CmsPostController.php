@@ -38,8 +38,9 @@ class CmsPostController extends BaseCmsController
     public function index(): View
     {
         $posts = Post::with('user')->orderByDesc('created_at')->get();
+        $trashCount = Post::onlyTrashed()->count();
 
-        return view('cms.posts.index', compact('posts'));
+        return view('cms.posts.index', compact('posts', 'trashCount'));
     }
 
     /**

@@ -20,9 +20,14 @@
 
         @can('manage content')
             {{-- Trash overview --}}
-            <div class="ms-sm-auto"><a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.posts.trash') }}">
+            <div class="ms-sm-auto">
+                <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.posts.trash') }}">
                     <i class="bi bi-trash"></i> {{ __('Post trash') }}
-                </a></div>
+                    <span class="{{ $trashCount > 0 ? 'fw-bold' : 'fw-light' }}">
+                        {{ '(' . $trashCount . ')' }}
+                    </span>
+                </a>
+            </div>
         @endcan
     </x-slot>
 
