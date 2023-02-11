@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "ext-pdo": "*",
+        "barryvdh/laravel-ide-helper": "^v2.13.0",
         "guzzlehttp/guzzle": "^7.5.0",
         "laravel/framework": "^v9.51.0",
         "laravel/tinker": "^v2.8.0",
@@ -18,7 +19,6 @@
         "spatie/laravel-sluggable": "^3.4.2"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^v2.13.0",
         "fakerphp/faker": "^v1.21.0",
         "laravel/breeze": "^v1.18.2",
         "laravel/pint": "^v1.4.1",
