@@ -12,14 +12,6 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
 
-    - name: Install Composer dependencies
-      uses: php-actions/composer@v6
-      with:
-        php_extensions: redis exif
-        version: 2.x
-        dev: no
-        args: --optimize-autoloader
-
     - name: Use Node.js 18
       uses: actions/setup-node@v2
       with:
@@ -27,6 +19,7 @@ jobs:
 
     - name: 🔨 Build Project
       run: |
+        composer install --no-dev --optimize-autoloader
         npm install
         npm run build
 
