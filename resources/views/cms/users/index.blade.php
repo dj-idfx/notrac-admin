@@ -13,19 +13,25 @@
 
         @can('manage users')
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.users.create') }}">
-                    <i class="bi bi-plus-circle"></i> {{ __('Create new user') }}
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="d-md-none">{{ __('New') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Create new user') }}</span>
                 </a></div>
 
             @can('manage roles')
                 <div><a class="btn btn-outline-secondary btn-sm lh-sm" href="{{ route('cms.roles.index') }}">
-                        <i class="bi bi-bricks"></i> {{ __('Manage roles') }}
+                        <i class="bi bi-bricks"></i>
+                        <span class="d-md-none">{{ __('Roles') }}</span>
+                        <span class="d-none d-md-inline">{{ __('Manage roles') }}</span>
                     </a></div>
             @endcan
 
             {{-- Trash overview --}}
             <div class="ms-sm-auto">
                 <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.trash') }}">
-                    <i class="bi bi-trash"></i> {{ __('User trash') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Trash') }}</span>
+                    <span class="d-none d-md-inline">{{ __('User trash') }}</span>
                     <span class="{{ $trashCount > 0 ? 'fw-bold' : 'fw-light' }}">
                         {{ '(' . $trashCount . ')' }}
                     </span>
@@ -35,7 +41,9 @@
             @can('access admin')
                 <div>
                     <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.users.hashed') }}">
-                        <i class="bi bi-hash"></i> {{ __('Hashed users') }}
+                        <i class="bi bi-hash"></i>
+                        <span class="d-md-none">{{ __('Hashed') }}</span>
+                        <span class="d-none d-md-inline">{{ __('Hashed users') }}</span>
                         <span class="{{ $hashCount > 0 ? 'fw-bold' : 'fw-light' }}">
                             {{ '(' . $hashCount . ')' }}
                         </span>

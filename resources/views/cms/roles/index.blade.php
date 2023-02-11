@@ -13,7 +13,9 @@
 
         {{-- Create role link--}}
         <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.roles.create') }}">
-                <i class="bi bi-plus-circle"></i> {{ __('Create new role') }}
+                <i class="bi bi-plus-circle"></i>
+                <span class="d-md-none">{{ __('New') }}</span>
+                <span class="d-none d-md-inline">{{ __('Create new role') }}</span>
             </a></div>
     </x-slot>
 

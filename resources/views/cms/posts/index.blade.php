@@ -14,7 +14,9 @@
         @can('write article')
             {{-- Create post link--}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.posts.create') }}">
-                    <i class="bi bi-plus-circle"></i> {{ __('Create new post') }}
+                    <i class="bi bi-plus-circle"></i>
+                    <span class="d-md-none">{{ __('New') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Create new post') }}</span>
                 </a></div>
         @endcan
 
@@ -22,7 +24,9 @@
             {{-- Trash overview --}}
             <div class="ms-sm-auto">
                 <a class="btn btn-outline-danger btn-sm lh-sm" href="{{ route('cms.posts.trash') }}">
-                    <i class="bi bi-trash"></i> {{ __('Post trash') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Trash') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Post trash') }}</span>
                     <span class="{{ $trashCount > 0 ? 'fw-bold' : 'fw-light' }}">
                         {{ '(' . $trashCount . ')' }}
                     </span>

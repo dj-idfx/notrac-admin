@@ -32,7 +32,9 @@
         @can('manage content')
             {{-- Edit post link --}}
             <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.posts.edit', $post) }}">
-                    <i class="bi bi-pencil-square"></i> {{ __('Edit post') }}
+                    <i class="bi bi-pencil-square"></i>
+                    <span class="d-md-none">{{ __('Edit') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Edit post') }}</span>
                 </a></div>
 
             {{-- (un-)Publish post --}}
@@ -51,7 +53,9 @@
             {{-- Delete post toggle modal --}}
             <div class="ms-md-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
                                             data-bs-toggle="modal" data-bs-target="#deletePostModal">
-                    <i class="bi bi-trash"></i> {{ __('Delete post') }}
+                    <i class="bi bi-trash"></i>
+                    <span class="d-md-none">{{ __('Delete') }}</span>
+                    <span class="d-none d-md-inline">{{ __('Delete post') }}</span>
                 </button></div>
         @endcan
     </x-slot>
