@@ -10,24 +10,17 @@
         <div><a class="btn btn-sm lh-sm ps-0" href="{{ route('cms.dashboard.index') }}" style="--cms-btn-active-border-color: transparent;">
                 <i class="bi bi-arrow-left"></i> {{ __('Dashboard') }}
             </a></div>
-
-        @can('manage content')
-            {{-- Create media link--}}
-            <div><a class="btn btn-outline-primary btn-sm lh-sm" href="{{ route('cms.media.create') }}">
-                    <i class="bi bi-plus-circle"></i> {{ __('Add new media') }}
-                </a></div>
-        @endcan
     </x-slot>
 
     <h2 class="fs-3 fw-light">
-        {{ __('All media') }}
+        {{ __('All images') }}
     </h2>
 
     <div class="row g-2">
-        @forelse($media as $medium)
+        @forelse($images as $image)
             <div class="col-6 col-sm-4 col-md-2">
-                <a href="{{ route('cms.media.show', $medium) }}">
-                    <img src="{{ $medium->getUrl('thumbnail') }}" alt="{{ $medium->file_name }}" class="img-fluid w-100">
+                <a href="{{ route('cms.media.show', $image) }}">
+                    <img src="{{ $image->getUrl('thumbnail') }}" alt="{{ $image->file_name }}" class="img-fluid w-100" loading="lazy">
                 </a>
             </div>
 

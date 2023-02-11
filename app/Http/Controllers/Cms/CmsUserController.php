@@ -194,7 +194,7 @@ class CmsUserController extends BaseCmsController
      */
     public function empty(): RedirectResponse
     {
-        /* todo: trash all images / avatars? */
+        /* todo: trash all images / covers? */
         User::onlyTrashed()->whereHas('roles', function ($query) {
             $query->where('name','!=', 'super-admin');
         })->forceDelete();

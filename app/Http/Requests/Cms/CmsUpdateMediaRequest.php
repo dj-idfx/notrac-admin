@@ -5,11 +5,8 @@ namespace App\Http\Requests\Cms;
 use App\Models\Media;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
-use Spatie\Image\Image;
 
-class CmsStoreDropzoneImagesRequest extends FormRequest
+class CmsUpdateMediaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,10 +30,7 @@ class CmsStoreDropzoneImagesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'media.*' => [
-                'bail','present','required',
-                File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
-            ],
+            'name' => 'required|string|max:255',
         ];
     }
 
@@ -44,14 +38,19 @@ class CmsStoreDropzoneImagesRequest extends FormRequest
      * Actions to perform after validation passes
      *
      * @param Media $medium
-     * @return void
+     * @return Media
      */
-    public function actions(Media $medium): void
+    public function actions(Media $medium): Media
     {
-        /* Save width & height to database */
-        $image = Image::load($medium->getFullUrl());
-        $medium->width = $image->getWidth();
-        $medium->height = $image->getHeight();
-        $medium->save();
+        $medium->update($this->safe()->only([
+            'name',
+        ]));
+
+        // Flash message
+        session()->flash('flash_message', __('Media updated successfully!'));
+        session()->flash('flash_level', 'success');
+
+        // Return media
+        return $medium;
     }
 }

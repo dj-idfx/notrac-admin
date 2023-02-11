@@ -74,15 +74,15 @@
 
             {{-- image file --}}
             <div class="col-md-6">
-                {!! Form::label('avatar', __('User avatar'), ['class' => 'h3 fs-4 fw-light']) !!}
-                {!! Form::file('avatar', [
-                    'aria-label' => 'avatar',
-                    'class' => $errors->has('avatar') ? 'form-control is-invalid' : 'form-control',
+                {!! Form::label('cover', __('User image'), ['class' => 'h3 fs-4 fw-light']) !!}
+                {!! Form::file('cover', [
+                    'aria-label' => 'cover',
+                    'class' => $errors->has('cover') ? 'form-control is-invalid' : 'form-control',
                     'accept' => 'image/*',
-                    'id' => 'avatar',
+                    'id' => 'cover',
                     ]) !!}
-                {!! $errors->first('avatar', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
-                <div id="avatarHelp" class="form-text">{{ __('max. 2MB') }}</div>
+                {!! $errors->first('cover', '<div class="invalid-feedback"><strong>:message</strong></div>') !!}
+                <div id="coverHelp" class="form-text">{{ __('max. 2MB') }}</div>
             </div>
 
             {{-- buttons --}}

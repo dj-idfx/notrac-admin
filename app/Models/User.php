@@ -130,7 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatar')->singleFile()
+        $this->addMediaCollection('cover')->singleFile()
             ->withResponsiveImages()
             ->useFallbackUrl('/media/placeholder250.png')
             ->useFallbackPath(public_path('/media/placeholder250.png'));
@@ -146,7 +146,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 200, 200)
+            ->fit(Manipulations::FIT_CROP, 250, 250)
             ->nonQueued();
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Spatie\Image\Image;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -38,7 +39,7 @@ class CmsUpdateUserRequest extends FormRequest
             'last_name'  => 'required|string|max:255',
             'email'      => ['required','string','email','max:255', Rule::unique('users')->ignore($this->user)],
             'role'       => ['required', 'string', 'max:255', 'exists:roles,name' ],
-            'avatar'     => [
+            'cover'     => [
                 'nullable',
                 File::image()->max(2048)->dimensions(Rule::dimensions()->minWidth(200)->minHeight(200)->maxWidth(6000)->maxHeight(6000)),
             ],
@@ -68,10 +69,15 @@ class CmsUpdateUserRequest extends FormRequest
                 $user->syncRoles([$this->safe()->role]);
             }
 
-            // Upload avatar
-            if($this->hasFile("avatar")) {
-                $user->addMedia($this->safe()->avatar)
-                    ->toMediaCollection('avatar');
+            // Upload cover
+            if($this->hasFile("cover")) {
+                $media = $user->addMedia($this->safe()->cover)
+                    ->toMediaCollection('cover');
+
+                $image = Image::load($media->getFullUrl());
+                $media->width = $image->getWidth();
+                $media->height = $image->getHeight();
+                $media->save();
             }
 
             session()->flash('flash_message', __('User updated successfully!'));

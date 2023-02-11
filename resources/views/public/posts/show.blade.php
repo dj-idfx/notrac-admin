@@ -10,7 +10,7 @@
     <div class="container py-3 mb-4">
         <div class="row">
             <div class="col-md-auto text-center">
-                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid mb-3">
+                <img src="{{ $post->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $post->title }}" class="img-fluid mb-3" width="250" height="250">
             </div>
 
             <div class="col">

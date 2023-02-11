@@ -1,4 +1,8 @@
 <x-cms-layout>
+    @push('scripts-head')
+        @vite('resources/js/chocolat.js')
+    @endpush
+
     <x-slot name="header">
         <h1 class="fs-2 text-center mb-0">
             @if(! $user->active)
@@ -148,12 +152,12 @@
                 @if($loop->first) <ul>  @if($user->hasRole('super-admin'))<li>super-admin</li>@endif @endif
                     @if($role->name != 'super-admin')
                         <li>
-                        @can('manage roles') <a href="{{ route('cms.roles.show', $role) }}" class="link-dark"> @endif
-                            {{ $role->name }}
-                        @can('manage roles') </a> @endif
+                            @can('manage roles') <a href="{{ route('cms.roles.show', $role) }}" class="link-dark"> @endif
+                                {{ $role->name }}
+                                @can('manage roles') </a> @endif
                         </li>
                     @endif
-                @if($loop->last)</ul>@endif
+                    @if($loop->last)</ul>@endif
             @empty
                 <p class="fw-bold fst-italic">
                     {{ __('No roles found') }}
@@ -178,13 +182,15 @@
             @endcan
         </div>
 
-        {{-- Users avatar --}}
-        <div class="col">
+        {{-- User image --}}
+        <div class="col-auto">
             <h3 class="fs-4 fw-light">
-                {{ __('User avatar') }}
+                {{ __('User image') }}
             </h3>
 
-            <img src="{{ $user->getFirstMediaUrl('avatar', 'thumbnail') }}" alt="{{ $user->full_name }}" class="img-fluid">
+            <a class="chocolat-image-link" href="#" data-href="{{ $user->getFirstMediaUrl('cover') }}" title="{{ $user->full_name }}">
+                <img src="{{ $user->getFirstMediaUrl('cover', 'thumbnail') }}" alt="{{ $user->full_name }}" class="img-fluid mb-3" width="250" height="250">
+            </a>
         </div>
     </div>
 
@@ -258,4 +264,23 @@
             </div>
         @endcan
     @endcan
+
+    {{-- Extra JS --}}
+    @push('scripts-bottom')
+        <script>
+            /* Chocolat */
+            document.addEventListener("DOMContentLoaded", () => {
+                let imageLinks = document.querySelectorAll('.chocolat-image-link');
+
+                imageLinks.forEach(link => {
+                    link.href = link.getAttribute('data-href');
+                })
+
+                chocolat(imageLinks, {
+                    loop: true,
+                    imageSize: 'contain',
+                })
+            })
+        </script>
+    @endpush
 </x-cms-layout>

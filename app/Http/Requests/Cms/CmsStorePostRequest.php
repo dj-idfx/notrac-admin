@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Spatie\Image\Image;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -60,8 +61,13 @@ class CmsStorePostRequest extends FormRequest
 
         // Upload cover
         if($this->hasFile("cover")) {
-            $post->addMedia($this->safe()->cover)
+            $media = $post->addMedia($this->safe()->cover)
                 ->toMediaCollection('cover');
+
+            $image = Image::load($media->getFullUrl());
+            $media->width = $image->getWidth();
+            $media->height = $image->getHeight();
+            $media->save();
         }
 
         // Flash message
