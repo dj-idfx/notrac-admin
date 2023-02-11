@@ -12,7 +12,7 @@
             </a></div>
 
         {{-- Delete All users toggle modal --}}
-        <div class="ms-sm-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button"
+        <div class="ms-sm-auto"><button class="btn btn-outline-danger btn-sm lh-sm" type="button" {{ $users->count() == 0 ? 'disabled' : '' }}
                                         data-bs-toggle="modal" data-bs-target="#deleteAllUsersModal">
                 <i class="bi bi-trash-fill"></i> {{ __('Empty user trash') }}
             </button></div>
