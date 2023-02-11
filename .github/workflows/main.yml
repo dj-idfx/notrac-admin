@@ -12,14 +12,6 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
 
-    - name: Install Composer dependencies
-      uses: php-actions/composer@v6
-      with:
-        php_extensions: redis exif
-        version: 2.x
-        dev: no
-        args: --optimize-autoloader
-
     - name: Use Node.js 18
       uses: actions/setup-node@v2
       with:
@@ -36,4 +28,12 @@ jobs:
         server: ${{ secrets.FTP_NOTRAC_ADMIN_HOST }}
         username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
         password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
-        dry-run: true
+        dry-run: false
+
+    - name: Install Composer dependencies
+      uses: php-actions/composer@v6
+      with:
+        php_extensions: redis exif
+        version: 2.x
+        dev: no
+        args: --optimize-autoloader
