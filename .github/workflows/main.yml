@@ -29,3 +29,11 @@ jobs:
         username: ${{ secrets.FTP_NOTRAC_ADMIN_USER }}
         password: ${{ secrets.FTP_NOTRAC_ADMIN_PASSWORD }}
         dry-run: true
+
+    - name: Install Composer dependencies
+      uses: php-actions/composer@v6
+      with:
+        php_extensions: redis exif
+        version: 2.x
+        dev: no
+        args: --optimize-autoloader
