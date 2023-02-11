@@ -22,3 +22,4 @@ yarn-error.log
 /.info/
 /public/media/library/
 /storage/media-library/temp/
+/composer.lock

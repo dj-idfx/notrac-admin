@@ -18,6 +18,7 @@ jobs:
         php_extensions: redis exif
         version: 2.x
         dev: no
+        args: --optimize-autoloader
 
     - name: Use Node.js 18
       uses: actions/setup-node@v2
