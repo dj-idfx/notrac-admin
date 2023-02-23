@@ -90,6 +90,7 @@ HTML and **Form** Builders.
 
 Log Viewer helps you quickly and clearly see individual **log entries**,   
 to search, filter, and make sense of your Laravel logs fast.  
+[Official documentation](https://log-viewer.opcodes.io/docs/2.x)    
 [Opcodesio Github](https://github.com/opcodesio/log-viewer)       
 `composer require opcodesio/log-viewer`   
 
