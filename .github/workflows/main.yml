@@ -20,6 +20,7 @@ jobs:
       - name: 🔨 Build Project
         run: |
           composer install --optimize-autoloader --no-dev
+          php artisan log-viewer:publish
           npm install
           npm run build
 
