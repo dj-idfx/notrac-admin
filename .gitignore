@@ -27,6 +27,7 @@ yarn-error.log
 /public/hot
 /public/media/library/
 /public/storage
+/public/vendor/log-viewer/
 
 # Storage files
 /storage/*.key

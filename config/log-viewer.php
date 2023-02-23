@@ -6,6 +6,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Log Viewer
+    |--------------------------------------------------------------------------
+    | Log Viewer can be disabled, so it's no longer accessible via browser.
+    |
+    */
+
+    'enabled' => env('LOG_VIEWER_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Log Viewer Domain
     |--------------------------------------------------------------------------
     | You may change the domain where Log Viewer should be active.
@@ -44,12 +54,22 @@ return [
     |--------------------------------------------------------------------------
     | Log Viewer route middleware.
     |--------------------------------------------------------------------------
-    | The middleware should enable session and cookies support in order for the Log Viewer to work.
-    | The 'web' middleware will be applied automatically if empty.
+    | Optional middleware to use when loading the initial Log Viewer page.
     |
     */
 
     'middleware' => ['web', 'auth', 'verified', 'permission:view logs'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Viewer API middleware.
+    |--------------------------------------------------------------------------
+    | Optional middleware to use on every API request. The same API is also
+    | used from within the Log Viewer user interface.
+    |
+    */
+
+    'api_middleware' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,6 +80,8 @@ return [
 
     'include_files' => [
         '*.log',
+        '**/*.log',
+        // '/absolute/paths/supported',
     ],
 
     /*
@@ -71,7 +93,7 @@ return [
     */
 
     'exclude_files' => [
-        //'my_secret.log'
+        // 'my_secret.log'
     ],
 
     /*
@@ -120,11 +142,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cache driver
+    |--------------------------------------------------------------------------
+    | Cache driver to use for storing the log indices. Indices are used to speed up
+    | log navigation. Defaults to your application's default cache driver.
+    |
+    */
+
+    'cache_driver' => env('LOG_VIEWER_CACHE_DRIVER'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Chunk size when scanning log files lazily
     |--------------------------------------------------------------------------
     | The size in MB of files to scan before updating the progress bar when searching across all files.
     |
     */
 
-    'lazy_scan_chunk_size_in_mb' => 200,
+    'lazy_scan_chunk_size_in_mb' => 50,
 ];
