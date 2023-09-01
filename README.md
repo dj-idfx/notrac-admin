@@ -2,11 +2,6 @@
 
 Notrac administrator CMS: Take control over content in a simple & elegant way.
 
-Try it out at his [DEMO PAGE](https://admin.notrac.be/)  
-Admin login is possible with these test credentials:  
-Email: **admin@test.local**  
-Password: **password**  
-
 ## Quick guide for local development:
 
 - Clone the [GitHub repo](https://github.com/dj-idfx/notrac-admin)   
