@@ -217,7 +217,7 @@ class CmsPostController extends BaseCmsController
      * @throws FileIsTooBig
      * @throws FileDoesNotExist
      */
-    public function images(CmsStoreDropzoneImagesRequest $request, Post $post)
+    public function images(CmsStoreDropzoneImagesRequest $request, Post $post): void
     {
         $media = $request->safe()->media;
 
